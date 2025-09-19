@@ -12,11 +12,16 @@ export const Users: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['email'],
-    useAsTitle: 'email',
+    defaultColumns: ['name', 'email'],
+    useAsTitle: 'name',
   },
   auth: true,
+  timestamps: true,
   fields: [
+    {
+      name: 'name',
+      type: 'text',
+    },
     {
       name: 'profilePicture',
       type: 'upload',
@@ -36,21 +41,33 @@ export const Users: CollectionConfig = {
               name: 'firstName',
               type: 'text',
               label: 'First Name',
+              admin: {
+                placeholder: 'Örn. Kenan',
+              },
             },
             {
               name: 'lastName',
               type: 'text',
               label: 'Last Name',
+              admin: {
+                placeholder: 'Örn. Gündoğan',
+              },
             },
             {
               name: 'username',
               type: 'text',
               label: 'Username',
+              admin: {
+                placeholder: 'Örn. kenangundogan',
+              },
             },
             {
               name: 'birthDate',
               type: 'date',
               label: 'Birth Date',
+              admin: {
+                placeholder: 'Örn. 1988-01-01',
+              },
             },
           ],
         },
@@ -63,6 +80,9 @@ export const Users: CollectionConfig = {
               type: 'relationship',
               label: 'Gender',
               relationTo: 'genders',
+              admin: {
+                placeholder: 'Örn. Erkek',
+              },
             },
           ],
         },
@@ -87,11 +107,19 @@ export const Users: CollectionConfig = {
               },
             },
             {
+              name: 'district',
+              type: 'text',
+              label: 'District',
+              admin: {
+                placeholder: 'Örn. Beşiktaş',
+              },
+            },
+            {
               name: 'address',
               type: 'textarea',
               label: 'Address',
               admin: {
-                placeholder: 'Örn. Beşiktaş',
+                placeholder: 'Örn. Beşiktaş Mahallesi, 123. Sokak, No: 1',
               },
             },
           ],
@@ -121,5 +149,4 @@ export const Users: CollectionConfig = {
       ],
     },
   ],
-  timestamps: true,
 }

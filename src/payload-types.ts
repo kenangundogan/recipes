@@ -377,6 +377,7 @@ export interface Category {
  */
 export interface User {
   id: string;
+  name?: string | null;
   profilePicture?: (string | null) | Media;
   general?: {
     firstName?: string | null;
@@ -390,6 +391,7 @@ export interface User {
   addresses?: {
     country?: string | null;
     city?: string | null;
+    district?: string | null;
     address?: string | null;
   };
   phones?: {
@@ -1364,6 +1366,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
   profilePicture?: T;
   general?:
     | T
@@ -1383,6 +1386,7 @@ export interface UsersSelect<T extends boolean = true> {
     | {
         country?: T;
         city?: T;
+        district?: T;
         address?: T;
       };
   phones?:
