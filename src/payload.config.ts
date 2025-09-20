@@ -15,6 +15,7 @@ import { Genders } from './collections/Genders'
 import { Recipes } from './collections/Recipes'
 import { Continents } from './collections/Continents'
 import { Countries } from './collections/Countries'
+import { Regions } from './collections/Regions'
 import { Cities } from './collections/Cities'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
@@ -77,6 +78,7 @@ export default buildConfig({
     Recipes,
     Continents,
     Countries,
+    Regions,
     Cities,
   ],
   cors: [getServerSideURL()].filter(Boolean),

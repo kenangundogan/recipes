@@ -76,6 +76,7 @@ export interface Config {
     recipes: Recipe;
     continents: Continent;
     countries: Country;
+    regions: Region;
     cities: City;
     redirects: Redirect;
     forms: Form;
@@ -97,6 +98,7 @@ export interface Config {
     recipes: RecipesSelect<false> | RecipesSelect<true>;
     continents: ContinentsSelect<false> | ContinentsSelect<true>;
     countries: CountriesSelect<false> | CountriesSelect<true>;
+    regions: RegionsSelect<false> | RegionsSelect<true>;
     cities: CitiesSelect<false> | CitiesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -979,6 +981,57 @@ export interface City {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions".
+ */
+export interface Region {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  relatedRegions?: (string | Region)[] | null;
+  cities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1185,6 +1238,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'countries';
         value: string | Country;
+      } | null)
+    | ({
+        relationTo: 'regions';
+        value: string | Region;
       } | null)
     | ({
         relationTo: 'cities';
@@ -1698,6 +1755,41 @@ export interface CountriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions_select".
+ */
+export interface RegionsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  code?: T;
+  latitude?: T;
+  longitude?: T;
+  relatedRegions?: T;
+  cities?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cities_select".
  */
 export interface CitiesSelect<T extends boolean = true> {
@@ -2117,6 +2209,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'countries';
           value: string | Country;
+        } | null)
+      | ({
+          relationTo: 'regions';
+          value: string | Region;
         } | null)
       | ({
           relationTo: 'cities';

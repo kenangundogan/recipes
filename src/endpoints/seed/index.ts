@@ -12,12 +12,14 @@ import { post3 } from './post-3'
 import { istanbulCity, ankaraCity, izmirCity } from './cities'
 import { turkeyCountry, germanyCountry, franceCountry } from './countries'
 import { europeContinent, asiaContinent, africaContinent } from './continents'
+import { marmaraRegion, egeRegion, icAnatoliaRegion } from './regions'
 
 const collections: CollectionSlug[] = [
   'categories',
   'cities',
   'continents',
   'countries',
+  'regions',
   'media',
   'pages',
   'posts',
@@ -437,6 +439,62 @@ export const seed = async ({
     collection: 'continents',
     data: {
       countries: [turkeyDoc.id], // Turkey is in both continents
+    },
+  })
+
+  payload.logger.info(`— Seeding regions...`)
+
+  // Create regions in order
+  const marmaraDoc = await payload.create({
+    collection: 'regions',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: marmaraRegion({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const egeDoc = await payload.create({
+    collection: 'regions',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: egeRegion({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const icAnatoliaDoc = await payload.create({
+    collection: 'regions',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: icAnatoliaRegion({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  // update each region with related regions and cities
+  await payload.update({
+    id: marmaraDoc.id,
+    collection: 'regions',
+    data: {
+      relatedRegions: [egeDoc.id, icAnatoliaDoc.id],
+      cities: [istanbulDoc.id], // İstanbul Marmara bölgesinde
+    },
+  })
+  await payload.update({
+    id: egeDoc.id,
+    collection: 'regions',
+    data: {
+      relatedRegions: [marmaraDoc.id, icAnatoliaDoc.id],
+      cities: [izmirDoc.id], // İzmir Ege bölgesinde
+    },
+  })
+  await payload.update({
+    id: icAnatoliaDoc.id,
+    collection: 'regions',
+    data: {
+      relatedRegions: [marmaraDoc.id, egeDoc.id],
+      cities: [ankaraDoc.id], // Ankara İç Anadolu bölgesinde
     },
   })
 
