@@ -38,7 +38,7 @@ export const Continents: CollectionConfig<'continents'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    categories: true,
+    countries: true,
     meta: {
       image: true,
       description: true,
@@ -46,7 +46,7 @@ export const Continents: CollectionConfig<'continents'> = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    group: 'Definitions',
+    group: 'Geography',
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({

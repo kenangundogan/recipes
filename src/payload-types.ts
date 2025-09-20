@@ -955,7 +955,6 @@ export interface City {
   latitude?: number | null;
   longitude?: number | null;
   relatedCities?: (string | City)[] | null;
-  categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1710,7 +1709,6 @@ export interface CitiesSelect<T extends boolean = true> {
   latitude?: T;
   longitude?: T;
   relatedCities?: T;
-  categories?: T;
   meta?:
     | T
     | {

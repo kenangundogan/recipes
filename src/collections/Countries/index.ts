@@ -38,7 +38,7 @@ export const Countries: CollectionConfig<'countries'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    categories: true,
+    cities: true,
     meta: {
       image: true,
       description: true,
@@ -46,7 +46,7 @@ export const Countries: CollectionConfig<'countries'> = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    group: 'Definitions',
+    group: 'Geography',
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
