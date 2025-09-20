@@ -15,6 +15,7 @@ import { Genders } from './collections/Genders'
 import { Recipes } from './collections/Recipes'
 import { Continents } from './collections/Continents'
 import { Countries } from './collections/Countries'
+import { Cities } from './collections/Cities'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -66,7 +67,18 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Genders, Recipes, Continents, Countries],
+  collections: [
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    Genders,
+    Recipes,
+    Continents,
+    Countries,
+    Cities,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
