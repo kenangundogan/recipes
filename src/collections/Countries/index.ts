@@ -165,13 +165,13 @@ export const Countries: CollectionConfig<'countries'> = {
               relationTo: 'countries',
             },
             {
-              name: 'categories',
+              name: 'cities',
               type: 'relationship',
               admin: {
                 position: 'sidebar',
               },
               hasMany: true,
-              relationTo: 'categories',
+              relationTo: 'cities',
             },
           ],
         },

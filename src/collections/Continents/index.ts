@@ -165,13 +165,13 @@ export const Continents: CollectionConfig<'continents'> = {
               relationTo: 'continents',
             },
             {
-              name: 'categories',
+              name: 'countries',
               type: 'relationship',
               admin: {
                 position: 'sidebar',
               },
               hasMany: true,
-              relationTo: 'categories',
+              relationTo: 'countries',
             },
           ],
         },

@@ -853,7 +853,7 @@ export interface Continent {
   latitude?: number | null;
   longitude?: number | null;
   relatedContinents?: (string | Continent)[] | null;
-  categories?: (string | Category)[] | null;
+  countries?: (string | Country)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -904,7 +904,7 @@ export interface Country {
   latitude?: number | null;
   longitude?: number | null;
   relatedCountries?: (string | Country)[] | null;
-  categories?: (string | Category)[] | null;
+  cities?: (string | City)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1640,7 +1640,7 @@ export interface ContinentsSelect<T extends boolean = true> {
   latitude?: T;
   longitude?: T;
   relatedContinents?: T;
-  categories?: T;
+  countries?: T;
   meta?:
     | T
     | {
@@ -1675,7 +1675,7 @@ export interface CountriesSelect<T extends boolean = true> {
   latitude?: T;
   longitude?: T;
   relatedCountries?: T;
-  categories?: T;
+  cities?: T;
   meta?:
     | T
     | {
