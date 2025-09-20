@@ -9,9 +9,15 @@ import { imageHero1 } from './image-hero-1'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
+import { istanbulCity, ankaraCity, izmirCity } from './cities'
+import { turkeyCountry, germanyCountry, franceCountry } from './countries'
+import { europeContinent, asiaContinent, africaContinent } from './continents'
 
 const collections: CollectionSlug[] = [
   'categories',
+  'cities',
+  'continents',
+  'countries',
   'media',
   'pages',
   'posts',
@@ -254,6 +260,183 @@ export const seed = async ({
     collection: 'posts',
     data: {
       relatedPosts: [post1Doc.id, post2Doc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding cities...`)
+
+  // Do not create cities with `Promise.all` because we want the cities to be created in order
+  // This way we can sort them by `createdAt` or `publishedAt` and they will be in the expected order
+  const istanbulDoc = await payload.create({
+    collection: 'cities',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: istanbulCity({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const ankaraDoc = await payload.create({
+    collection: 'cities',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: ankaraCity({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const izmirDoc = await payload.create({
+    collection: 'cities',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: izmirCity({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  // update each city with related cities
+  await payload.update({
+    id: istanbulDoc.id,
+    collection: 'cities',
+    data: {
+      relatedCities: [ankaraDoc.id, izmirDoc.id],
+    },
+  })
+  await payload.update({
+    id: ankaraDoc.id,
+    collection: 'cities',
+    data: {
+      relatedCities: [istanbulDoc.id, izmirDoc.id],
+    },
+  })
+  await payload.update({
+    id: izmirDoc.id,
+    collection: 'cities',
+    data: {
+      relatedCities: [istanbulDoc.id, ankaraDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding continents...`)
+
+  // Create continents in order
+  const europeDoc = await payload.create({
+    collection: 'continents',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: europeContinent({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const asiaDoc = await payload.create({
+    collection: 'continents',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: asiaContinent({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const africaDoc = await payload.create({
+    collection: 'continents',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: africaContinent({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  // update each continent with related continents
+  await payload.update({
+    id: europeDoc.id,
+    collection: 'continents',
+    data: {
+      relatedContinents: [asiaDoc.id, africaDoc.id],
+    },
+  })
+  await payload.update({
+    id: asiaDoc.id,
+    collection: 'continents',
+    data: {
+      relatedContinents: [europeDoc.id, africaDoc.id],
+    },
+  })
+  await payload.update({
+    id: africaDoc.id,
+    collection: 'continents',
+    data: {
+      relatedContinents: [europeDoc.id, asiaDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding countries...`)
+
+  // Create countries in order
+  const turkeyDoc = await payload.create({
+    collection: 'countries',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: turkeyCountry({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const germanyDoc = await payload.create({
+    collection: 'countries',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: germanyCountry({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const franceDoc = await payload.create({
+    collection: 'countries',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: franceCountry({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  // update each country with related countries and cities
+  await payload.update({
+    id: turkeyDoc.id,
+    collection: 'countries',
+    data: {
+      relatedCountries: [germanyDoc.id, franceDoc.id],
+      cities: [istanbulDoc.id, ankaraDoc.id, izmirDoc.id],
+    },
+  })
+  await payload.update({
+    id: germanyDoc.id,
+    collection: 'countries',
+    data: {
+      relatedCountries: [turkeyDoc.id, franceDoc.id],
+    },
+  })
+  await payload.update({
+    id: franceDoc.id,
+    collection: 'countries',
+    data: {
+      relatedCountries: [turkeyDoc.id, germanyDoc.id],
+    },
+  })
+
+  // update continents with countries
+  await payload.update({
+    id: europeDoc.id,
+    collection: 'continents',
+    data: {
+      countries: [turkeyDoc.id, germanyDoc.id, franceDoc.id],
+    },
+  })
+  await payload.update({
+    id: asiaDoc.id,
+    collection: 'continents',
+    data: {
+      countries: [turkeyDoc.id], // Turkey is in both continents
     },
   })
 
