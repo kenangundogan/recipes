@@ -86,6 +86,7 @@ export interface Config {
     ingredientUnits: IngredientUnit;
     difficultyLevels: DifficultyLevel;
     cookingMethods: CookingMethod;
+    nutrients: Nutrient;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -116,6 +117,7 @@ export interface Config {
     ingredientUnits: IngredientUnitsSelect<false> | IngredientUnitsSelect<true>;
     difficultyLevels: DifficultyLevelsSelect<false> | DifficultyLevelsSelect<true>;
     cookingMethods: CookingMethodsSelect<false> | CookingMethodsSelect<true>;
+    nutrients: NutrientsSelect<false> | NutrientsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -856,40 +858,18 @@ export interface Recipe {
     id?: string | null;
   }[];
   servingTips?: string | null;
-  nutrition?: {
+  /**
+   * Besin değerlerini ve miktarlarını belirtin
+   */
+  nutritionValues: {
+    nutrient: string | Nutrient;
     /**
-     * Kalori (kcal)
+     * Miktar (porsiyon başına)
      */
-    calories?: number | null;
-    /**
-     * Protein (g)
-     */
-    protein?: number | null;
-    /**
-     * Karbonhidrat (g)
-     */
-    carbs?: number | null;
-    /**
-     * Yağ (g)
-     */
-    fat?: number | null;
-    /**
-     * Lif (g)
-     */
-    fiber?: number | null;
-    /**
-     * Şeker (g)
-     */
-    sugar?: number | null;
-    /**
-     * Sodyum (mg)
-     */
-    sodium?: number | null;
-    /**
-     * Kolesterol (mg)
-     */
-    cholesterol?: number | null;
-  };
+    amount: number;
+    unit: 'kcal' | 'g' | 'mg' | 'mcg';
+    id?: string | null;
+  }[];
   relatedRecipes?: (string | Recipe)[] | null;
   categories?: (string | Category)[] | null;
   seasons?: (string | Season)[] | null;
@@ -1274,6 +1254,53 @@ export interface IngredientUnitCategory {
     [k: string]: unknown;
   };
   relatedIngredientUnitCategories?: (string | IngredientUnitCategory)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nutrients".
+ */
+export interface Nutrient {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedNutrients?: (string | Nutrient)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1749,6 +1776,10 @@ export interface PayloadLockedDocument {
         value: string | CookingMethod;
       } | null)
     | ({
+        relationTo: 'nutrients';
+        value: string | Nutrient;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: string | Redirect;
       } | null)
@@ -2184,17 +2215,13 @@ export interface RecipesSelect<T extends boolean = true> {
         id?: T;
       };
   servingTips?: T;
-  nutrition?:
+  nutritionValues?:
     | T
     | {
-        calories?: T;
-        protein?: T;
-        carbs?: T;
-        fat?: T;
-        fiber?: T;
-        sugar?: T;
-        sodium?: T;
-        cholesterol?: T;
+        nutrient?: T;
+        amount?: T;
+        unit?: T;
+        id?: T;
       };
   relatedRecipes?: T;
   categories?: T;
@@ -2591,6 +2618,37 @@ export interface CookingMethodsSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   relatedCookingMethods?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nutrients_select".
+ */
+export interface NutrientsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedNutrients?: T;
   meta?:
     | T
     | {
@@ -3039,6 +3097,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'cookingMethods';
           value: string | CookingMethod;
+        } | null)
+      | ({
+          relationTo: 'nutrients';
+          value: string | Nutrient;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

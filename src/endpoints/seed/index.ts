@@ -76,6 +76,16 @@ import {
   pressureCookerMethod,
 } from './cooking-methods'
 import { easyLevel, mediumLevel, hardLevel } from './difficulty-levels'
+import {
+  calories,
+  protein,
+  carbohydrates,
+  fat,
+  fiber,
+  sugar,
+  sodium,
+  cholesterol,
+} from './nutrients'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -91,6 +101,7 @@ const collections: CollectionSlug[] = [
   'ingredients',
   'cookingMethods',
   'difficultyLevels',
+  'nutrients',
   'recipes',
   'media',
   'pages',
@@ -1534,6 +1545,146 @@ export const seed = async ({
     },
   })
 
+  payload.logger.info(`— Seeding nutrients...`)
+
+  // Create nutrients
+  const caloriesDoc = await payload.create({
+    collection: 'nutrients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: calories({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const proteinDoc = await payload.create({
+    collection: 'nutrients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: protein({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const carbohydratesDoc = await payload.create({
+    collection: 'nutrients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: carbohydrates({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const fatDoc = await payload.create({
+    collection: 'nutrients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: fat({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const fiberDoc = await payload.create({
+    collection: 'nutrients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: fiber({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const sugarDoc = await payload.create({
+    collection: 'nutrients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: sugar({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const sodiumDoc = await payload.create({
+    collection: 'nutrients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: sodium({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const cholesterolDoc = await payload.create({
+    collection: 'nutrients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: cholesterol({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  // Update nutrients with relations
+  await payload.update({
+    id: caloriesDoc.id,
+    collection: 'nutrients',
+    data: {
+      relatedNutrients: [proteinDoc.id, carbohydratesDoc.id, fatDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: proteinDoc.id,
+    collection: 'nutrients',
+    data: {
+      relatedNutrients: [caloriesDoc.id, fatDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: carbohydratesDoc.id,
+    collection: 'nutrients',
+    data: {
+      relatedNutrients: [caloriesDoc.id, sugarDoc.id, fiberDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: fatDoc.id,
+    collection: 'nutrients',
+    data: {
+      relatedNutrients: [caloriesDoc.id, proteinDoc.id, cholesterolDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: fiberDoc.id,
+    collection: 'nutrients',
+    data: {
+      relatedNutrients: [carbohydratesDoc.id, sugarDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: sugarDoc.id,
+    collection: 'nutrients',
+    data: {
+      relatedNutrients: [carbohydratesDoc.id, fiberDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: sodiumDoc.id,
+    collection: 'nutrients',
+    data: {
+      relatedNutrients: [cholesterolDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: cholesterolDoc.id,
+    collection: 'nutrients',
+    data: {
+      relatedNutrients: [fatDoc.id, sodiumDoc.id],
+    },
+  })
+
   payload.logger.info(`— Seeding recipes...`)
 
   // Create recipes
@@ -1565,6 +1716,14 @@ export const seed = async ({
       steamMethodDoc,
       grillMethodDoc,
       pressureCookerMethodDoc,
+      caloriesDoc,
+      proteinDoc,
+      carbohydratesDoc,
+      fatDoc,
+      fiberDoc,
+      sugarDoc,
+      sodiumDoc,
+      cholesterolDoc,
     }),
   })
 
@@ -1596,6 +1755,14 @@ export const seed = async ({
       steamMethodDoc,
       grillMethodDoc,
       pressureCookerMethodDoc,
+      caloriesDoc,
+      proteinDoc,
+      carbohydratesDoc,
+      fatDoc,
+      fiberDoc,
+      sugarDoc,
+      sodiumDoc,
+      cholesterolDoc,
     }),
   })
 
@@ -1627,6 +1794,14 @@ export const seed = async ({
       steamMethodDoc,
       grillMethodDoc,
       pressureCookerMethodDoc,
+      caloriesDoc,
+      proteinDoc,
+      carbohydratesDoc,
+      fatDoc,
+      fiberDoc,
+      sugarDoc,
+      sodiumDoc,
+      cholesterolDoc,
     }),
   })
 

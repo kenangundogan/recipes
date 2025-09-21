@@ -46,6 +46,7 @@ export const Recipes: CollectionConfig<'recipes'> = {
     cookTime: true,
     difficulty: true,
     cookingMethod: true,
+    nutritionValues: true,
     meta: {
       image: true,
       description: true,
@@ -292,102 +293,66 @@ export const Recipes: CollectionConfig<'recipes'> = {
         },
         {
           label: 'Besin Değerleri',
-          description: 'Porsiyon başına değerler',
+          description: 'Porsiyon başına besin değerleri',
           fields: [
             {
-              type: 'row',
+              name: 'nutritionValues',
+              type: 'array',
+              required: true,
+              minRows: 1,
+              admin: {
+                description: 'Besin değerlerini ve miktarlarını belirtin',
+              },
               fields: [
                 {
-                  name: 'nutrition',
-                  type: 'group',
+                  type: 'row',
                   fields: [
                     {
-                      name: 'calories',
-                      type: 'number',
-                      min: 0,
+                      name: 'nutrient',
+                      type: 'relationship',
+                      relationTo: 'nutrients',
+                      required: true,
                       admin: {
-                        placeholder: '450',
-                        description: 'Kalori (kcal)',
+                        width: '50%',
                       },
                     },
                     {
-                      type: 'row',
-                      fields: [
-                        {
-                          name: 'protein',
-                          type: 'number',
-                          min: 0,
-                          admin: {
-                            placeholder: '25',
-                            description: 'Protein (g)',
-                            width: '33%',
-                          },
-                        },
-                        {
-                          name: 'carbs',
-                          type: 'number',
-                          min: 0,
-                          admin: {
-                            placeholder: '45',
-                            description: 'Karbonhidrat (g)',
-                            width: '33%',
-                          },
-                        },
-                        {
-                          name: 'fat',
-                          type: 'number',
-                          min: 0,
-                          admin: {
-                            placeholder: '15',
-                            description: 'Yağ (g)',
-                            width: '34%',
-                          },
-                        },
-                      ],
-                    },
-                    {
-                      type: 'row',
-                      fields: [
-                        {
-                          name: 'fiber',
-                          type: 'number',
-                          min: 0,
-                          admin: {
-                            placeholder: '8',
-                            description: 'Lif (g)',
-                            width: '33%',
-                          },
-                        },
-                        {
-                          name: 'sugar',
-                          type: 'number',
-                          min: 0,
-                          admin: {
-                            placeholder: '12',
-                            description: 'Şeker (g)',
-                            width: '33%',
-                          },
-                        },
-                        {
-                          name: 'sodium',
-                          type: 'number',
-                          min: 0,
-                          admin: {
-                            placeholder: '850',
-                            description: 'Sodyum (mg)',
-                            width: '34%',
-                          },
-                        },
-                      ],
-                    },
-                    {
-                      name: 'cholesterol',
+                      name: 'amount',
                       type: 'number',
+                      required: true,
                       min: 0,
                       admin: {
-                        placeholder: '65',
-                        description: 'Kolesterol (mg)',
+                        placeholder: '25',
+                        description: 'Miktar (porsiyon başına)',
+                        width: '30%',
                       },
+                    },
+                    {
+                      name: 'unit',
+                      type: 'select',
+                      required: true,
+                      options: [
+                        {
+                          label: 'kcal',
+                          value: 'kcal',
+                        },
+                        {
+                          label: 'g',
+                          value: 'g',
+                        },
+                        {
+                          label: 'mg',
+                          value: 'mg',
+                        },
+                        {
+                          label: 'μg',
+                          value: 'mcg',
+                        },
+                      ],
+                      admin: {
+                        width: '20%',
+                      },
+                      defaultValue: 'g',
                     },
                   ],
                 },

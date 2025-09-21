@@ -26,6 +26,15 @@ export type RecipeArgs = {
   steamMethodDoc: any
   grillMethodDoc: any
   pressureCookerMethodDoc: any
+  // Nutrient docs
+  caloriesDoc: any
+  proteinDoc: any
+  carbohydratesDoc: any
+  fatDoc: any
+  fiberDoc: any
+  sugarDoc: any
+  sodiumDoc: any
+  cholesterolDoc: any
 }
 
 export const beyranSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'recipes'> = ({
@@ -42,6 +51,14 @@ export const beyranSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionS
   milliliterUnitDoc,
   mediumLevelDoc,
   stovetopMethodDoc,
+  caloriesDoc,
+  proteinDoc,
+  carbohydratesDoc,
+  fatDoc,
+  fiberDoc,
+  sugarDoc,
+  sodiumDoc,
+  cholesterolDoc,
 }) => {
   return {
     slug: 'beyran-soup',
@@ -116,16 +133,48 @@ export const beyranSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionS
     ],
     servingTips:
       'Üzerine taze maydanoz serpin ve sıcak ekmek ile servis edin. Gaziantep usulü acı biber ile tatlandırabilirsiniz.',
-    nutrition: {
-      calories: 425,
-      protein: 28,
-      carbs: 22,
-      fat: 18,
-      fiber: 2,
-      sugar: 4,
-      sodium: 980,
-      cholesterol: 75,
-    },
+    nutritionValues: [
+      {
+        nutrient: caloriesDoc.id,
+        amount: 425,
+        unit: 'kcal',
+      },
+      {
+        nutrient: proteinDoc.id,
+        amount: 28,
+        unit: 'g',
+      },
+      {
+        nutrient: carbohydratesDoc.id,
+        amount: 22,
+        unit: 'g',
+      },
+      {
+        nutrient: fatDoc.id,
+        amount: 18,
+        unit: 'g',
+      },
+      {
+        nutrient: fiberDoc.id,
+        amount: 2,
+        unit: 'g',
+      },
+      {
+        nutrient: sugarDoc.id,
+        amount: 4,
+        unit: 'g',
+      },
+      {
+        nutrient: sodiumDoc.id,
+        amount: 980,
+        unit: 'mg',
+      },
+      {
+        nutrient: cholesterolDoc.id,
+        amount: 75,
+        unit: 'mg',
+      },
+    ],
     content: {
       root: {
         type: 'root',
@@ -239,6 +288,14 @@ export const menemenRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug
   teaspoonUnitDoc,
   easyLevelDoc,
   stovetopMethodDoc,
+  caloriesDoc,
+  proteinDoc,
+  carbohydratesDoc,
+  fatDoc,
+  fiberDoc,
+  sugarDoc,
+  sodiumDoc,
+  cholesterolDoc,
 }) => {
   return {
     slug: 'menemen',
@@ -319,16 +376,48 @@ export const menemenRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug
     ],
     servingTips:
       'Sıcakken servis edin. Yanında taze ekmek, peynir ve çay ile kahvaltının tadını çıkarın.',
-    nutrition: {
-      calories: 285,
-      protein: 16,
-      carbs: 12,
-      fat: 20,
-      fiber: 3,
-      sugar: 8,
-      sodium: 420,
-      cholesterol: 350,
-    },
+    nutritionValues: [
+      {
+        nutrient: caloriesDoc.id,
+        amount: 285,
+        unit: 'kcal',
+      },
+      {
+        nutrient: proteinDoc.id,
+        amount: 16,
+        unit: 'g',
+      },
+      {
+        nutrient: carbohydratesDoc.id,
+        amount: 12,
+        unit: 'g',
+      },
+      {
+        nutrient: fatDoc.id,
+        amount: 20,
+        unit: 'g',
+      },
+      {
+        nutrient: fiberDoc.id,
+        amount: 3,
+        unit: 'g',
+      },
+      {
+        nutrient: sugarDoc.id,
+        amount: 8,
+        unit: 'g',
+      },
+      {
+        nutrient: sodiumDoc.id,
+        amount: 420,
+        unit: 'mg',
+      },
+      {
+        nutrient: cholesterolDoc.id,
+        amount: 350,
+        unit: 'mg',
+      },
+    ],
     content: {
       root: {
         type: 'root',
@@ -401,6 +490,14 @@ export const pilafRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'
   milliliterUnitDoc,
   easyLevelDoc,
   stovetopMethodDoc,
+  caloriesDoc,
+  proteinDoc,
+  carbohydratesDoc,
+  fatDoc,
+  fiberDoc,
+  sugarDoc,
+  sodiumDoc,
+  cholesterolDoc,
 }) => {
   return {
     slug: 'pilaf',
@@ -461,16 +558,48 @@ export const pilafRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'
       },
     ],
     servingTips: 'Her türlü et yemeği, sebze yemeği ve çorba ile servis edilebilir.',
-    nutrition: {
-      calories: 320,
-      protein: 6,
-      carbs: 58,
-      fat: 8,
-      fiber: 1,
-      sugar: 0,
-      sodium: 400,
-      cholesterol: 20,
-    },
+    nutritionValues: [
+      {
+        nutrient: caloriesDoc.id,
+        amount: 320,
+        unit: 'kcal',
+      },
+      {
+        nutrient: proteinDoc.id,
+        amount: 6,
+        unit: 'g',
+      },
+      {
+        nutrient: carbohydratesDoc.id,
+        amount: 58,
+        unit: 'g',
+      },
+      {
+        nutrient: fatDoc.id,
+        amount: 8,
+        unit: 'g',
+      },
+      {
+        nutrient: fiberDoc.id,
+        amount: 1,
+        unit: 'g',
+      },
+      {
+        nutrient: sugarDoc.id,
+        amount: 0,
+        unit: 'g',
+      },
+      {
+        nutrient: sodiumDoc.id,
+        amount: 400,
+        unit: 'mg',
+      },
+      {
+        nutrient: cholesterolDoc.id,
+        amount: 20,
+        unit: 'mg',
+      },
+    ],
     content: {
       root: {
         type: 'root',
