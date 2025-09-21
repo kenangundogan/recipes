@@ -47,6 +47,7 @@ export const Recipes: CollectionConfig<'recipes'> = {
     difficulty: true,
     cookingMethod: true,
     nutritionValues: true,
+    dietTypes: true,
     meta: {
       image: true,
       description: true,
@@ -407,6 +408,16 @@ export const Recipes: CollectionConfig<'recipes'> = {
               },
               hasMany: true,
               relationTo: 'regions',
+            },
+            {
+              name: 'dietTypes',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+                description: 'Bu tarif hangi diyet tipine uygun?',
+              },
+              hasMany: true,
+              relationTo: 'dietTypes',
             },
           ],
         },

@@ -87,6 +87,7 @@ export interface Config {
     difficultyLevels: DifficultyLevel;
     cookingMethods: CookingMethod;
     nutrients: Nutrient;
+    dietTypes: DietType;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -118,6 +119,7 @@ export interface Config {
     difficultyLevels: DifficultyLevelsSelect<false> | DifficultyLevelsSelect<true>;
     cookingMethods: CookingMethodsSelect<false> | CookingMethodsSelect<true>;
     nutrients: NutrientsSelect<false> | NutrientsSelect<true>;
+    dietTypes: DietTypesSelect<false> | DietTypesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -877,6 +879,10 @@ export interface Recipe {
   categories?: (string | Category)[] | null;
   seasons?: (string | Season)[] | null;
   regions?: (string | Region)[] | null;
+  /**
+   * Bu tarif hangi diyet tipine uygun?
+   */
+  dietTypes?: (string | DietType)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1429,6 +1435,53 @@ export interface City {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dietTypes".
+ */
+export interface DietType {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedDietTypes?: (string | DietType)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "continents".
  */
 export interface Continent {
@@ -1781,6 +1834,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'nutrients';
         value: string | Nutrient;
+      } | null)
+    | ({
+        relationTo: 'dietTypes';
+        value: string | DietType;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2230,6 +2287,7 @@ export interface RecipesSelect<T extends boolean = true> {
   categories?: T;
   seasons?: T;
   regions?: T;
+  dietTypes?: T;
   meta?:
     | T
     | {
@@ -2652,6 +2710,37 @@ export interface NutrientsSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   relatedNutrients?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dietTypes_select".
+ */
+export interface DietTypesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedDietTypes?: T;
   meta?:
     | T
     | {
@@ -3104,6 +3193,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'nutrients';
           value: string | Nutrient;
+        } | null)
+      | ({
+          relationTo: 'dietTypes';
+          value: string | DietType;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

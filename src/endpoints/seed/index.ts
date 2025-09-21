@@ -86,6 +86,7 @@ import {
   sodium,
   cholesterol,
 } from './nutrients'
+import { vegan, vegetarian, glutenFree, keto, lowCarb, mediterranean, paleo } from './diet-types'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -102,6 +103,7 @@ const collections: CollectionSlug[] = [
   'cookingMethods',
   'difficultyLevels',
   'nutrients',
+  'dietTypes',
   'recipes',
   'media',
   'pages',
@@ -1685,6 +1687,129 @@ export const seed = async ({
     },
   })
 
+  payload.logger.info(`— Seeding diet types...`)
+
+  // Create diet types
+  const veganDoc = await payload.create({
+    collection: 'dietTypes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: vegan({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const vegetarianDoc = await payload.create({
+    collection: 'dietTypes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: vegetarian({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const glutenFreeDoc = await payload.create({
+    collection: 'dietTypes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: glutenFree({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const ketoDoc = await payload.create({
+    collection: 'dietTypes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: keto({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const lowCarbDoc = await payload.create({
+    collection: 'dietTypes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: lowCarb({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const mediterraneanDoc = await payload.create({
+    collection: 'dietTypes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: mediterranean({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const paleoDoc = await payload.create({
+    collection: 'dietTypes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: paleo({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  // Update diet types with relations
+  await payload.update({
+    id: veganDoc.id,
+    collection: 'dietTypes',
+    data: {
+      relatedDietTypes: [vegetarianDoc.id, mediterraneanDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: vegetarianDoc.id,
+    collection: 'dietTypes',
+    data: {
+      relatedDietTypes: [veganDoc.id, mediterraneanDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: glutenFreeDoc.id,
+    collection: 'dietTypes',
+    data: {
+      relatedDietTypes: [paleoDoc.id, ketoDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: ketoDoc.id,
+    collection: 'dietTypes',
+    data: {
+      relatedDietTypes: [lowCarbDoc.id, glutenFreeDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: lowCarbDoc.id,
+    collection: 'dietTypes',
+    data: {
+      relatedDietTypes: [ketoDoc.id, paleoDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: mediterraneanDoc.id,
+    collection: 'dietTypes',
+    data: {
+      relatedDietTypes: [vegetarianDoc.id, veganDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: paleoDoc.id,
+    collection: 'dietTypes',
+    data: {
+      relatedDietTypes: [glutenFreeDoc.id, lowCarbDoc.id],
+    },
+  })
+
   payload.logger.info(`— Seeding recipes...`)
 
   // Create recipes
@@ -1724,6 +1849,13 @@ export const seed = async ({
       sugarDoc,
       sodiumDoc,
       cholesterolDoc,
+      veganDoc,
+      vegetarianDoc,
+      glutenFreeDoc,
+      ketoDoc,
+      lowCarbDoc,
+      mediterraneanDoc,
+      paleoDoc,
     }),
   })
 
@@ -1763,6 +1895,13 @@ export const seed = async ({
       sugarDoc,
       sodiumDoc,
       cholesterolDoc,
+      veganDoc,
+      vegetarianDoc,
+      glutenFreeDoc,
+      ketoDoc,
+      lowCarbDoc,
+      mediterraneanDoc,
+      paleoDoc,
     }),
   })
 
@@ -1802,6 +1941,13 @@ export const seed = async ({
       sugarDoc,
       sodiumDoc,
       cholesterolDoc,
+      veganDoc,
+      vegetarianDoc,
+      glutenFreeDoc,
+      ketoDoc,
+      lowCarbDoc,
+      mediterraneanDoc,
+      paleoDoc,
     }),
   })
 
@@ -1814,6 +1960,7 @@ export const seed = async ({
       categories: [],
       seasons: [winterDoc.id, autumnDoc.id], // Kış ve sonbahar çorbası
       regions: [icAnatoliaDoc.id], // İç Anadolu/Gaziantep
+      dietTypes: [glutenFreeDoc.id], // Beyran genelde glutensiz
     },
   })
 
@@ -1825,6 +1972,7 @@ export const seed = async ({
       categories: [],
       seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
       regions: [icAnatoliaDoc.id], // Tüm bölgeler
+      dietTypes: [vegetarianDoc.id, glutenFreeDoc.id], // Vejetaryen ve glutensiz
     },
   })
 
@@ -1836,6 +1984,7 @@ export const seed = async ({
       categories: [],
       seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
       regions: [icAnatoliaDoc.id], // Tüm bölgeler
+      dietTypes: [vegetarianDoc.id, veganDoc.id, glutenFreeDoc.id], // Vegan, vejetaryen, glutensiz
     },
   })
 

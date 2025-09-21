@@ -26,6 +26,7 @@ import { DifficultyLevels } from './collections/DifficultyLevels'
 import { CookingMethods } from './collections/CookingMethods'
 import { Months } from './collections/Months'
 import { Nutrients } from './collections/Nutrients'
+import { DietTypes } from './collections/DietTypes'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -98,6 +99,7 @@ export default buildConfig({
     DifficultyLevels,
     CookingMethods,
     Nutrients,
+    DietTypes,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],

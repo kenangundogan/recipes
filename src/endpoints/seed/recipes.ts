@@ -35,6 +35,14 @@ export type RecipeArgs = {
   sugarDoc: any
   sodiumDoc: any
   cholesterolDoc: any
+  // Diet type docs
+  veganDoc: any
+  vegetarianDoc: any
+  glutenFreeDoc: any
+  ketoDoc: any
+  lowCarbDoc: any
+  mediterraneanDoc: any
+  paleoDoc: any
 }
 
 export const beyranSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'recipes'> = ({
@@ -272,6 +280,7 @@ export const beyranSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionS
     categories: [], // Bu seed script tarafından doldurulacak
     seasons: [], // Bu seed script tarafından doldurulacak
     regions: [], // Bu seed script tarafından doldurulacak
+    dietTypes: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -478,6 +487,7 @@ export const menemenRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug
     categories: [], // Bu seed script tarafından doldurulacak
     seasons: [], // Bu seed script tarafından doldurulacak
     regions: [], // Bu seed script tarafından doldurulacak
+    dietTypes: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -659,5 +669,6 @@ export const pilafRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'
     categories: [], // Bu seed script tarafından doldurulacak
     seasons: [], // Bu seed script tarafından doldurulacak
     regions: [], // Bu seed script tarafından doldurulacak
+    dietTypes: [], // Bu seed script tarafından doldurulacak
   }
 }
