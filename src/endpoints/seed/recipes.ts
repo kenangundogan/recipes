@@ -87,24 +87,28 @@ export const beyranSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionS
         amount: 100,
         unit: gramUnitDoc.id,
         notes: 'Baldo pirinç tercih edilir',
+        optional: false, // Ana malzeme
       },
       {
         ingredient: onionDoc.id,
         amount: 1,
         unit: pieceUnitDoc.id,
         notes: 'Orta boy soğan',
+        optional: false, // Ana malzeme
       },
       {
         ingredient: saltDoc.id,
         amount: 2,
         unit: teaspoonUnitDoc.id,
         notes: 'Tuz',
+        optional: false, // Temel baharat
       },
       {
         ingredient: blackPepperDoc.id,
         amount: 1,
         unit: teaspoonUnitDoc.id,
         notes: 'Karabiber',
+        optional: true, // Baharatlar genelde opsiyonel
       },
     ],
     instructions: [
@@ -326,30 +330,35 @@ export const menemenRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug
         amount: 4,
         unit: pieceUnitDoc.id,
         notes: 'Taze yumurta',
+        optional: false, // Ana malzeme
       },
       {
         ingredient: tomatoDoc.id,
         amount: 3,
         unit: pieceUnitDoc.id,
         notes: 'Orta boy, olgun domates',
+        optional: false, // Ana malzeme
       },
       {
         ingredient: onionDoc.id,
         amount: 1,
         unit: pieceUnitDoc.id,
         notes: 'Küçük boy soğan',
+        optional: true, // Tercihe göre eklenebilir
       },
       {
         ingredient: saltDoc.id,
         amount: 1,
         unit: teaspoonUnitDoc.id,
         notes: 'Tuz',
+        optional: false, // Temel baharat
       },
       {
         ingredient: blackPepperDoc.id,
         amount: 0.5,
         unit: teaspoonUnitDoc.id,
         notes: 'Karabiber',
+        optional: true, // Tercihe göre eklenebilir
       },
     ],
     instructions: [
@@ -528,12 +537,14 @@ export const pilafRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'
         amount: 300,
         unit: gramUnitDoc.id,
         notes: 'Baldo pirinç',
+        optional: false, // Ana malzeme
       },
       {
         ingredient: saltDoc.id,
         amount: 1,
         unit: teaspoonUnitDoc.id,
         notes: 'Tuz',
+        optional: true, // İsteğe bağlı tuzlama
       },
     ],
     instructions: [

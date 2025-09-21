@@ -848,6 +848,7 @@ export interface Recipe {
     amount: number;
     unit: string | IngredientUnit;
     notes?: string | null;
+    optional?: boolean | null;
     id?: string | null;
   }[];
   /**
@@ -2264,6 +2265,7 @@ export interface RecipesSelect<T extends boolean = true> {
         amount?: T;
         unit?: T;
         notes?: T;
+        optional?: T;
         id?: T;
       };
   instructions?:

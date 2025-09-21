@@ -235,11 +235,28 @@ export const Recipes: CollectionConfig<'recipes'> = {
                   ],
                 },
                 {
-                  name: 'notes',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. İsteğe bağlı, alternatif malzeme...',
-                  },
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'notes',
+                      type: 'text',
+                      admin: {
+                        placeholder: 'Örn. Alternatif malzeme notları...',
+                        width: '100%',
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'optional',
+                      type: 'checkbox',
+                      label: 'İsteğe Bağlı',
+                      defaultValue: false,
+                    },
+                  ],
                 },
               ],
               admin: {
