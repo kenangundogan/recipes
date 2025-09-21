@@ -1210,6 +1210,7 @@ export interface Ingredient {
   };
   relatedIngredients?: (string | Ingredient)[] | null;
   ingredientCategories?: (string | IngredientCategory)[] | null;
+  seasons?: (string | Season)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -2248,6 +2249,7 @@ export interface IngredientsSelect<T extends boolean = true> {
   content?: T;
   relatedIngredients?: T;
   ingredientCategories?: T;
+  seasons?: T;
   meta?:
     | T
     | {

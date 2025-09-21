@@ -39,6 +39,7 @@ export const Ingredients: CollectionConfig<'ingredients'> = {
     title: true,
     slug: true,
     relatedIngredients: true,
+    seasons: true,
     meta: {
       image: true,
       description: true,
@@ -141,6 +142,15 @@ export const Ingredients: CollectionConfig<'ingredients'> = {
               },
               hasMany: true,
               relationTo: 'ingredientCategories',
+            },
+            {
+              name: 'seasons',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'seasons',
             },
           ],
         },

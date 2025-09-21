@@ -111,6 +111,7 @@ export const tomatoIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -180,6 +181,7 @@ export const onionIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -249,6 +251,7 @@ export const potatoIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -319,6 +322,7 @@ export const appleIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -388,6 +392,7 @@ export const lemonIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -458,6 +463,7 @@ export const riceIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -527,6 +533,7 @@ export const bulgurIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -597,6 +604,7 @@ export const chickenIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -666,6 +674,7 @@ export const eggIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -736,6 +745,7 @@ export const milkIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -805,6 +815,7 @@ export const yogurtIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -875,6 +886,7 @@ export const saltIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -944,5 +956,6 @@ export const blackPepperIngredient: (
     },
     relatedIngredients: [], // Bu seed script tarafından doldurulacak
     ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
   }
 }

@@ -1266,6 +1266,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [onionDoc.id, potatoDoc.id],
       ingredientCategories: [vegetablesCategoryDoc.id],
+      seasons: [summerDoc.id, autumnDoc.id], // Yaz ve sonbahar domatesi
     },
   })
   await payload.update({
@@ -1274,6 +1275,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [tomatoDoc.id, potatoDoc.id],
       ingredientCategories: [vegetablesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
   await payload.update({
@@ -1282,6 +1284,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [tomatoDoc.id, onionDoc.id],
       ingredientCategories: [vegetablesCategoryDoc.id],
+      seasons: [summerDoc.id, autumnDoc.id, winterDoc.id], // Yaz, sonbahar, kış
     },
   })
   await payload.update({
@@ -1290,6 +1293,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [lemonDoc.id, milkDoc.id],
       ingredientCategories: [fruitsCategoryDoc.id],
+      seasons: [autumnDoc.id, winterDoc.id], // Sonbahar ve kış elması
     },
   })
   await payload.update({
@@ -1298,6 +1302,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [appleDoc.id, saltDoc.id],
       ingredientCategories: [fruitsCategoryDoc.id],
+      seasons: [winterDoc.id, springDoc.id], // Kış ve ilkbahar limonu
     },
   })
   await payload.update({
@@ -1306,6 +1311,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [bulgurDoc.id, chickenDoc.id],
       ingredientCategories: [grainsCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
   await payload.update({
@@ -1314,6 +1320,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [riceDoc.id, tomatoDoc.id],
       ingredientCategories: [grainsCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
   await payload.update({
@@ -1322,6 +1329,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [eggDoc.id, riceDoc.id],
       ingredientCategories: [proteinsCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
   await payload.update({
@@ -1330,6 +1338,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [chickenDoc.id, milkDoc.id],
       ingredientCategories: [proteinsCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
   await payload.update({
@@ -1338,6 +1347,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [yogurtDoc.id, eggDoc.id],
       ingredientCategories: [dairyCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
   await payload.update({
@@ -1346,6 +1356,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [milkDoc.id, appleDoc.id],
       ingredientCategories: [dairyCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
   await payload.update({
@@ -1354,6 +1365,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [blackPepperDoc.id, lemonDoc.id],
       ingredientCategories: [spicesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
   await payload.update({
@@ -1362,6 +1374,7 @@ export const seed = async ({
     data: {
       relatedIngredients: [saltDoc.id, onionDoc.id],
       ingredientCategories: [spicesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
 
