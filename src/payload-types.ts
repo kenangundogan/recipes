@@ -84,6 +84,8 @@ export interface Config {
     ingredients: Ingredient;
     ingredientUnitCategories: IngredientUnitCategory;
     ingredientUnits: IngredientUnit;
+    difficultyLevels: DifficultyLevel;
+    cookingMethods: CookingMethod;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -112,6 +114,8 @@ export interface Config {
     ingredients: IngredientsSelect<false> | IngredientsSelect<true>;
     ingredientUnitCategories: IngredientUnitCategoriesSelect<false> | IngredientUnitCategoriesSelect<true>;
     ingredientUnits: IngredientUnitsSelect<false> | IngredientUnitsSelect<true>;
+    difficultyLevels: DifficultyLevelsSelect<false> | DifficultyLevelsSelect<true>;
+    cookingMethods: CookingMethodsSelect<false> | CookingMethodsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -815,8 +819,81 @@ export interface Recipe {
     };
     [k: string]: unknown;
   };
+  /**
+   * Kaç kişilik
+   */
+  servings: number;
+  /**
+   * Hazırlık süresi (dakika)
+   */
+  prepTime: number;
+  /**
+   * Pişirme süresi (dakika)
+   */
+  cookTime: number;
+  difficulty: string | DifficultyLevel;
+  cookingMethod: string | CookingMethod;
+  /**
+   * Tarif malzemelerini ekleyin
+   */
+  ingredients: {
+    ingredient: string | Ingredient;
+    amount: number;
+    unit: string | IngredientUnit;
+    notes?: string | null;
+    id?: string | null;
+  }[];
+  /**
+   * Hazırlama adımlarını sıralayın
+   */
+  instructions: {
+    step: string;
+    tip?: string | null;
+    /**
+     * Adım görseli (opsiyonel)
+     */
+    image?: (string | null) | Media;
+    id?: string | null;
+  }[];
+  servingTips?: string | null;
+  nutrition?: {
+    /**
+     * Kalori (kcal)
+     */
+    calories?: number | null;
+    /**
+     * Protein (g)
+     */
+    protein?: number | null;
+    /**
+     * Karbonhidrat (g)
+     */
+    carbs?: number | null;
+    /**
+     * Yağ (g)
+     */
+    fat?: number | null;
+    /**
+     * Lif (g)
+     */
+    fiber?: number | null;
+    /**
+     * Şeker (g)
+     */
+    sugar?: number | null;
+    /**
+     * Sodyum (mg)
+     */
+    sodium?: number | null;
+    /**
+     * Kolesterol (mg)
+     */
+    cholesterol?: number | null;
+  };
   relatedRecipes?: (string | Recipe)[] | null;
   categories?: (string | Category)[] | null;
+  seasons?: (string | Season)[] | null;
+  regions?: (string | Region)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -841,9 +918,9 @@ export interface Recipe {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "continents".
+ * via the `definition` "difficultyLevels".
  */
-export interface Continent {
+export interface DifficultyLevel {
   id: string;
   title: string;
   description: string;
@@ -863,11 +940,7 @@ export interface Continent {
     };
     [k: string]: unknown;
   };
-  code?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
-  relatedContinents?: (string | Continent)[] | null;
-  countries?: (string | Country)[] | null;
+  relatedDifficultyLevels?: (string | DifficultyLevel)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -892,9 +965,9 @@ export interface Continent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "countries".
+ * via the `definition` "cookingMethods".
  */
-export interface Country {
+export interface CookingMethod {
   id: string;
   title: string;
   description: string;
@@ -914,11 +987,7 @@ export interface Country {
     };
     [k: string]: unknown;
   };
-  code?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
-  relatedCountries?: (string | Country)[] | null;
-  cities?: (string | City)[] | null;
+  relatedCookingMethods?: (string | CookingMethod)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -943,9 +1012,9 @@ export interface Country {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cities".
+ * via the `definition` "ingredients".
  */
-export interface City {
+export interface Ingredient {
   id: string;
   title: string;
   description: string;
@@ -965,10 +1034,9 @@ export interface City {
     };
     [k: string]: unknown;
   };
-  code?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
-  relatedCities?: (string | City)[] | null;
+  relatedIngredients?: (string | Ingredient)[] | null;
+  ingredientCategories?: (string | IngredientCategory)[] | null;
+  seasons?: (string | Season)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -993,9 +1061,9 @@ export interface City {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "regions".
+ * via the `definition` "ingredientCategories".
  */
-export interface Region {
+export interface IngredientCategory {
   id: string;
   title: string;
   description: string;
@@ -1015,11 +1083,7 @@ export interface Region {
     };
     [k: string]: unknown;
   };
-  code?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
-  relatedRegions?: (string | Region)[] | null;
-  cities?: (string | City)[] | null;
+  relatedIngredientCategories?: (string | IngredientCategory)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1139,9 +1203,9 @@ export interface Month {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ingredientCategories".
+ * via the `definition` "ingredientUnits".
  */
-export interface IngredientCategory {
+export interface IngredientUnit {
   id: string;
   title: string;
   description: string;
@@ -1161,56 +1225,8 @@ export interface IngredientCategory {
     };
     [k: string]: unknown;
   };
-  relatedIngredientCategories?: (string | IngredientCategory)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ingredients".
- */
-export interface Ingredient {
-  id: string;
-  title: string;
-  description: string;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedIngredients?: (string | Ingredient)[] | null;
-  ingredientCategories?: (string | IngredientCategory)[] | null;
-  seasons?: (string | Season)[] | null;
+  relatedIngredientUnits?: (string | IngredientUnit)[] | null;
+  ingredientUnitCategories?: (string | IngredientUnitCategory)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1282,9 +1298,9 @@ export interface IngredientUnitCategory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ingredientUnits".
+ * via the `definition` "regions".
  */
-export interface IngredientUnit {
+export interface Region {
   id: string;
   title: string;
   description: string;
@@ -1304,8 +1320,163 @@ export interface IngredientUnit {
     };
     [k: string]: unknown;
   };
-  relatedIngredientUnits?: (string | IngredientUnit)[] | null;
-  ingredientUnitCategories?: (string | IngredientUnitCategory)[] | null;
+  code?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  relatedRegions?: (string | Region)[] | null;
+  cities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cities".
+ */
+export interface City {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  relatedCities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "continents".
+ */
+export interface Continent {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  relatedContinents?: (string | Continent)[] | null;
+  countries?: (string | Country)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  relatedCountries?: (string | Country)[] | null;
+  cities?: (string | City)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1568,6 +1739,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'ingredientUnits';
         value: string | IngredientUnit;
+      } | null)
+    | ({
+        relationTo: 'difficultyLevels';
+        value: string | DifficultyLevel;
+      } | null)
+    | ({
+        relationTo: 'cookingMethods';
+        value: string | CookingMethod;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1982,8 +2161,45 @@ export interface RecipesSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
+  servings?: T;
+  prepTime?: T;
+  cookTime?: T;
+  difficulty?: T;
+  cookingMethod?: T;
+  ingredients?:
+    | T
+    | {
+        ingredient?: T;
+        amount?: T;
+        unit?: T;
+        notes?: T;
+        id?: T;
+      };
+  instructions?:
+    | T
+    | {
+        step?: T;
+        tip?: T;
+        image?: T;
+        id?: T;
+      };
+  servingTips?: T;
+  nutrition?:
+    | T
+    | {
+        calories?: T;
+        protein?: T;
+        carbs?: T;
+        fat?: T;
+        fiber?: T;
+        sugar?: T;
+        sodium?: T;
+        cholesterol?: T;
+      };
   relatedRecipes?: T;
   categories?: T;
+  seasons?: T;
+  regions?: T;
   meta?:
     | T
     | {
@@ -2313,6 +2529,68 @@ export interface IngredientUnitsSelect<T extends boolean = true> {
   content?: T;
   relatedIngredientUnits?: T;
   ingredientUnitCategories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "difficultyLevels_select".
+ */
+export interface DifficultyLevelsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedDifficultyLevels?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cookingMethods_select".
+ */
+export interface CookingMethodsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedCookingMethods?: T;
   meta?:
     | T
     | {
@@ -2753,6 +3031,14 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'ingredientUnits';
           value: string | IngredientUnit;
+        } | null)
+      | ({
+          relationTo: 'difficultyLevels';
+          value: string | DifficultyLevel;
+        } | null)
+      | ({
+          relationTo: 'cookingMethods';
+          value: string | CookingMethod;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

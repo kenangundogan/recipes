@@ -67,6 +67,15 @@ import {
   saltIngredient,
   blackPepperIngredient,
 } from './ingredients'
+import { beyranSoupRecipe, menemenRecipe, pilafRecipe } from './recipes'
+import {
+  stovetopMethod,
+  ovenMethod,
+  steamMethod,
+  grillMethod,
+  pressureCookerMethod,
+} from './cooking-methods'
+import { easyLevel, mediumLevel, hardLevel } from './difficulty-levels'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -80,6 +89,9 @@ const collections: CollectionSlug[] = [
   'ingredientUnitCategories',
   'ingredientUnits',
   'ingredients',
+  'cookingMethods',
+  'difficultyLevels',
+  'recipes',
   'media',
   'pages',
   'posts',
@@ -1375,6 +1387,280 @@ export const seed = async ({
       relatedIngredients: [saltDoc.id, onionDoc.id],
       ingredientCategories: [spicesCategoryDoc.id],
       seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+
+  payload.logger.info(`— Seeding cooking methods...`)
+
+  // Create cooking methods
+  const stovetopMethodDoc = await payload.create({
+    collection: 'cookingMethods',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: stovetopMethod({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const ovenMethodDoc = await payload.create({
+    collection: 'cookingMethods',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: ovenMethod({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const steamMethodDoc = await payload.create({
+    collection: 'cookingMethods',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: steamMethod({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const grillMethodDoc = await payload.create({
+    collection: 'cookingMethods',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: grillMethod({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const pressureCookerMethodDoc = await payload.create({
+    collection: 'cookingMethods',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: pressureCookerMethod({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  // Update cooking methods with relations
+  await payload.update({
+    id: stovetopMethodDoc.id,
+    collection: 'cookingMethods',
+    data: {
+      relatedCookingMethods: [ovenMethodDoc.id, steamMethodDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: ovenMethodDoc.id,
+    collection: 'cookingMethods',
+    data: {
+      relatedCookingMethods: [stovetopMethodDoc.id, grillMethodDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: steamMethodDoc.id,
+    collection: 'cookingMethods',
+    data: {
+      relatedCookingMethods: [stovetopMethodDoc.id, pressureCookerMethodDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: grillMethodDoc.id,
+    collection: 'cookingMethods',
+    data: {
+      relatedCookingMethods: [ovenMethodDoc.id, stovetopMethodDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: pressureCookerMethodDoc.id,
+    collection: 'cookingMethods',
+    data: {
+      relatedCookingMethods: [steamMethodDoc.id, stovetopMethodDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding difficulty levels...`)
+
+  // Create difficulty levels
+  const easyLevelDoc = await payload.create({
+    collection: 'difficultyLevels',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: easyLevel({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const mediumLevelDoc = await payload.create({
+    collection: 'difficultyLevels',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: mediumLevel({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const hardLevelDoc = await payload.create({
+    collection: 'difficultyLevels',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: hardLevel({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  // Update difficulty levels with relations
+  await payload.update({
+    id: easyLevelDoc.id,
+    collection: 'difficultyLevels',
+    data: {
+      relatedDifficultyLevels: [mediumLevelDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: mediumLevelDoc.id,
+    collection: 'difficultyLevels',
+    data: {
+      relatedDifficultyLevels: [easyLevelDoc.id, hardLevelDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: hardLevelDoc.id,
+    collection: 'difficultyLevels',
+    data: {
+      relatedDifficultyLevels: [mediumLevelDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding recipes...`)
+
+  // Create recipes
+  const beyranSoupDoc = await payload.create({
+    collection: 'recipes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: beyranSoupRecipe({
+      heroImage: image1Doc,
+      author: demoAuthor,
+      tomatoDoc,
+      onionDoc,
+      riceDoc,
+      eggDoc,
+      saltDoc,
+      blackPepperDoc,
+      gramUnitDoc,
+      pieceUnitDoc,
+      tablespoonUnitDoc,
+      teaspoonUnitDoc,
+      milliliterUnitDoc,
+      easyLevelDoc,
+      mediumLevelDoc,
+      hardLevelDoc,
+      stovetopMethodDoc,
+      ovenMethodDoc,
+      steamMethodDoc,
+      grillMethodDoc,
+      pressureCookerMethodDoc,
+    }),
+  })
+
+  const menemenDoc = await payload.create({
+    collection: 'recipes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: menemenRecipe({
+      heroImage: image2Doc,
+      author: demoAuthor,
+      tomatoDoc,
+      onionDoc,
+      riceDoc,
+      eggDoc,
+      saltDoc,
+      blackPepperDoc,
+      gramUnitDoc,
+      pieceUnitDoc,
+      tablespoonUnitDoc,
+      teaspoonUnitDoc,
+      milliliterUnitDoc,
+      easyLevelDoc,
+      mediumLevelDoc,
+      hardLevelDoc,
+      stovetopMethodDoc,
+      ovenMethodDoc,
+      steamMethodDoc,
+      grillMethodDoc,
+      pressureCookerMethodDoc,
+    }),
+  })
+
+  const pilafDoc = await payload.create({
+    collection: 'recipes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: pilafRecipe({
+      heroImage: image3Doc,
+      author: demoAuthor,
+      tomatoDoc,
+      onionDoc,
+      riceDoc,
+      eggDoc,
+      saltDoc,
+      blackPepperDoc,
+      gramUnitDoc,
+      pieceUnitDoc,
+      tablespoonUnitDoc,
+      teaspoonUnitDoc,
+      milliliterUnitDoc,
+      easyLevelDoc,
+      mediumLevelDoc,
+      hardLevelDoc,
+      stovetopMethodDoc,
+      ovenMethodDoc,
+      steamMethodDoc,
+      grillMethodDoc,
+      pressureCookerMethodDoc,
+    }),
+  })
+
+  // update each recipe with relations
+  await payload.update({
+    id: beyranSoupDoc.id,
+    collection: 'recipes',
+    data: {
+      relatedRecipes: [menemenDoc.id, pilafDoc.id],
+      categories: [],
+      seasons: [winterDoc.id, autumnDoc.id], // Kış ve sonbahar çorbası
+      regions: [icAnatoliaDoc.id], // İç Anadolu/Gaziantep
+    },
+  })
+
+  await payload.update({
+    id: menemenDoc.id,
+    collection: 'recipes',
+    data: {
+      relatedRecipes: [beyranSoupDoc.id, pilafDoc.id],
+      categories: [],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+      regions: [icAnatoliaDoc.id], // Tüm bölgeler
+    },
+  })
+
+  await payload.update({
+    id: pilafDoc.id,
+    collection: 'recipes',
+    data: {
+      relatedRecipes: [beyranSoupDoc.id, menemenDoc.id],
+      categories: [],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+      regions: [icAnatoliaDoc.id], // Tüm bölgeler
     },
   })
 

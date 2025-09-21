@@ -39,13 +39,21 @@ export const Recipes: CollectionConfig<'recipes'> = {
     title: true,
     slug: true,
     categories: true,
+    ingredients: true,
+    seasons: true,
+    servings: true,
+    prepTime: true,
+    cookTime: true,
+    difficulty: true,
+    cookingMethod: true,
     meta: {
       image: true,
       description: true,
     },
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'difficulty', 'cookTime', 'servings', 'updatedAt'],
+    group: 'Recipe Management',
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
@@ -66,15 +74,22 @@ export const Recipes: CollectionConfig<'recipes'> = {
     useAsTitle: 'title',
   },
   fields: [
+    // Temel Bilgiler
     {
       name: 'title',
       type: 'text',
       required: true,
+      admin: {
+        placeholder: 'Örn. Beyran Çorbası',
+      },
     },
     {
       name: 'description',
       type: 'textarea',
       required: true,
+      admin: {
+        placeholder: 'Tarifin kısa tanıtımı, kültürel veya tarihi bilgisi...',
+      },
     },
     {
       type: 'tabs',
@@ -108,6 +123,280 @@ export const Recipes: CollectionConfig<'recipes'> = {
           label: 'Content',
         },
         {
+          label: 'Tarif Detayları',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'servings',
+                  type: 'number',
+                  required: true,
+                  min: 1,
+                  max: 50,
+                  admin: {
+                    placeholder: '4',
+                    description: 'Kaç kişilik',
+                    width: '33%',
+                  },
+                },
+                {
+                  name: 'prepTime',
+                  type: 'number',
+                  required: true,
+                  min: 0,
+                  admin: {
+                    placeholder: '30',
+                    description: 'Hazırlık süresi (dakika)',
+                    width: '33%',
+                  },
+                },
+                {
+                  name: 'cookTime',
+                  type: 'number',
+                  required: true,
+                  min: 0,
+                  admin: {
+                    placeholder: '45',
+                    description: 'Pişirme süresi (dakika)',
+                    width: '34%',
+                  },
+                },
+              ],
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'difficulty',
+                  type: 'relationship',
+                  required: true,
+                  relationTo: 'difficultyLevels',
+                  admin: {
+                    width: '50%',
+                  },
+                },
+                {
+                  name: 'cookingMethod',
+                  type: 'relationship',
+                  required: true,
+                  relationTo: 'cookingMethods',
+                  admin: {
+                    width: '50%',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Malzemeler',
+          fields: [
+            {
+              name: 'ingredients',
+              type: 'array',
+              required: true,
+              minRows: 1,
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'ingredient',
+                      type: 'relationship',
+                      relationTo: 'ingredients',
+                      required: true,
+                      admin: {
+                        width: '40%',
+                      },
+                    },
+                    {
+                      name: 'amount',
+                      type: 'number',
+                      required: true,
+                      admin: {
+                        placeholder: '250',
+                        width: '30%',
+                      },
+                    },
+                    {
+                      name: 'unit',
+                      type: 'relationship',
+                      relationTo: 'ingredientUnits',
+                      required: true,
+                      admin: {
+                        width: '30%',
+                      },
+                    },
+                  ],
+                },
+                {
+                  name: 'notes',
+                  type: 'text',
+                  admin: {
+                    placeholder: 'Örn. İsteğe bağlı, alternatif malzeme...',
+                  },
+                },
+              ],
+              admin: {
+                description: 'Tarif malzemelerini ekleyin',
+              },
+            },
+          ],
+        },
+        {
+          label: 'Hazırlanış',
+          fields: [
+            {
+              name: 'instructions',
+              type: 'array',
+              required: true,
+              minRows: 1,
+              fields: [
+                {
+                  name: 'step',
+                  type: 'textarea',
+                  required: true,
+                  admin: {
+                    placeholder: 'Adım adım talimatları yazın...',
+                  },
+                },
+                {
+                  name: 'tip',
+                  type: 'text',
+                  admin: {
+                    placeholder: 'Profesyonel ipucu (opsiyonel)',
+                  },
+                },
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  admin: {
+                    description: 'Adım görseli (opsiyonel)',
+                  },
+                },
+              ],
+              admin: {
+                description: 'Hazırlama adımlarını sıralayın',
+              },
+            },
+            {
+              name: 'servingTips',
+              type: 'textarea',
+              admin: {
+                placeholder: 'Sunum önerileri, garnitür, servis şekli...',
+              },
+            },
+          ],
+        },
+        {
+          label: 'Besin Değerleri',
+          description: 'Porsiyon başına değerler',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'nutrition',
+                  type: 'group',
+                  fields: [
+                    {
+                      name: 'calories',
+                      type: 'number',
+                      min: 0,
+                      admin: {
+                        placeholder: '450',
+                        description: 'Kalori (kcal)',
+                      },
+                    },
+                    {
+                      type: 'row',
+                      fields: [
+                        {
+                          name: 'protein',
+                          type: 'number',
+                          min: 0,
+                          admin: {
+                            placeholder: '25',
+                            description: 'Protein (g)',
+                            width: '33%',
+                          },
+                        },
+                        {
+                          name: 'carbs',
+                          type: 'number',
+                          min: 0,
+                          admin: {
+                            placeholder: '45',
+                            description: 'Karbonhidrat (g)',
+                            width: '33%',
+                          },
+                        },
+                        {
+                          name: 'fat',
+                          type: 'number',
+                          min: 0,
+                          admin: {
+                            placeholder: '15',
+                            description: 'Yağ (g)',
+                            width: '34%',
+                          },
+                        },
+                      ],
+                    },
+                    {
+                      type: 'row',
+                      fields: [
+                        {
+                          name: 'fiber',
+                          type: 'number',
+                          min: 0,
+                          admin: {
+                            placeholder: '8',
+                            description: 'Lif (g)',
+                            width: '33%',
+                          },
+                        },
+                        {
+                          name: 'sugar',
+                          type: 'number',
+                          min: 0,
+                          admin: {
+                            placeholder: '12',
+                            description: 'Şeker (g)',
+                            width: '33%',
+                          },
+                        },
+                        {
+                          name: 'sodium',
+                          type: 'number',
+                          min: 0,
+                          admin: {
+                            placeholder: '850',
+                            description: 'Sodyum (mg)',
+                            width: '34%',
+                          },
+                        },
+                      ],
+                    },
+                    {
+                      name: 'cholesterol',
+                      type: 'number',
+                      min: 0,
+                      admin: {
+                        placeholder: '65',
+                        description: 'Kolesterol (mg)',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Meta',
           fields: [
             {
               name: 'relatedRecipes',
@@ -134,8 +423,25 @@ export const Recipes: CollectionConfig<'recipes'> = {
               hasMany: true,
               relationTo: 'categories',
             },
+            {
+              name: 'seasons',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'seasons',
+            },
+            {
+              name: 'regions',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'regions',
+            },
           ],
-          label: 'Meta',
         },
         {
           name: 'meta',
@@ -152,13 +458,9 @@ export const Recipes: CollectionConfig<'recipes'> = {
             MetaImageField({
               relationTo: 'media',
             }),
-
             MetaDescriptionField({}),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),

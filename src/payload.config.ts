@@ -22,6 +22,8 @@ import { IngredientCategories } from './collections/IngredientCategories'
 import { Ingredients } from './collections/Ingredients'
 import { IngredientUnits } from './collections/IngredientUnits'
 import { IngredientUnitCategories } from './collections/IngredientUnitCategories'
+import { DifficultyLevels } from './collections/DifficultyLevels'
+import { CookingMethods } from './collections/CookingMethods'
 import { Months } from './collections/Months'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
@@ -92,6 +94,8 @@ export default buildConfig({
     Ingredients,
     IngredientUnitCategories,
     IngredientUnits,
+    DifficultyLevels,
+    CookingMethods,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
