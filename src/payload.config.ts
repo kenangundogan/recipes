@@ -17,6 +17,8 @@ import { Continents } from './collections/Continents'
 import { Countries } from './collections/Countries'
 import { Regions } from './collections/Regions'
 import { Cities } from './collections/Cities'
+import { Seasons } from './collections/Seasons'
+import { Months } from './collections/Months'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -80,6 +82,8 @@ export default buildConfig({
     Countries,
     Regions,
     Cities,
+    Seasons,
+    Months,
   ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],

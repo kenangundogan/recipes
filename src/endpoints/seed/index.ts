@@ -13,6 +13,21 @@ import { istanbulCity, ankaraCity, izmirCity } from './cities'
 import { turkeyCountry, germanyCountry, franceCountry } from './countries'
 import { europeContinent, asiaContinent, africaContinent } from './continents'
 import { marmaraRegion, egeRegion, icAnatoliaRegion } from './regions'
+import {
+  januaryMonth,
+  februaryMonth,
+  marchMonth,
+  aprilMonth,
+  mayMonth,
+  juneMonth,
+  julyMonth,
+  augustMonth,
+  septemberMonth,
+  octoberMonth,
+  novemberMonth,
+  decemberMonth,
+} from './months'
+import { springSeason, summerSeason, autumnSeason, winterSeason } from './seasons'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -20,6 +35,8 @@ const collections: CollectionSlug[] = [
   'continents',
   'countries',
   'regions',
+  'months',
+  'seasons',
   'media',
   'pages',
   'posts',
@@ -495,6 +512,276 @@ export const seed = async ({
     data: {
       relatedRegions: [marmaraDoc.id, egeDoc.id],
       cities: [ankaraDoc.id], // Ankara İç Anadolu bölgesinde
+    },
+  })
+
+  payload.logger.info(`— Seeding months...`)
+
+  // Create months in order
+  const januaryDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: januaryMonth({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const februaryDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: februaryMonth({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const marchDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: marchMonth({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const aprilDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: aprilMonth({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const mayDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: mayMonth({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const juneDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: juneMonth({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const julyDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: julyMonth({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const augustDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: augustMonth({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const septemberDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: septemberMonth({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const octoberDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: octoberMonth({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const novemberDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: novemberMonth({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const decemberDoc = await payload.create({
+    collection: 'months',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: decemberMonth({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  // update each month with related months (consecutive months)
+  await payload.update({
+    id: januaryDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [decemberDoc.id, februaryDoc.id],
+    },
+  })
+  await payload.update({
+    id: februaryDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [januaryDoc.id, marchDoc.id],
+    },
+  })
+  await payload.update({
+    id: marchDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [februaryDoc.id, aprilDoc.id],
+    },
+  })
+  await payload.update({
+    id: aprilDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [marchDoc.id, mayDoc.id],
+    },
+  })
+  await payload.update({
+    id: mayDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [aprilDoc.id, juneDoc.id],
+    },
+  })
+  await payload.update({
+    id: juneDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [mayDoc.id, julyDoc.id],
+    },
+  })
+  await payload.update({
+    id: julyDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [juneDoc.id, augustDoc.id],
+    },
+  })
+  await payload.update({
+    id: augustDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [julyDoc.id, septemberDoc.id],
+    },
+  })
+  await payload.update({
+    id: septemberDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [augustDoc.id, octoberDoc.id],
+    },
+  })
+  await payload.update({
+    id: octoberDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [septemberDoc.id, novemberDoc.id],
+    },
+  })
+  await payload.update({
+    id: novemberDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [octoberDoc.id, decemberDoc.id],
+    },
+  })
+  await payload.update({
+    id: decemberDoc.id,
+    collection: 'months',
+    data: {
+      relatedMonths: [novemberDoc.id, januaryDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding seasons...`)
+
+  // Create seasons in order
+  const springDoc = await payload.create({
+    collection: 'seasons',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: springSeason({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const summerDoc = await payload.create({
+    collection: 'seasons',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: summerSeason({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const autumnDoc = await payload.create({
+    collection: 'seasons',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: autumnSeason({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const winterDoc = await payload.create({
+    collection: 'seasons',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: winterSeason({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  // update each season with related seasons and months
+  await payload.update({
+    id: springDoc.id,
+    collection: 'seasons',
+    data: {
+      relatedSeasons: [summerDoc.id, autumnDoc.id, winterDoc.id],
+      months: [marchDoc.id, aprilDoc.id, mayDoc.id],
+    },
+  })
+  await payload.update({
+    id: summerDoc.id,
+    collection: 'seasons',
+    data: {
+      relatedSeasons: [springDoc.id, autumnDoc.id, winterDoc.id],
+      months: [juneDoc.id, julyDoc.id, augustDoc.id],
+    },
+  })
+  await payload.update({
+    id: autumnDoc.id,
+    collection: 'seasons',
+    data: {
+      relatedSeasons: [springDoc.id, summerDoc.id, winterDoc.id],
+      months: [septemberDoc.id, octoberDoc.id, novemberDoc.id],
+    },
+  })
+  await payload.update({
+    id: winterDoc.id,
+    collection: 'seasons',
+    data: {
+      relatedSeasons: [springDoc.id, summerDoc.id, autumnDoc.id],
+      months: [decemberDoc.id, januaryDoc.id, februaryDoc.id],
     },
   })
 

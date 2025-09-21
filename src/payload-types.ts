@@ -78,6 +78,8 @@ export interface Config {
     countries: Country;
     regions: Region;
     cities: City;
+    seasons: Season;
+    months: Month;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -100,6 +102,8 @@ export interface Config {
     countries: CountriesSelect<false> | CountriesSelect<true>;
     regions: RegionsSelect<false> | RegionsSelect<true>;
     cities: CitiesSelect<false> | CitiesSelect<true>;
+    seasons: SeasonsSelect<false> | SeasonsSelect<true>;
+    months: MonthsSelect<false> | MonthsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1032,6 +1036,101 @@ export interface Region {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seasons".
+ */
+export interface Season {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedSeasons?: (string | Season)[] | null;
+  months?: (string | Month)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "months".
+ */
+export interface Month {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedMonths?: (string | Month)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1246,6 +1345,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'cities';
         value: string | City;
+      } | null)
+    | ({
+        relationTo: 'seasons';
+        value: string | Season;
+      } | null)
+    | ({
+        relationTo: 'months';
+        value: string | Month;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1824,6 +1931,69 @@ export interface CitiesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seasons_select".
+ */
+export interface SeasonsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedSeasons?: T;
+  months?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "months_select".
+ */
+export interface MonthsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedMonths?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -2217,6 +2387,14 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'cities';
           value: string | City;
+        } | null)
+      | ({
+          relationTo: 'seasons';
+          value: string | Season;
+        } | null)
+      | ({
+          relationTo: 'months';
+          value: string | Month;
         } | null);
     global?: string | null;
     user?: (string | null) | User;
