@@ -124,7 +124,7 @@ export const Recipes: CollectionConfig<'recipes'> = {
           label: 'Content',
         },
         {
-          label: 'Tarif Detayları',
+          label: 'Recipe Details',
           fields: [
             {
               type: 'row',
@@ -182,8 +182,10 @@ export const Recipes: CollectionConfig<'recipes'> = {
                   type: 'relationship',
                   required: true,
                   relationTo: 'cookingMethods',
+                  hasMany: true,
                   admin: {
                     width: '50%',
+                    description: 'Bir veya birden fazla pişirme yöntemi seçebilirsiniz',
                   },
                 },
               ],
@@ -191,7 +193,7 @@ export const Recipes: CollectionConfig<'recipes'> = {
           ],
         },
         {
-          label: 'Malzemeler',
+          label: 'Ingredients',
           fields: [
             {
               name: 'ingredients',
@@ -246,7 +248,7 @@ export const Recipes: CollectionConfig<'recipes'> = {
           ],
         },
         {
-          label: 'Hazırlanış',
+          label: 'Instructions',
           fields: [
             {
               name: 'instructions',
@@ -292,7 +294,7 @@ export const Recipes: CollectionConfig<'recipes'> = {
           ],
         },
         {
-          label: 'Besin Değerleri',
+          label: 'Nutrition',
           description: 'Porsiyon başına besin değerleri',
           fields: [
             {

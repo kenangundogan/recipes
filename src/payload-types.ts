@@ -834,7 +834,10 @@ export interface Recipe {
    */
   cookTime: number;
   difficulty: string | DifficultyLevel;
-  cookingMethod: string | CookingMethod;
+  /**
+   * Bir veya birden fazla pişirme yöntemi seçebilirsiniz
+   */
+  cookingMethod: (string | CookingMethod)[];
   /**
    * Tarif malzemelerini ekleyin
    */

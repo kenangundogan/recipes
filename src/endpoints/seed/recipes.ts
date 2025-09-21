@@ -70,7 +70,7 @@ export const beyranSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionS
     prepTime: 30,
     cookTime: 120,
     difficulty: mediumLevelDoc.id,
-    cookingMethod: stovetopMethodDoc.id,
+    cookingMethod: [stovetopMethodDoc.id], // Çorba genelde sadece ocak üstü
     heroImage: heroImage.id,
     authors: [author],
     ingredients: [
@@ -288,6 +288,7 @@ export const menemenRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug
   teaspoonUnitDoc,
   easyLevelDoc,
   stovetopMethodDoc,
+  ovenMethodDoc,
   caloriesDoc,
   proteinDoc,
   carbohydratesDoc,
@@ -307,7 +308,7 @@ export const menemenRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug
     prepTime: 10,
     cookTime: 15,
     difficulty: easyLevelDoc.id,
-    cookingMethod: stovetopMethodDoc.id,
+    cookingMethod: [stovetopMethodDoc.id, ovenMethodDoc.id], // Hem tavada hem fırında yapılabilir
     heroImage: heroImage.id,
     authors: [author],
     ingredients: [
@@ -508,7 +509,7 @@ export const pilafRecipe: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'
     prepTime: 15,
     cookTime: 25,
     difficulty: easyLevelDoc.id,
-    cookingMethod: stovetopMethodDoc.id,
+    cookingMethod: [stovetopMethodDoc.id], // Pilav geleneksel olarak ocak üstü
     heroImage: heroImage.id,
     authors: [author],
     ingredients: [
