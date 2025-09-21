@@ -72,7 +72,7 @@ export const Months: CollectionConfig<'months'> = {
       type: 'text',
       required: true,
       admin: {
-        placeholder: 'Örn. İstanbul',
+        placeholder: 'Örn. Ocak',
       },
     },
     {
@@ -80,7 +80,7 @@ export const Months: CollectionConfig<'months'> = {
       type: 'textarea',
       required: true,
       admin: {
-        placeholder: 'Örn. İstanbul',
+        placeholder: 'Örn. Ocak',
       },
     },
     {

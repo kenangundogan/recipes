@@ -72,7 +72,7 @@ export const Seasons: CollectionConfig<'seasons'> = {
       type: 'text',
       required: true,
       admin: {
-        placeholder: 'Örn. İstanbul',
+        placeholder: 'Örn. Yaz',
       },
     },
     {
@@ -80,7 +80,7 @@ export const Seasons: CollectionConfig<'seasons'> = {
       type: 'textarea',
       required: true,
       admin: {
-        placeholder: 'Örn. İstanbul',
+        placeholder: 'Örn. Yaz',
       },
     },
     {
