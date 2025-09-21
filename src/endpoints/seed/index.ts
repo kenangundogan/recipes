@@ -28,6 +28,45 @@ import {
   decemberMonth,
 } from './months'
 import { springSeason, summerSeason, autumnSeason, winterSeason } from './seasons'
+import {
+  vegetablesCategory,
+  fruitsCategory,
+  grainsCategory,
+  proteinsCategory,
+  dairyCategory,
+  spicesCategory,
+} from './ingredient-categories'
+import {
+  weightCategory,
+  volumeCategory,
+  pieceCategory,
+  spoonCategory,
+} from './ingredient-unit-categories'
+import {
+  gramUnit,
+  kilogramUnit,
+  milliliterUnit,
+  literUnit,
+  pieceUnit,
+  sliceUnit,
+  tablespoonUnit,
+  teaspoonUnit,
+} from './ingredient-units'
+import {
+  tomatoIngredient,
+  onionIngredient,
+  potatoIngredient,
+  appleIngredient,
+  lemonIngredient,
+  riceIngredient,
+  bulgurIngredient,
+  chickenIngredient,
+  eggIngredient,
+  milkIngredient,
+  yogurtIngredient,
+  saltIngredient,
+  blackPepperIngredient,
+} from './ingredients'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -37,6 +76,10 @@ const collections: CollectionSlug[] = [
   'regions',
   'months',
   'seasons',
+  'ingredientCategories',
+  'ingredientUnitCategories',
+  'ingredientUnits',
+  'ingredients',
   'media',
   'pages',
   'posts',
@@ -782,6 +825,543 @@ export const seed = async ({
     data: {
       relatedSeasons: [springDoc.id, summerDoc.id, autumnDoc.id],
       months: [decemberDoc.id, januaryDoc.id, februaryDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding ingredient categories...`)
+
+  // Create ingredient categories in order
+  const vegetablesCategoryDoc = await payload.create({
+    collection: 'ingredientCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: vegetablesCategory({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const fruitsCategoryDoc = await payload.create({
+    collection: 'ingredientCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: fruitsCategory({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const grainsCategoryDoc = await payload.create({
+    collection: 'ingredientCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: grainsCategory({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const proteinsCategoryDoc = await payload.create({
+    collection: 'ingredientCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: proteinsCategory({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const dairyCategoryDoc = await payload.create({
+    collection: 'ingredientCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: dairyCategory({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const spicesCategoryDoc = await payload.create({
+    collection: 'ingredientCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: spicesCategory({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  // update each ingredient category with related categories
+  await payload.update({
+    id: vegetablesCategoryDoc.id,
+    collection: 'ingredientCategories',
+    data: {
+      relatedIngredientCategories: [fruitsCategoryDoc.id, grainsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: fruitsCategoryDoc.id,
+    collection: 'ingredientCategories',
+    data: {
+      relatedIngredientCategories: [vegetablesCategoryDoc.id, dairyCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: grainsCategoryDoc.id,
+    collection: 'ingredientCategories',
+    data: {
+      relatedIngredientCategories: [vegetablesCategoryDoc.id, proteinsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: proteinsCategoryDoc.id,
+    collection: 'ingredientCategories',
+    data: {
+      relatedIngredientCategories: [grainsCategoryDoc.id, dairyCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: dairyCategoryDoc.id,
+    collection: 'ingredientCategories',
+    data: {
+      relatedIngredientCategories: [proteinsCategoryDoc.id, fruitsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: spicesCategoryDoc.id,
+    collection: 'ingredientCategories',
+    data: {
+      relatedIngredientCategories: [vegetablesCategoryDoc.id, proteinsCategoryDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding ingredient unit categories...`)
+
+  // Create ingredient unit categories
+  const weightCategoryDoc = await payload.create({
+    collection: 'ingredientUnitCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: weightCategory({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const volumeCategoryDoc = await payload.create({
+    collection: 'ingredientUnitCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: volumeCategory({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const pieceCategoryDoc = await payload.create({
+    collection: 'ingredientUnitCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: pieceCategory({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const spoonCategoryDoc = await payload.create({
+    collection: 'ingredientUnitCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: spoonCategory({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  // update each ingredient unit category with related categories
+  await payload.update({
+    id: weightCategoryDoc.id,
+    collection: 'ingredientUnitCategories',
+    data: {
+      relatedIngredientUnitCategories: [volumeCategoryDoc.id, spoonCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: volumeCategoryDoc.id,
+    collection: 'ingredientUnitCategories',
+    data: {
+      relatedIngredientUnitCategories: [weightCategoryDoc.id, pieceCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: pieceCategoryDoc.id,
+    collection: 'ingredientUnitCategories',
+    data: {
+      relatedIngredientUnitCategories: [volumeCategoryDoc.id, spoonCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: spoonCategoryDoc.id,
+    collection: 'ingredientUnitCategories',
+    data: {
+      relatedIngredientUnitCategories: [weightCategoryDoc.id, pieceCategoryDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding ingredient units...`)
+
+  // Create ingredient units
+  const gramUnitDoc = await payload.create({
+    collection: 'ingredientUnits',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: gramUnit({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const kilogramUnitDoc = await payload.create({
+    collection: 'ingredientUnits',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: kilogramUnit({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const milliliterUnitDoc = await payload.create({
+    collection: 'ingredientUnits',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: milliliterUnit({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const literUnitDoc = await payload.create({
+    collection: 'ingredientUnits',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: literUnit({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const pieceUnitDoc = await payload.create({
+    collection: 'ingredientUnits',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: pieceUnit({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const sliceUnitDoc = await payload.create({
+    collection: 'ingredientUnits',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: sliceUnit({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const tablespoonUnitDoc = await payload.create({
+    collection: 'ingredientUnits',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: tablespoonUnit({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const teaspoonUnitDoc = await payload.create({
+    collection: 'ingredientUnits',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: teaspoonUnit({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  // update each ingredient unit with relations
+  await payload.update({
+    id: gramUnitDoc.id,
+    collection: 'ingredientUnits',
+    data: {
+      relatedIngredientUnits: [kilogramUnitDoc.id, teaspoonUnitDoc.id],
+      ingredientUnitCategories: [weightCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: kilogramUnitDoc.id,
+    collection: 'ingredientUnits',
+    data: {
+      relatedIngredientUnits: [gramUnitDoc.id, literUnitDoc.id],
+      ingredientUnitCategories: [weightCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: milliliterUnitDoc.id,
+    collection: 'ingredientUnits',
+    data: {
+      relatedIngredientUnits: [literUnitDoc.id, teaspoonUnitDoc.id],
+      ingredientUnitCategories: [volumeCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: literUnitDoc.id,
+    collection: 'ingredientUnits',
+    data: {
+      relatedIngredientUnits: [milliliterUnitDoc.id, kilogramUnitDoc.id],
+      ingredientUnitCategories: [volumeCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: pieceUnitDoc.id,
+    collection: 'ingredientUnits',
+    data: {
+      relatedIngredientUnits: [sliceUnitDoc.id, gramUnitDoc.id],
+      ingredientUnitCategories: [pieceCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: sliceUnitDoc.id,
+    collection: 'ingredientUnits',
+    data: {
+      relatedIngredientUnits: [pieceUnitDoc.id, tablespoonUnitDoc.id],
+      ingredientUnitCategories: [pieceCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: tablespoonUnitDoc.id,
+    collection: 'ingredientUnits',
+    data: {
+      relatedIngredientUnits: [teaspoonUnitDoc.id, milliliterUnitDoc.id],
+      ingredientUnitCategories: [spoonCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: teaspoonUnitDoc.id,
+    collection: 'ingredientUnits',
+    data: {
+      relatedIngredientUnits: [tablespoonUnitDoc.id, gramUnitDoc.id],
+      ingredientUnitCategories: [spoonCategoryDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding ingredients...`)
+
+  // Create ingredients
+  const tomatoDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: tomatoIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const onionDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: onionIngredient({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const potatoDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: potatoIngredient({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const appleDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: appleIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const lemonDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: lemonIngredient({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const riceDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: riceIngredient({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const bulgurDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: bulgurIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const chickenDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: chickenIngredient({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const eggDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: eggIngredient({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const milkDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: milkIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const yogurtDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: yogurtIngredient({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const saltDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: saltIngredient({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const blackPepperDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: blackPepperIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  // update each ingredient with relations
+  await payload.update({
+    id: tomatoDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [onionDoc.id, potatoDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: onionDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [tomatoDoc.id, potatoDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: potatoDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [tomatoDoc.id, onionDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: appleDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [lemonDoc.id, milkDoc.id],
+      ingredientCategories: [fruitsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: lemonDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [appleDoc.id, saltDoc.id],
+      ingredientCategories: [fruitsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: riceDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [bulgurDoc.id, chickenDoc.id],
+      ingredientCategories: [grainsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: bulgurDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [riceDoc.id, tomatoDoc.id],
+      ingredientCategories: [grainsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: chickenDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [eggDoc.id, riceDoc.id],
+      ingredientCategories: [proteinsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: eggDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [chickenDoc.id, milkDoc.id],
+      ingredientCategories: [proteinsCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: milkDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [yogurtDoc.id, eggDoc.id],
+      ingredientCategories: [dairyCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: yogurtDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [milkDoc.id, appleDoc.id],
+      ingredientCategories: [dairyCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: saltDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [blackPepperDoc.id, lemonDoc.id],
+      ingredientCategories: [spicesCategoryDoc.id],
+    },
+  })
+  await payload.update({
+    id: blackPepperDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [saltDoc.id, onionDoc.id],
+      ingredientCategories: [spicesCategoryDoc.id],
     },
   })
 
