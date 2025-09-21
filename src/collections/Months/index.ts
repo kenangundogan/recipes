@@ -38,7 +38,7 @@ export const Months: CollectionConfig<'months'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    months: true,
+    relatedMonths: true,
     meta: {
       image: true,
       description: true,
