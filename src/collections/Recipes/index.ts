@@ -38,7 +38,6 @@ export const Recipes: CollectionConfig<'recipes'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    categories: true,
     ingredients: true,
     seasons: true,
     servings: true,
@@ -138,7 +137,6 @@ export const Recipes: CollectionConfig<'recipes'> = {
                   max: 50,
                   admin: {
                     placeholder: '4',
-                    description: 'Kaç kişilik',
                     width: '33%',
                   },
                 },
@@ -149,7 +147,6 @@ export const Recipes: CollectionConfig<'recipes'> = {
                   min: 0,
                   admin: {
                     placeholder: '30',
-                    description: 'Hazırlık süresi (dakika)',
                     width: '33%',
                   },
                 },
@@ -160,7 +157,6 @@ export const Recipes: CollectionConfig<'recipes'> = {
                   min: 0,
                   admin: {
                     placeholder: '45',
-                    description: 'Pişirme süresi (dakika)',
                     width: '34%',
                   },
                 },
@@ -186,7 +182,6 @@ export const Recipes: CollectionConfig<'recipes'> = {
                   hasMany: true,
                   admin: {
                     width: '50%',
-                    description: 'Bir veya birden fazla pişirme yöntemi seçebilirsiniz',
                   },
                 },
               ],
@@ -343,7 +338,6 @@ export const Recipes: CollectionConfig<'recipes'> = {
                       min: 0,
                       admin: {
                         placeholder: '25',
-                        description: 'Miktar (porsiyon başına)',
                         width: '30%',
                       },
                     },
@@ -400,15 +394,6 @@ export const Recipes: CollectionConfig<'recipes'> = {
               relationTo: 'recipes',
             },
             {
-              name: 'categories',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              hasMany: true,
-              relationTo: 'categories',
-            },
-            {
               name: 'seasons',
               type: 'relationship',
               admin: {
@@ -418,6 +403,15 @@ export const Recipes: CollectionConfig<'recipes'> = {
               relationTo: 'seasons',
             },
             {
+              name: 'dietTypes',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'dietTypes',
+            },
+            {
               name: 'regions',
               type: 'relationship',
               admin: {
@@ -425,16 +419,6 @@ export const Recipes: CollectionConfig<'recipes'> = {
               },
               hasMany: true,
               relationTo: 'regions',
-            },
-            {
-              name: 'dietTypes',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-                description: 'Bu tarif hangi diyet tipine uygun?',
-              },
-              hasMany: true,
-              relationTo: 'dietTypes',
             },
           ],
         },

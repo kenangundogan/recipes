@@ -823,22 +823,10 @@ export interface Recipe {
     };
     [k: string]: unknown;
   };
-  /**
-   * Kaç kişilik
-   */
   servings: number;
-  /**
-   * Hazırlık süresi (dakika)
-   */
   prepTime: number;
-  /**
-   * Pişirme süresi (dakika)
-   */
   cookTime: number;
   difficulty: string | DifficultyLevel;
-  /**
-   * Bir veya birden fazla pişirme yöntemi seçebilirsiniz
-   */
   cookingMethod: (string | CookingMethod)[];
   /**
    * Tarif malzemelerini ekleyin
@@ -869,21 +857,14 @@ export interface Recipe {
    */
   nutritionValues: {
     nutrient: string | Nutrient;
-    /**
-     * Miktar (porsiyon başına)
-     */
     amount: number;
     unit: 'kcal' | 'g' | 'mg' | 'mcg';
     id?: string | null;
   }[];
   relatedRecipes?: (string | Recipe)[] | null;
-  categories?: (string | Category)[] | null;
   seasons?: (string | Season)[] | null;
-  regions?: (string | Region)[] | null;
-  /**
-   * Bu tarif hangi diyet tipine uygun?
-   */
   dietTypes?: (string | DietType)[] | null;
+  regions?: (string | Region)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1335,6 +1316,53 @@ export interface Nutrient {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dietTypes".
+ */
+export interface DietType {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedDietTypes?: (string | DietType)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "regions".
  */
 export interface Region {
@@ -1412,53 +1440,6 @@ export interface City {
   latitude?: number | null;
   longitude?: number | null;
   relatedCities?: (string | City)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "dietTypes".
- */
-export interface DietType {
-  id: string;
-  title: string;
-  description: string;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedDietTypes?: (string | DietType)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -2286,10 +2267,9 @@ export interface RecipesSelect<T extends boolean = true> {
         id?: T;
       };
   relatedRecipes?: T;
-  categories?: T;
   seasons?: T;
-  regions?: T;
   dietTypes?: T;
+  regions?: T;
   meta?:
     | T
     | {
