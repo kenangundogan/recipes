@@ -46,7 +46,7 @@ export const Countries: CollectionConfig<'countries'> = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    group: 'Geography',
+    group: 'Geography Management',
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
