@@ -842,7 +842,7 @@ export const lentilSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionS
       },
     ],
     servingTips:
-      'Mercimek çorbası koyulaştığında su veya tavuk suyu ekleyerek kıvamını ayarlayabilirsiniz. Çorbanın üzerine tereyağı ve kırmızı pul biber ile terbiye yapabilirsiniz. Soğan kavururken yanmamasına dikkat edin, aksi halde çorba acı olur. Daha besleyici olması için çorbaya bulgur veya pirinç ekleyebilirsiniz.',
+      'Közlenmiş ekmek, tereyağında kızdırılmış pul biber veya limon ile servis edilebilir.',
 
     nutritionValues: [
       {
