@@ -791,64 +791,59 @@ export const lentilSoupRecipe: (args: RecipeArgs) => RequiredDataFromCollectionS
     ],
     instructions: [
       {
-        step: 1,
-        instruction: 'Mercimekleri soğuk suyla iyice yıkayın ve süzün.',
-        time: 2,
+        step: 'Mercimekleri soğuk suyla iyice yıkayın ve süzün.',
+        tip: 'Taş veya yabancı madde kalmamasına dikkat edin.',
+        image: null,
       },
       {
-        step: 2,
-        instruction: 'Soğanı ince doğrayın, havuç ve patatesi küp şeklinde doğrayın.',
-        time: 8,
+        step: 'Soğanı ince doğrayın, havuç ve patatesi küp şeklinde doğrayın.',
+        tip: 'Sebzelerin eşit boyutta olması pişme süresini dengeler.',
+        image: null,
       },
       {
-        step: 3,
-        instruction:
-          'Geniş bir tencerede zeytinyağını ısıtın ve soğanları pembeleşene kadar kavurun.',
-        time: 5,
+        step: 'Geniş bir tencerede zeytinyağını ısıtın ve soğanları pembeleşene kadar kavurun.',
+        tip: 'Orta ateşte kavurun, yanmamasına dikkat edin.',
+        image: null,
       },
       {
-        step: 4,
-        instruction: 'Domates salçasını ekleyip 1-2 dakika kavurun.',
-        time: 2,
+        step: 'Domates salçasını ekleyip 1-2 dakika kavurun.',
+        tip: 'Salça kokusu çıkana kadar kavurun.',
+        image: null,
       },
       {
-        step: 5,
-        instruction: 'Mercimek, havuç ve patates ekleyip karıştırın.',
-        time: 2,
+        step: 'Mercimek, havuç ve patates ekleyip karıştırın.',
+        tip: 'Tüm malzemelerin yağla kaplanmasını sağlayın.',
+        image: null,
       },
       {
-        step: 6,
-        instruction: 'Üzerini geçecek kadar su ekleyin (yaklaşık 1 litre).',
-        time: 1,
+        step: 'Üzerini geçecek kadar su ekleyin (yaklaşık 1 litre).',
+        tip: 'Sıcak su eklemek pişirme süresini kısaltır.',
+        image: null,
       },
       {
-        step: 7,
-        instruction:
-          'Kaynadıktan sonra kısık ateşte 25-30 dakika, mercimekler yumuşayana kadar pişirin.',
-        time: 30,
+        step: 'Kaynadıktan sonra kısık ateşte 25-30 dakika, mercimekler yumuşayana kadar pişirin.',
+        tip: 'Tahta kaşıkla ara sıra karıştırın, dibi tutmasın.',
+        image: null,
       },
       {
-        step: 8,
-        instruction: 'Blender ile püre haline getirin veya tel çırpıcıyla ezerek karıştırın.',
-        time: 3,
+        step: 'Blender ile püre haline getirin veya tel çırpıcıyla ezerek karıştırın.',
+        tip: 'Blender çok uzun süre çalıştırılırsa kıvam fazla yoğunlaşabilir.',
+        image: null,
       },
       {
-        step: 9,
-        instruction: 'Tuz ve karabiber ile tatlandırın. 2-3 dakika daha kaynatın.',
-        time: 3,
+        step: 'Tuz ve karabiber ile tatlandırın. 2-3 dakika daha kaynatın.',
+        tip: 'Baharat miktarını damak zevkinize göre ayarlayın.',
+        image: null,
       },
       {
-        step: 10,
-        instruction: 'Sıcak servis yapın. Dilediğiniz ile limon sıkarak servis edebilirsiniz.',
-        time: 1,
+        step: 'Sıcak servis yapın. Dilediğiniz ile limon sıkarak servis edebilirsiniz.',
+        tip: 'Üzerine tereyağında kızdırılmış pul biber dökebilirsiniz.',
+        image: null,
       },
     ],
-    tips: [
-      'Mercimek çorbası koyulaştığında su veya tavuk suyu ekleyerek kıvamını ayarlayabilirsiniz.',
-      'Çorbanın üzerine tereyağı ve kırmızı pul biber ile terbiye yapabilirsiniz.',
-      'Soğan kavururken yanmamasına dikkat edin, aksi halde çorba acı olur.',
-      'Daha besleyici olması için çorbaya bulgur veya pirinç ekleyebilirsiniz.',
-    ],
+    servingTips:
+      'Mercimek çorbası koyulaştığında su veya tavuk suyu ekleyerek kıvamını ayarlayabilirsiniz. Çorbanın üzerine tereyağı ve kırmızı pul biber ile terbiye yapabilirsiniz. Soğan kavururken yanmamasına dikkat edin, aksi halde çorba acı olur. Daha besleyici olması için çorbaya bulgur veya pirinç ekleyebilirsiniz.',
+
     nutritionValues: [
       {
         nutrient: caloriesDoc.id,
