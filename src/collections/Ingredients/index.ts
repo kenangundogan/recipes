@@ -116,6 +116,189 @@ export const Ingredients: CollectionConfig<'ingredients'> = {
           label: 'Content',
         },
         {
+          label: 'Nutrition Facts',
+          fields: [
+            {
+              name: 'nutritionFacts',
+              type: 'group',
+              fields: [
+                {
+                  name: 'servingSize',
+                  type: 'text',
+                  label: 'Serving Size',
+                  admin: {
+                    placeholder: 'Örn. 100g, 1 adet, 1 bardak',
+                    description: 'Besin değerlerinin hesaplandığı porsiyon boyutu',
+                  },
+                },
+                {
+                  name: 'calories',
+                  type: 'number',
+                  label: 'Calories (kcal)',
+                  admin: {
+                    placeholder: 'Örn. 65',
+                    description: 'Porsiyon başına kalori miktarı',
+                  },
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'protein',
+                      type: 'number',
+                      label: 'Protein (g)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 0.6',
+                      },
+                    },
+                    {
+                      name: 'carbohydrates',
+                      type: 'number',
+                      label: 'Carbohydrates (g)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 17',
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'fat',
+                      type: 'number',
+                      label: 'Fat (g)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 0.2',
+                      },
+                    },
+                    {
+                      name: 'fiber',
+                      type: 'number',
+                      label: 'Fiber (g)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 1.4',
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'sugar',
+                      type: 'number',
+                      label: 'Sugar (g)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 16',
+                      },
+                    },
+                    {
+                      name: 'sodium',
+                      type: 'number',
+                      label: 'Sodium (mg)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 1',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              name: 'vitaminsAndMinerals',
+              type: 'group',
+              label: 'Vitamins and Minerals',
+              fields: [
+                {
+                  name: 'vitaminC',
+                  type: 'number',
+                  label: 'Vitamin C (mg)',
+                  admin: {
+                    placeholder: 'Örn. 10.8',
+                    description: 'Porsiyon başına Vitamin C miktarı',
+                  },
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'vitaminA',
+                      type: 'number',
+                      label: 'Vitamin A (IU)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 66',
+                      },
+                    },
+                    {
+                      name: 'vitaminK',
+                      type: 'number',
+                      label: 'Vitamin K (mcg)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 22',
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'potassium',
+                      type: 'number',
+                      label: 'Potassium (mg)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 191',
+                      },
+                    },
+                    {
+                      name: 'calcium',
+                      type: 'number',
+                      label: 'Calcium (mg)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 10',
+                      },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'iron',
+                      type: 'number',
+                      label: 'Iron (mg)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 0.4',
+                      },
+                    },
+                    {
+                      name: 'magnesium',
+                      type: 'number',
+                      label: 'Magnesium (mg)',
+                      admin: {
+                        width: '50%',
+                        placeholder: 'Örn. 7',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
           label: 'Meta',
           fields: [
             {

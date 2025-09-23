@@ -1005,6 +1005,34 @@ export interface Ingredient {
     };
     [k: string]: unknown;
   };
+  nutritionFacts?: {
+    /**
+     * Besin değerlerinin hesaplandığı porsiyon boyutu
+     */
+    servingSize?: string | null;
+    /**
+     * Porsiyon başına kalori miktarı
+     */
+    calories?: number | null;
+    protein?: number | null;
+    carbohydrates?: number | null;
+    fat?: number | null;
+    fiber?: number | null;
+    sugar?: number | null;
+    sodium?: number | null;
+  };
+  vitaminsAndMinerals?: {
+    /**
+     * Porsiyon başına Vitamin C miktarı
+     */
+    vitaminC?: number | null;
+    vitaminA?: number | null;
+    vitaminK?: number | null;
+    potassium?: number | null;
+    calcium?: number | null;
+    iron?: number | null;
+    magnesium?: number | null;
+  };
   relatedIngredients?: (string | Ingredient)[] | null;
   ingredientCategories?: (string | IngredientCategory)[] | null;
   seasons?: (string | Season)[] | null;
@@ -2533,6 +2561,29 @@ export interface IngredientsSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
+  nutritionFacts?:
+    | T
+    | {
+        servingSize?: T;
+        calories?: T;
+        protein?: T;
+        carbohydrates?: T;
+        fat?: T;
+        fiber?: T;
+        sugar?: T;
+        sodium?: T;
+      };
+  vitaminsAndMinerals?:
+    | T
+    | {
+        vitaminC?: T;
+        vitaminA?: T;
+        vitaminK?: T;
+        potassium?: T;
+        calcium?: T;
+        iron?: T;
+        magnesium?: T;
+      };
   relatedIngredients?: T;
   ingredientCategories?: T;
   seasons?: T;

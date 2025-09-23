@@ -66,8 +66,11 @@ import {
   yogurtIngredient,
   saltIngredient,
   blackPepperIngredient,
+  lentilIngredient,
+  carrotIngredient,
+  oliveOilIngredient,
 } from './ingredients'
-import { beyranSoupRecipe, menemenRecipe, pilafRecipe } from './recipes'
+import { beyranSoupRecipe, menemenRecipe, pilafRecipe, lentilSoupRecipe } from './recipes'
 import {
   stovetopMethod,
   ovenMethod,
@@ -1284,6 +1287,33 @@ export const seed = async ({
     data: blackPepperIngredient({ heroImage: image1Doc, author: demoAuthor }),
   })
 
+  const lentilDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: lentilIngredient({ heroImage: image2Doc, author: demoAuthor }),
+  })
+
+  const carrotDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: carrotIngredient({ heroImage: image3Doc, author: demoAuthor }),
+  })
+
+  const oliveOilDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: oliveOilIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
   // update each ingredient with relations
   await payload.update({
     id: tomatoDoc.id,
@@ -1951,12 +1981,50 @@ export const seed = async ({
     }),
   })
 
+  const lentilSoupDoc = await payload.create({
+    collection: 'recipes',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: lentilSoupRecipe({
+      heroImage: image2Doc,
+      author: demoAuthor,
+      lentilDoc,
+      onionDoc,
+      carrotDoc,
+      potatoDoc,
+      tomatoDoc,
+      oliveOilDoc,
+      saltDoc,
+      blackPepperDoc,
+      gramUnitDoc,
+      pieceUnitDoc,
+      tablespoonUnitDoc,
+      teaspoonUnitDoc,
+      milliliterUnitDoc,
+      easyLevelDoc,
+      stovetopMethodDoc,
+      caloriesDoc,
+      proteinDoc,
+      carbohydratesDoc,
+      fatDoc,
+      fiberDoc,
+      sugarDoc,
+      sodiumDoc,
+      cholesterolDoc,
+      veganDoc,
+      vegetarianDoc,
+      glutenFreeDoc,
+    }),
+  })
+
   // update each recipe with relations
   await payload.update({
     id: beyranSoupDoc.id,
     collection: 'recipes',
     data: {
-      relatedRecipes: [menemenDoc.id, pilafDoc.id],
+      relatedRecipes: [menemenDoc.id, pilafDoc.id, lentilSoupDoc.id],
       categories: [],
       seasons: [winterDoc.id, autumnDoc.id], // Kış ve sonbahar çorbası
       regions: [icAnatoliaDoc.id], // İç Anadolu/Gaziantep
@@ -1968,7 +2036,7 @@ export const seed = async ({
     id: menemenDoc.id,
     collection: 'recipes',
     data: {
-      relatedRecipes: [beyranSoupDoc.id, pilafDoc.id],
+      relatedRecipes: [beyranSoupDoc.id, pilafDoc.id, lentilSoupDoc.id],
       categories: [],
       seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
       regions: [icAnatoliaDoc.id], // Tüm bölgeler
@@ -1980,11 +2048,23 @@ export const seed = async ({
     id: pilafDoc.id,
     collection: 'recipes',
     data: {
-      relatedRecipes: [beyranSoupDoc.id, menemenDoc.id],
+      relatedRecipes: [beyranSoupDoc.id, menemenDoc.id, lentilSoupDoc.id],
       categories: [],
       seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
       regions: [icAnatoliaDoc.id], // Tüm bölgeler
       dietTypes: [vegetarianDoc.id, veganDoc.id, glutenFreeDoc.id], // Vegan, vejetaryen, glutensiz
+    },
+  })
+
+  await payload.update({
+    id: lentilSoupDoc.id,
+    collection: 'recipes',
+    data: {
+      relatedRecipes: [beyranSoupDoc.id, menemenDoc.id, pilafDoc.id],
+      categories: [],
+      seasons: [winterDoc.id, autumnDoc.id, springDoc.id], // Kış, sonbahar, ilkbahar
+      regions: [icAnatoliaDoc.id], // Tüm Türkiye'de yaygın
+      dietTypes: [veganDoc.id, vegetarianDoc.id, glutenFreeDoc.id], // Vegan, vejetaryen, glutensiz
     },
   })
 

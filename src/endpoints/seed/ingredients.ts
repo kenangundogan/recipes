@@ -959,3 +959,219 @@ export const blackPepperIngredient: (
     seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
+
+export const lentilIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'lentil',
+    _status: 'published',
+    title: 'Mercimek',
+    description:
+      'Protein açısından zengin baklagil, özellikle kırmızı mercimek çorbalarda sıkça kullanılır.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Mercimek: Protein Deposu',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Mercimek, özellikle vegan ve vejetaryen beslenmede çok önemli bir protein kaynağıdır. Kırmızı mercimek daha hızlı pişer ve çorbalarda yaygın kullanılır.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description:
+        'Protein açısından zengin baklagil, özellikle kırmızı mercimek çorbalarda sıkça kullanılır.',
+      image: heroImage.id,
+      title: 'Mercimek - Protein Deposu',
+    },
+    relatedIngredients: [], // Bu seed script tarafından doldurulacak
+    ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
+  }
+}
+
+export const carrotIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'carrot',
+    _status: 'published',
+    title: 'Havuç',
+    description:
+      'Beta karoten açısından zengin turuncu sebze, çorbalarda ve yemeklerde yaygın kullanılır.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Havuç: A Vitamini Kaynağı',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Havuç, beta karoten içeriği ile A vitamini kaynağıdır. Çorbalarda, salatalarda ve sebze yemeklerinde yaygın olarak kullanılır.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description:
+        'Beta karoten açısından zengin turuncu sebze, çorbalarda ve yemeklerde yaygın kullanılır.',
+      image: heroImage.id,
+      title: 'Havuç - A Vitamini Kaynağı',
+    },
+    relatedIngredients: [], // Bu seed script tarafından doldurulacak
+    ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
+  }
+}
+
+export const oliveOilIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'olive-oil',
+    _status: 'published',
+    title: 'Zeytinyağı',
+    description:
+      'Sağlıklı tekli doymamış yağ asitleri açısından zengin, Akdeniz mutfağının vazgeçilmezi.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: "Zeytinyağı: Akdeniz'in Altını",
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Zeytinyağı, sağlıklı tekli doymamış yağ asitleri ve E vitamini içerir. Özellikle sızma zeytinyağı, yüksek antioksidan içeriği ile kalp sağlığını destekler.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description:
+        'Sağlıklı tekli doymamış yağ asitleri açısından zengin, Akdeniz mutfağının vazgeçilmezi.',
+      image: heroImage.id,
+      title: "Zeytinyağı - Akdeniz'in Altını",
+    },
+    relatedIngredients: [], // Bu seed script tarafından doldurulacak
+    ingredientCategories: [], // Bu seed script tarafından doldurulacak
+    seasons: [], // Bu seed script tarafından doldurulacak
+  }
+}
