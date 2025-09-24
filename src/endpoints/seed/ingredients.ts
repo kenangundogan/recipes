@@ -1175,3 +1175,713 @@ export const oliveOilIngredient: (
     seasons: [], // Bu seed script tarafından doldurulacak
   }
 }
+
+// Added for Lahmacun
+export const flourIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'flour',
+    _status: 'published',
+    title: 'Un',
+    description: 'Hamur işleri ve ekmek yapımının temel bileşeni, doğru gluten yapısı için kritik.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Un Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Doğru protein oranı ve öğütümle hamurun elastikiyetini belirler.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'Doğru protein oranı ve öğütümle hamurun elastikiyetini belirler.',
+      image: heroImage.id,
+      title: 'Un - Hamurun Temeli',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const waterIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'water',
+    _status: 'published',
+    title: 'Su',
+    description: 'Hamurun hidrasyonu ve gluten gelişimi için vazgeçilmez.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Su Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Hidrasyon düzeyi kıvam, doku ve pişme kalitesini etkiler.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'Hidrasyon düzeyi kıvam, doku ve pişme kalitesini etkiler.',
+      image: heroImage.id,
+      title: 'Su - Hamurun Hayati Bileşeni',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const yeastIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'yeast',
+    _status: 'published',
+    title: 'Maya',
+    description: 'Hamuru fermente ederek hacim ve aroma kazandırır.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Maya Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Uygun sıcaklık ve süreyle optimum kabarma sağlar.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'Uygun sıcaklık ve süreyle optimum kabarma sağlar.',
+      image: heroImage.id,
+      title: 'Maya - Doğal Fermantasyon Gücü',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const beefIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'beef',
+    _status: 'published',
+    title: 'Dana Kıyma',
+    description: 'Lahmacun harcının protein kaynağı, yağ oranı lezzeti belirler.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Dana Kıyma Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: '%15–20 yağ oranı ideal sulu doku sağlar.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: '%15–20 yağ oranı ideal sulu doku sağlar.',
+      image: heroImage.id,
+      title: 'Dana Kıyma - Lezzetin Gövdesi',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const parsleyIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'parsley',
+    _status: 'published',
+    title: 'Maydanoz',
+    description: 'Ferahlık ve denge; harçta tazelik katar.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Maydanoz Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'İnce kıyım, harç dağılımını ve aromayı dengeler.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'İnce kıyım, harç dağılımını ve aromayı dengeler.',
+      image: heroImage.id,
+      title: 'Maydanoz - Taze Dokunuş',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const pepperPasteIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'pepper-paste',
+    _status: 'published',
+    title: 'Biber Salçası',
+    description: 'Renk, gövde ve kapsaisinle karakter katar.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Biber Salçası Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'İyi kalite salça harca parıltı ve derinlik verir.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'İyi kalite salça harca parıltı ve derinlik verir.',
+      image: heroImage.id,
+      title: 'Biber Salçası - Gövde ve Renk',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const garlicIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'garlic',
+    _status: 'published',
+    title: 'Sarımsak',
+    description: 'Keskin ve tatlı aromasıyla harca omurga kazandırır.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Sarımsak Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Azı karar; doz aşımı acılığa kaçırabilir.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'Azı karar; doz aşımı acılığa kaçırabilir.',
+      image: heroImage.id,
+      title: 'Sarımsak - Aromanın Omurgası',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const greenPepperIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'green-pepper',
+    _status: 'published',
+    title: 'Yeşil Biber',
+    description: 'Taze biber aroması ve hafif acılık katar.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Yeşil Biber Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'İnce doğrayın; su salmaması için fazla çalışmayın.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'İnce doğrayın; su salmaması için fazla çalışmayın.',
+      image: heroImage.id,
+      title: 'Yeşil Biber - Taptaze Koku',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const sumacIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'sumac',
+    _status: 'published',
+    title: 'Sumak',
+    description: 'Serviste ekşimsi tazelik ve dengeli asidite sağlar.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Sumak Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Son dokunuşta serpmek aromayı korur.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'Son dokunuşta serpmek aromayı korur.',
+      image: heroImage.id,
+      title: 'Sumak - Taze Asidite',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}
+
+// Added for Lahmacun
+export const paprikaIngredient: (
+  args: IngredientArgs,
+) => RequiredDataFromCollectionSlug<'ingredients'> = ({ heroImage, author }) => {
+  return {
+    slug: 'paprika',
+    _status: 'published',
+    title: 'Toz Kırmızı Biber',
+    description: 'Renk ve hafif tatlı-acı profil için kullanılır.',
+    authors: [author],
+    content: {
+      root: {
+        type: 'root',
+        children: [
+          {
+            type: 'heading',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Toz Kırmızı Biber Hakkında',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            tag: 'h2',
+            version: 1,
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                type: 'text',
+                detail: 0,
+                format: 0,
+                mode: 'normal',
+                style: '',
+                text: 'Isıya dayanıklıdır; yanmaması için kontrollü pişirin.',
+                version: 1,
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            textFormat: 0,
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        version: 1,
+      },
+    },
+    heroImage: heroImage.id,
+    meta: {
+      description: 'Isıya dayanıklıdır; yanmaması için kontrollü pişirin.',
+      image: heroImage.id,
+      title: 'Toz Kırmızı Biber - Renk ve Aroma',
+    },
+    relatedIngredients: [],
+    ingredientCategories: [],
+    seasons: [],
+  }
+}

@@ -69,6 +69,16 @@ import {
   lentilIngredient,
   carrotIngredient,
   oliveOilIngredient,
+  flourIngredient,
+  waterIngredient,
+  yeastIngredient,
+  beefIngredient,
+  parsleyIngredient,
+  pepperPasteIngredient,
+  garlicIngredient,
+  greenPepperIngredient,
+  sumacIngredient,
+  paprikaIngredient,
 } from './ingredients'
 import {
   stovetopMethod,
@@ -1359,6 +1369,96 @@ export const seed = async ({
     data: oliveOilIngredient({ heroImage: image1Doc, author: demoAuthor }),
   })
 
+  const flourDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: flourIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const waterDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: waterIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const yeastDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: yeastIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const beefDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: beefIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const parsleyDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: parsleyIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const pepperPasteDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: pepperPasteIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const garlicDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: garlicIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const greenPepperDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: greenPepperIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const sumacDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: sumacIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const paprikaDoc = await payload.create({
+    collection: 'ingredients',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: paprikaIngredient({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
   // update each ingredient with relations
   await payload.update({
     id: tomatoDoc.id,
@@ -1474,6 +1574,97 @@ export const seed = async ({
     data: {
       relatedIngredients: [saltDoc.id, onionDoc.id],
       ingredientCategories: [spicesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+
+  await payload.update({
+    id: flourDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [waterDoc.id, yeastDoc.id],
+      ingredientCategories: [grainsCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: waterDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [flourDoc.id, yeastDoc.id],
+      ingredientCategories: [grainsCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: yeastDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [flourDoc.id, waterDoc.id],
+      ingredientCategories: [grainsCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: beefDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [onionDoc.id, tomatoDoc.id],
+      ingredientCategories: [proteinsCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: parsleyDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [beefDoc.id, onionDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: pepperPasteDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [garlicDoc.id, onionDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: garlicDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [pepperPasteDoc.id, onionDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: greenPepperDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [pepperPasteDoc.id, onionDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: sumacDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [pepperPasteDoc.id, onionDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
+      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
+    },
+  })
+  await payload.update({
+    id: paprikaDoc.id,
+    collection: 'ingredients',
+    data: {
+      relatedIngredients: [pepperPasteDoc.id, onionDoc.id],
+      ingredientCategories: [vegetablesCategoryDoc.id],
       seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
     },
   })
@@ -1904,7 +2095,6 @@ export const seed = async ({
       pieceUnitDoc: pieceUnitDoc,
       tablespoonUnitDoc: tablespoonUnitDoc,
       teaspoonUnitDoc: teaspoonUnitDoc,
-      milliliterUnitDoc: milliliterUnitDoc,
       mediumLevelDoc: mediumLevelDoc,
       stovetopMethodDoc: stovetopMethodDoc,
       caloriesDoc: caloriesDoc,
@@ -1951,7 +2141,6 @@ export const seed = async ({
       pieceUnitDoc: pieceUnitDoc,
       tablespoonUnitDoc: tablespoonUnitDoc,
       teaspoonUnitDoc: teaspoonUnitDoc,
-      milliliterUnitDoc: milliliterUnitDoc,
       mediumLevelDoc: mediumLevelDoc,
       stovetopMethodDoc: stovetopMethodDoc,
       caloriesDoc: caloriesDoc,
@@ -1998,7 +2187,6 @@ export const seed = async ({
       pieceUnitDoc: pieceUnitDoc,
       tablespoonUnitDoc: tablespoonUnitDoc,
       teaspoonUnitDoc: teaspoonUnitDoc,
-      milliliterUnitDoc: milliliterUnitDoc,
       mediumLevelDoc: mediumLevelDoc,
       stovetopMethodDoc: stovetopMethodDoc,
       caloriesDoc: caloriesDoc,
@@ -2013,6 +2201,16 @@ export const seed = async ({
       carrotDoc: carrotDoc,
       potatoDoc: potatoDoc,
       oliveOilDoc: oliveOilDoc,
+      flourDoc: flourDoc,
+      waterDoc: waterDoc,
+      yeastDoc: yeastDoc,
+      beefDoc: beefDoc,
+      parsleyDoc: parsleyDoc,
+      pepperPasteDoc: pepperPasteDoc,
+      garlicDoc: garlicDoc,
+      greenPepperDoc: greenPepperDoc,
+      sumacDoc: sumacDoc,
+      paprikaDoc: paprikaDoc,
       easyLevelDoc: easyLevelDoc,
       hardLevelDoc: hardLevelDoc,
       ovenMethodDoc: ovenMethodDoc,

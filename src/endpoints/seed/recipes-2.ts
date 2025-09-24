@@ -20,7 +20,6 @@ export type RecipeArgs = {
   pieceUnitDoc: any
   tablespoonUnitDoc: any
   teaspoonUnitDoc: any
-  milliliterUnitDoc: any
   // Difficulty and cooking method docs
   easyLevelDoc: any
   mediumLevelDoc: any
@@ -60,7 +59,6 @@ export const recipe2: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   pieceUnitDoc,
   tablespoonUnitDoc,
   teaspoonUnitDoc,
-  milliliterUnitDoc,
   mediumLevelDoc,
   stovetopMethodDoc,
   caloriesDoc,
