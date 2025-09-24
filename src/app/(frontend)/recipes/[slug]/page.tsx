@@ -70,8 +70,8 @@ export default async function Recipe({ params: paramsPromise }: Args) {
               <p className="text-sm">{recipes.meta?.description}</p>
             </div>
 
+            {/* Serving, PrepTime, CookTime */}
             <div className="flex flex-wrap gap-4">
-              {/* Serving, PrepTime, CookTime */}
               <div className="w-full flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <HandPlatterIcon strokeWidth={0.5} className="size-12" />
@@ -326,6 +326,60 @@ export default async function Recipe({ params: paramsPromise }: Args) {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Regions */}
+      <div className="container mb-8 max-w-3xl">
+        <h2 className="text-2xl font-bold mb-4">Bölgeler</h2>
+        <table className="w-full">
+          <tbody>
+            {recipes.regions?.map((region, index) => (
+              <tr
+                key={region?.id}
+                className="*:py-4 *:border-b *:border-gray-200 *:last:border-b-0"
+              >
+                <td>
+                  <div className="flex gap-4">
+                    <span className="text-gray-500 italic text-xs">{index + 1}.</span>
+                    <div className="flex flex-col leading-tight col-span-2">
+                      <span>{region?.title}</span>
+                      <span className="text-gray-500 italic text-xs">
+                        {region?.meta?.description}
+                      </span>
+                      <span className="text-gray-500 italic text-xs">
+                        {region?.cities?.map((city) => city?.title).join(', ')}
+                      </span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Related Recipes */}
+      <div className="container mb-8 max-w-3xl">
+        <h2 className="text-2xl font-bold mb-4">İlgili Tarifler</h2>
+        <ul className="w-full grid grid-cols-2 gap-4">
+          {recipes.relatedRecipes?.map((recipe, index) => (
+            <li key={recipe?.id}>
+              <div className="w-full flex flex-col items-center gap-4">
+                <Image
+                  src={recipe?.meta?.image?.sizes?.small?.url || ''}
+                  alt={recipe?.title}
+                  width={500}
+                  height={500}
+                  className="object-cover"
+                />
+                <div className="flex flex-col">
+                  <span>{recipe?.title}</span>
+                  <span className="text-gray-500 italic text-xs">{recipe?.meta?.description}</span>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </article>
   )
