@@ -46,6 +46,15 @@ export type RecipeArgs = {
   lowCarbDoc: any
   mediterraneanDoc: any
   paleoDoc: any
+  // Season docs
+  springDoc: any
+  summerDoc: any
+  autumnDoc: any
+  winterDoc: any
+  // Region docs
+  marmaraDoc: any
+  egeDoc: any
+  icAnatoliaDoc: any
 }
 export const recipe1: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'recipes'> = ({
   heroImage,
@@ -75,6 +84,13 @@ export const recipe1: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   veganDoc,
   vegetarianDoc,
   glutenFreeDoc,
+  springDoc,
+  summerDoc,
+  autumnDoc,
+  winterDoc,
+  marmaraDoc,
+  egeDoc,
+  icAnatoliaDoc,
 }) => {
   return {
     slug: 'lentil-soup',
@@ -376,8 +392,8 @@ export const recipe1: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
     },
     relatedRecipes: [], // Bu seed script tarafından doldurulacak
     categories: [], // Bu seed script tarafından doldurulacak
-    seasons: [], // Bu seed script tarafından doldurulacak
-    regions: [], // Bu seed script tarafından doldurulacak
+    seasons: [autumnDoc.id, winterDoc.id], // Sonbahar ve kış çorbası
+    regions: [marmaraDoc.id, egeDoc.id, icAnatoliaDoc.id], // Tüm Türkiye bölgelerinde sevilen
     dietTypes: [veganDoc.id, vegetarianDoc.id, glutenFreeDoc.id], // Vegan, vejetaryen, glutensiz
   }
 }

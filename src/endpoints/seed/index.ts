@@ -2122,6 +2122,13 @@ export const seed = async ({
       paleoDoc: paleoDoc,
       grillMethodDoc: grillMethodDoc,
       pressureCookerMethodDoc: pressureCookerMethodDoc,
+      springDoc: springDoc,
+      summerDoc: summerDoc,
+      autumnDoc: autumnDoc,
+      winterDoc: winterDoc,
+      marmaraDoc: marmaraDoc,
+      egeDoc: egeDoc,
+      icAnatoliaDoc: icAnatoliaDoc,
     }),
   })
 
@@ -2168,6 +2175,13 @@ export const seed = async ({
       paleoDoc: paleoDoc,
       grillMethodDoc: grillMethodDoc,
       pressureCookerMethodDoc: pressureCookerMethodDoc,
+      springDoc: springDoc,
+      summerDoc: summerDoc,
+      autumnDoc: autumnDoc,
+      winterDoc: winterDoc,
+      marmaraDoc: marmaraDoc,
+      egeDoc: egeDoc,
+      icAnatoliaDoc: icAnatoliaDoc,
     }),
   })
 
@@ -2224,6 +2238,13 @@ export const seed = async ({
       paleoDoc: paleoDoc,
       grillMethodDoc: grillMethodDoc,
       pressureCookerMethodDoc: pressureCookerMethodDoc,
+      springDoc: springDoc,
+      summerDoc: summerDoc,
+      autumnDoc: autumnDoc,
+      winterDoc: winterDoc,
+      marmaraDoc: marmaraDoc,
+      egeDoc: egeDoc,
+      icAnatoliaDoc: icAnatoliaDoc,
     }),
   })
 

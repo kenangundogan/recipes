@@ -56,6 +56,15 @@ export type RecipeArgs = {
   lowCarbDoc: any
   mediterraneanDoc: any
   paleoDoc: any
+  // Season docs
+  springDoc: any
+  summerDoc: any
+  autumnDoc: any
+  winterDoc: any
+  // Region docs
+  marmaraDoc: any
+  egeDoc: any
+  icAnatoliaDoc: any
 }
 
 export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'recipes'> = ({
@@ -90,6 +99,13 @@ export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   sugarDoc,
   sodiumDoc,
   cholesterolDoc,
+  springDoc,
+  summerDoc,
+  autumnDoc,
+  winterDoc,
+  marmaraDoc,
+  egeDoc,
+  icAnatoliaDoc,
 }) => {
   return {
     slug: 'lahmacun',
@@ -354,8 +370,8 @@ export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
 
     relatedRecipes: [],
     categories: [],
-    seasons: [],
-    regions: [],
+    seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Her mevsim yapılabilir
+    regions: [marmaraDoc.id, egeDoc.id, icAnatoliaDoc.id], // Tüm Türkiye'de sevilen lezzet
     dietTypes: [], // Et ve gluten içerdiği için vegan/vejetaryen/glutensiz işaretlenmedi
   }
 }

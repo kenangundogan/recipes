@@ -46,6 +46,15 @@ export type RecipeArgs = {
   lowCarbDoc: any
   mediterraneanDoc: any
   paleoDoc: any
+  // Season docs
+  springDoc: any
+  summerDoc: any
+  autumnDoc: any
+  winterDoc: any
+  // Region docs
+  marmaraDoc: any
+  egeDoc: any
+  icAnatoliaDoc: any
 }
 export const recipe2: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'recipes'> = ({
   heroImage,
@@ -69,6 +78,14 @@ export const recipe2: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   sugarDoc,
   sodiumDoc,
   cholesterolDoc,
+  vegetarianDoc,
+  springDoc,
+  summerDoc,
+  autumnDoc,
+  winterDoc,
+  marmaraDoc,
+  egeDoc,
+  icAnatoliaDoc,
 }) => {
   return {
     slug: 'domates-corbasi',
@@ -284,8 +301,8 @@ export const recipe2: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
     },
     relatedRecipes: [], // Bu seed script tarafından doldurulacak
     categories: [], // Bu seed script tarafından doldurulacak
-    seasons: [], // Bu seed script tarafından doldurulacak
-    regions: [], // Bu seed script tarafından doldurulacak
-    dietTypes: [], // Bu seed script tarafından doldurulacak
+    seasons: [summerDoc.id, autumnDoc.id], // Domates mevsimi - yaz ve sonbahar
+    regions: [marmaraDoc.id, egeDoc.id], // Marmara ve Ege bölgesi domates çorbası
+    dietTypes: [vegetarianDoc.id], // Vejetaryen
   }
 }
