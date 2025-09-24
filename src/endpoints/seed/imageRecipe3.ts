@@ -1,7 +1,7 @@
 import type { Media } from '@/payload-types'
 
 export const imageRecipe3: Omit<Media, 'createdAt' | 'id' | 'updatedAt'> = {
-  alt: 'Tomatoes soup',
+  alt: 'Lahmacun soup',
   caption: {
     root: {
       type: 'root',

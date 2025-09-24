@@ -364,7 +364,10 @@ export default async function Recipe({ params: paramsPromise }: Args) {
         <ul className="w-full grid grid-cols-2 gap-4">
           {recipes.relatedRecipes?.map((recipe, index) => (
             <li key={recipe?.id}>
-              <div className="w-full flex flex-col items-center gap-4">
+              <a
+                href={`/recipes/${recipe?.slug}`}
+                className="w-full flex flex-col items-center gap-4"
+              >
                 <Image
                   src={recipe?.meta?.image?.sizes?.small?.url || ''}
                   alt={recipe?.title}
@@ -376,7 +379,7 @@ export default async function Recipe({ params: paramsPromise }: Args) {
                   <span>{recipe?.title}</span>
                   <span className="text-gray-500 italic text-xs">{recipe?.meta?.description}</span>
                 </div>
-              </div>
+              </a>
             </li>
           ))}
         </ul>
