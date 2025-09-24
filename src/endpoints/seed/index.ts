@@ -105,6 +105,7 @@ import { recipe3 } from './recipes-3'
 import { imageRecipe1 } from './imageRecipe1'
 import { imageRecipe2 } from './imageRecipe2'
 import { imageRecipe3 } from './imageRecipe3'
+import { imageAuthor1 } from './imageAuthor1'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -199,6 +200,7 @@ export const seed = async ({
     imageRecipe1Buffer,
     imageRecipe2Buffer,
     imageRecipe3Buffer,
+    imageAuthor1Buffer,
   ] = await Promise.all([
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
@@ -220,6 +222,9 @@ export const seed = async ({
     ),
     fetchFileByURL(
       'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-recipe3.webp',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-author1.webp',
     ),
   ])
 
@@ -291,6 +296,11 @@ export const seed = async ({
       collection: 'media',
       data: imageRecipe3,
       file: imageRecipe3Buffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: imageAuthor1,
+      file: imageAuthor1Buffer,
     }),
     payload.create({
       collection: 'categories',
