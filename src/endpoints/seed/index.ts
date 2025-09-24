@@ -237,6 +237,22 @@ export const seed = async ({
       collection: 'users',
       data: {
         name: 'Demo Author',
+        general: {
+          firstName: 'Demo',
+          lastName: 'Author',
+          username: 'demo-author',
+          birthDate: '1990-01-01',
+        },
+        addresses: {
+          country: 'TR',
+          city: 'İstanbul',
+          district: 'Beşiktaş',
+          address: 'Beşiktaş Mahallesi, 123. Sokak, No: 1',
+        },
+        phones: {
+          landline: '0212 555 55 55',
+          gsm: '0555 555 55 55',
+        },
         email: 'demo-author@example.com',
         password: 'password',
       },
@@ -2303,6 +2319,13 @@ export const seed = async ({
       slug: 'header',
       data: {
         navItems: [
+          {
+            link: {
+              type: 'custom',
+              label: 'Recipes',
+              url: '/recipes',
+            },
+          },
           {
             link: {
               type: 'custom',
