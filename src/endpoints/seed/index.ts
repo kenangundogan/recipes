@@ -91,8 +91,10 @@ import {
 import { vegan, vegetarian, glutenFree, keto, lowCarb, mediterranean, paleo } from './diet-types'
 import { recipe1 } from './recipes-1'
 import { recipe2 } from './recipes-2'
+import { recipe3 } from './recipes-3'
 import { imageRecipe1 } from './imageRecipe1'
 import { imageRecipe2 } from './imageRecipe2'
+import { imageRecipe3 } from './imageRecipe3'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -186,6 +188,7 @@ export const seed = async ({
     hero1Buffer,
     imageRecipe1Buffer,
     imageRecipe2Buffer,
+    imageRecipe3Buffer,
   ] = await Promise.all([
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
@@ -205,6 +208,9 @@ export const seed = async ({
     fetchFileByURL(
       'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-recipe2.webp',
     ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-recipe3.webp',
+    ),
   ])
 
   const [
@@ -215,6 +221,7 @@ export const seed = async ({
     imageHomeDoc,
     imageRecipe1Doc,
     imageRecipe2Doc,
+    imageRecipe3Doc,
   ] = await Promise.all([
     payload.create({
       collection: 'users',
@@ -253,6 +260,11 @@ export const seed = async ({
       collection: 'media',
       data: imageRecipe2,
       file: imageRecipe2Buffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: imageRecipe3,
+      file: imageRecipe3Buffer,
     }),
     payload.create({
       collection: 'categories',
@@ -1922,6 +1934,7 @@ export const seed = async ({
       pressureCookerMethodDoc: pressureCookerMethodDoc,
     }),
   })
+
   const recipe2Doc = await payload.create({
     collection: 'recipes',
     depth: 0,
@@ -1969,12 +1982,59 @@ export const seed = async ({
     }),
   })
 
+  const recipe3Doc = await payload.create({
+    collection: 'recipes',
+    depth: 0,
+    data: recipe3({
+      heroImage: imageRecipe3Doc,
+      author: demoAuthor,
+      tomatoDoc: tomatoDoc,
+      onionDoc: onionDoc,
+      riceDoc: riceDoc,
+      eggDoc: eggDoc,
+      saltDoc: saltDoc,
+      blackPepperDoc: blackPepperDoc,
+      gramUnitDoc: gramUnitDoc,
+      pieceUnitDoc: pieceUnitDoc,
+      tablespoonUnitDoc: tablespoonUnitDoc,
+      teaspoonUnitDoc: teaspoonUnitDoc,
+      milliliterUnitDoc: milliliterUnitDoc,
+      mediumLevelDoc: mediumLevelDoc,
+      stovetopMethodDoc: stovetopMethodDoc,
+      caloriesDoc: caloriesDoc,
+      proteinDoc: proteinDoc,
+      carbohydratesDoc: carbohydratesDoc,
+      fatDoc: fatDoc,
+      fiberDoc: fiberDoc,
+      sugarDoc: sugarDoc,
+      sodiumDoc: sodiumDoc,
+      cholesterolDoc: cholesterolDoc,
+      lentilDoc: lentilDoc,
+      carrotDoc: carrotDoc,
+      potatoDoc: potatoDoc,
+      oliveOilDoc: oliveOilDoc,
+      easyLevelDoc: easyLevelDoc,
+      hardLevelDoc: hardLevelDoc,
+      ovenMethodDoc: ovenMethodDoc,
+      steamMethodDoc: steamMethodDoc,
+      veganDoc: veganDoc,
+      vegetarianDoc: vegetarianDoc,
+      glutenFreeDoc: glutenFreeDoc,
+      ketoDoc: ketoDoc,
+      lowCarbDoc: lowCarbDoc,
+      mediterraneanDoc: mediterraneanDoc,
+      paleoDoc: paleoDoc,
+      grillMethodDoc: grillMethodDoc,
+      pressureCookerMethodDoc: pressureCookerMethodDoc,
+    }),
+  })
+
   // update each recipe with relations
   await payload.update({
     id: recipe1Doc.id,
     collection: 'recipes',
     data: {
-      relatedRecipes: [recipe2Doc.id],
+      relatedRecipes: [recipe2Doc.id, recipe3Doc.id],
     },
   })
 
@@ -1982,7 +2042,15 @@ export const seed = async ({
     id: recipe2Doc.id,
     collection: 'recipes',
     data: {
-      relatedRecipes: [recipe1Doc.id],
+      relatedRecipes: [recipe1Doc.id, recipe3Doc.id],
+    },
+  })
+
+  await payload.update({
+    id: recipe3Doc.id,
+    collection: 'recipes',
+    data: {
+      relatedRecipes: [recipe1Doc.id, recipe2Doc.id],
     },
   })
 
