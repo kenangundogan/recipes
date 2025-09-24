@@ -70,7 +70,6 @@ import {
   carrotIngredient,
   oliveOilIngredient,
 } from './ingredients'
-import { beyranSoupRecipe, menemenRecipe, pilafRecipe, lentilSoupRecipe } from './recipes'
 import {
   stovetopMethod,
   ovenMethod,
@@ -90,6 +89,10 @@ import {
   cholesterol,
 } from './nutrients'
 import { vegan, vegetarian, glutenFree, keto, lowCarb, mediterranean, paleo } from './diet-types'
+import { recipe1 } from './recipes-1'
+import { recipe2 } from './recipes-2'
+import { imageRecipe1 } from './imageRecipe1'
+import { imageRecipe2 } from './imageRecipe2'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -176,7 +179,14 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding media...`)
 
-  const [image1Buffer, image2Buffer, image3Buffer, hero1Buffer] = await Promise.all([
+  const [
+    image1Buffer,
+    image2Buffer,
+    image3Buffer,
+    hero1Buffer,
+    imageRecipe1Buffer,
+    imageRecipe2Buffer,
+  ] = await Promise.all([
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
     ),
@@ -189,9 +199,23 @@ export const seed = async ({
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp',
     ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-recipe1.webp',
+    ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-recipe2.webp',
+    ),
   ])
 
-  const [demoAuthor, image1Doc, image2Doc, image3Doc, imageHomeDoc] = await Promise.all([
+  const [
+    demoAuthor,
+    image1Doc,
+    image2Doc,
+    image3Doc,
+    imageHomeDoc,
+    imageRecipe1Doc,
+    imageRecipe2Doc,
+  ] = await Promise.all([
     payload.create({
       collection: 'users',
       data: {
@@ -220,7 +244,16 @@ export const seed = async ({
       data: imageHero1,
       file: hero1Buffer,
     }),
-
+    payload.create({
+      collection: 'media',
+      data: imageRecipe1,
+      file: imageRecipe1Buffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: imageRecipe2,
+      file: imageRecipe2Buffer,
+    }),
     payload.create({
       collection: 'categories',
       data: {
@@ -1843,228 +1876,113 @@ export const seed = async ({
   payload.logger.info(`— Seeding recipes...`)
 
   // Create recipes
-  const beyranSoupDoc = await payload.create({
+  const recipe1Doc = await payload.create({
     collection: 'recipes',
     depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: beyranSoupRecipe({
-      heroImage: image1Doc,
+    data: recipe1({
+      heroImage: imageRecipe1Doc,
       author: demoAuthor,
-      tomatoDoc,
-      onionDoc,
-      riceDoc,
-      eggDoc,
-      saltDoc,
-      blackPepperDoc,
-      gramUnitDoc,
-      pieceUnitDoc,
-      tablespoonUnitDoc,
-      teaspoonUnitDoc,
-      milliliterUnitDoc,
-      easyLevelDoc,
-      mediumLevelDoc,
-      hardLevelDoc,
-      stovetopMethodDoc,
-      ovenMethodDoc,
-      steamMethodDoc,
-      grillMethodDoc,
-      pressureCookerMethodDoc,
-      caloriesDoc,
-      proteinDoc,
-      carbohydratesDoc,
-      fatDoc,
-      fiberDoc,
-      sugarDoc,
-      sodiumDoc,
-      cholesterolDoc,
-      veganDoc,
-      vegetarianDoc,
-      glutenFreeDoc,
-      ketoDoc,
-      lowCarbDoc,
-      mediterraneanDoc,
-      paleoDoc,
+      tomatoDoc: tomatoDoc,
+      onionDoc: onionDoc,
+      riceDoc: riceDoc,
+      eggDoc: eggDoc,
+      saltDoc: saltDoc,
+      blackPepperDoc: blackPepperDoc,
+      gramUnitDoc: gramUnitDoc,
+      pieceUnitDoc: pieceUnitDoc,
+      tablespoonUnitDoc: tablespoonUnitDoc,
+      teaspoonUnitDoc: teaspoonUnitDoc,
+      milliliterUnitDoc: milliliterUnitDoc,
+      mediumLevelDoc: mediumLevelDoc,
+      stovetopMethodDoc: stovetopMethodDoc,
+      caloriesDoc: caloriesDoc,
+      proteinDoc: proteinDoc,
+      carbohydratesDoc: carbohydratesDoc,
+      fatDoc: fatDoc,
+      fiberDoc: fiberDoc,
+      sugarDoc: sugarDoc,
+      sodiumDoc: sodiumDoc,
+      cholesterolDoc: cholesterolDoc,
+      lentilDoc: lentilDoc,
+      carrotDoc: carrotDoc,
+      potatoDoc: potatoDoc,
+      oliveOilDoc: oliveOilDoc,
+      easyLevelDoc: easyLevelDoc,
+      hardLevelDoc: hardLevelDoc,
+      ovenMethodDoc: ovenMethodDoc,
+      steamMethodDoc: steamMethodDoc,
+      veganDoc: veganDoc,
+      vegetarianDoc: vegetarianDoc,
+      glutenFreeDoc: glutenFreeDoc,
+      ketoDoc: ketoDoc,
+      lowCarbDoc: lowCarbDoc,
+      mediterraneanDoc: mediterraneanDoc,
+      paleoDoc: paleoDoc,
+      grillMethodDoc: grillMethodDoc,
+      pressureCookerMethodDoc: pressureCookerMethodDoc,
     }),
   })
-
-  const menemenDoc = await payload.create({
+  const recipe2Doc = await payload.create({
     collection: 'recipes',
     depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: menemenRecipe({
-      heroImage: image2Doc,
+    data: recipe2({
+      heroImage: imageRecipe2Doc,
       author: demoAuthor,
-      tomatoDoc,
-      onionDoc,
-      riceDoc,
-      eggDoc,
-      saltDoc,
-      blackPepperDoc,
-      gramUnitDoc,
-      pieceUnitDoc,
-      tablespoonUnitDoc,
-      teaspoonUnitDoc,
-      milliliterUnitDoc,
-      easyLevelDoc,
-      mediumLevelDoc,
-      hardLevelDoc,
-      stovetopMethodDoc,
-      ovenMethodDoc,
-      steamMethodDoc,
-      grillMethodDoc,
-      pressureCookerMethodDoc,
-      caloriesDoc,
-      proteinDoc,
-      carbohydratesDoc,
-      fatDoc,
-      fiberDoc,
-      sugarDoc,
-      sodiumDoc,
-      cholesterolDoc,
-      veganDoc,
-      vegetarianDoc,
-      glutenFreeDoc,
-      ketoDoc,
-      lowCarbDoc,
-      mediterraneanDoc,
-      paleoDoc,
-    }),
-  })
-
-  const pilafDoc = await payload.create({
-    collection: 'recipes',
-    depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: pilafRecipe({
-      heroImage: image3Doc,
-      author: demoAuthor,
-      tomatoDoc,
-      onionDoc,
-      riceDoc,
-      eggDoc,
-      saltDoc,
-      blackPepperDoc,
-      gramUnitDoc,
-      pieceUnitDoc,
-      tablespoonUnitDoc,
-      teaspoonUnitDoc,
-      milliliterUnitDoc,
-      easyLevelDoc,
-      mediumLevelDoc,
-      hardLevelDoc,
-      stovetopMethodDoc,
-      ovenMethodDoc,
-      steamMethodDoc,
-      grillMethodDoc,
-      pressureCookerMethodDoc,
-      caloriesDoc,
-      proteinDoc,
-      carbohydratesDoc,
-      fatDoc,
-      fiberDoc,
-      sugarDoc,
-      sodiumDoc,
-      cholesterolDoc,
-      veganDoc,
-      vegetarianDoc,
-      glutenFreeDoc,
-      ketoDoc,
-      lowCarbDoc,
-      mediterraneanDoc,
-      paleoDoc,
-    }),
-  })
-
-  const lentilSoupDoc = await payload.create({
-    collection: 'recipes',
-    depth: 0,
-    context: {
-      disableRevalidate: true,
-    },
-    data: lentilSoupRecipe({
-      heroImage: image2Doc,
-      author: demoAuthor,
-      lentilDoc,
-      onionDoc,
-      carrotDoc,
-      potatoDoc,
-      tomatoDoc,
-      oliveOilDoc,
-      saltDoc,
-      blackPepperDoc,
-      gramUnitDoc,
-      pieceUnitDoc,
-      tablespoonUnitDoc,
-      teaspoonUnitDoc,
-      milliliterUnitDoc,
-      easyLevelDoc,
-      stovetopMethodDoc,
-      caloriesDoc,
-      proteinDoc,
-      carbohydratesDoc,
-      fatDoc,
-      fiberDoc,
-      sugarDoc,
-      sodiumDoc,
-      cholesterolDoc,
-      veganDoc,
-      vegetarianDoc,
-      glutenFreeDoc,
+      tomatoDoc: tomatoDoc,
+      onionDoc: onionDoc,
+      riceDoc: riceDoc,
+      eggDoc: eggDoc,
+      saltDoc: saltDoc,
+      blackPepperDoc: blackPepperDoc,
+      gramUnitDoc: gramUnitDoc,
+      pieceUnitDoc: pieceUnitDoc,
+      tablespoonUnitDoc: tablespoonUnitDoc,
+      teaspoonUnitDoc: teaspoonUnitDoc,
+      milliliterUnitDoc: milliliterUnitDoc,
+      mediumLevelDoc: mediumLevelDoc,
+      stovetopMethodDoc: stovetopMethodDoc,
+      caloriesDoc: caloriesDoc,
+      proteinDoc: proteinDoc,
+      carbohydratesDoc: carbohydratesDoc,
+      fatDoc: fatDoc,
+      fiberDoc: fiberDoc,
+      sugarDoc: sugarDoc,
+      sodiumDoc: sodiumDoc,
+      cholesterolDoc: cholesterolDoc,
+      lentilDoc: lentilDoc,
+      carrotDoc: carrotDoc,
+      potatoDoc: potatoDoc,
+      oliveOilDoc: oliveOilDoc,
+      easyLevelDoc: easyLevelDoc,
+      hardLevelDoc: hardLevelDoc,
+      ovenMethodDoc: ovenMethodDoc,
+      steamMethodDoc: steamMethodDoc,
+      veganDoc: veganDoc,
+      vegetarianDoc: vegetarianDoc,
+      glutenFreeDoc: glutenFreeDoc,
+      ketoDoc: ketoDoc,
+      lowCarbDoc: lowCarbDoc,
+      mediterraneanDoc: mediterraneanDoc,
+      paleoDoc: paleoDoc,
+      grillMethodDoc: grillMethodDoc,
+      pressureCookerMethodDoc: pressureCookerMethodDoc,
     }),
   })
 
   // update each recipe with relations
   await payload.update({
-    id: beyranSoupDoc.id,
+    id: recipe1Doc.id,
     collection: 'recipes',
     data: {
-      relatedRecipes: [menemenDoc.id, pilafDoc.id, lentilSoupDoc.id],
-      categories: [],
-      seasons: [winterDoc.id, autumnDoc.id], // Kış ve sonbahar çorbası
-      regions: [icAnatoliaDoc.id], // İç Anadolu/Gaziantep
-      dietTypes: [glutenFreeDoc.id], // Beyran genelde glutensiz
+      relatedRecipes: [recipe2Doc.id],
     },
   })
 
   await payload.update({
-    id: menemenDoc.id,
+    id: recipe2Doc.id,
     collection: 'recipes',
     data: {
-      relatedRecipes: [beyranSoupDoc.id, pilafDoc.id, lentilSoupDoc.id],
-      categories: [],
-      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
-      regions: [icAnatoliaDoc.id], // Tüm bölgeler
-      dietTypes: [vegetarianDoc.id, glutenFreeDoc.id], // Vejetaryen ve glutensiz
-    },
-  })
-
-  await payload.update({
-    id: pilafDoc.id,
-    collection: 'recipes',
-    data: {
-      relatedRecipes: [beyranSoupDoc.id, menemenDoc.id, lentilSoupDoc.id],
-      categories: [],
-      seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Tüm mevsimler
-      regions: [icAnatoliaDoc.id], // Tüm bölgeler
-      dietTypes: [vegetarianDoc.id, veganDoc.id, glutenFreeDoc.id], // Vegan, vejetaryen, glutensiz
-    },
-  })
-
-  await payload.update({
-    id: lentilSoupDoc.id,
-    collection: 'recipes',
-    data: {
-      relatedRecipes: [beyranSoupDoc.id, menemenDoc.id, pilafDoc.id],
-      categories: [],
-      seasons: [winterDoc.id, autumnDoc.id, springDoc.id], // Kış, sonbahar, ilkbahar
-      regions: [icAnatoliaDoc.id], // Tüm Türkiye'de yaygın
-      dietTypes: [veganDoc.id, vegetarianDoc.id, glutenFreeDoc.id], // Vegan, vejetaryen, glutensiz
+      relatedRecipes: [recipe1Doc.id],
     },
   })
 
