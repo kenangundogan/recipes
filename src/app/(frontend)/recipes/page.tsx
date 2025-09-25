@@ -44,7 +44,6 @@ export default async function Page() {
     collection: 'recipes',
   })
 
-  console.log(recipes.docs)
   return (
     <div>
       <PageClient />

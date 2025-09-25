@@ -107,8 +107,6 @@ export default async function Recipe({ params: paramsPromise }: Args) {
 
   const typedRecipe = recipe as PopulatedRecipe
 
-  console.log(typedRecipe)
-
   return (
     <article>
       <PageClient />
