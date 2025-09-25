@@ -448,7 +448,7 @@ export default async function Recipe({ params: paramsPromise }: Args) {
         <div className="container mb-8 max-w-3xl">
           <h2 className="text-2xl font-bold mb-4">İlgili Tarifler</h2>
           <ul className="w-full grid grid-cols-2 gap-4">
-            {typedRecipe.relatedRecipes.map((recipe, index) => (
+            {typedRecipe.relatedRecipes.map((recipe) => (
               <li key={recipe?.id}>
                 <a
                   href={`/recipes/${recipe?.slug}`}

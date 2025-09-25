@@ -1,70 +1,81 @@
-import type { Media, User } from '@/payload-types'
+import type {
+  Media,
+  User,
+  Ingredient,
+  IngredientUnit,
+  DifficultyLevel,
+  CookingMethod,
+  Nutrient,
+  DietType,
+  Season,
+  Region,
+} from '@/payload-types'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
 export type RecipeArgs = {
   heroImage: Media
   author: User
   // Ingredient docs
-  tomatoDoc: any
-  onionDoc: any
-  riceDoc: any
-  eggDoc: any
-  saltDoc: any
-  blackPepperDoc: any
-  lentilDoc: any
-  carrotDoc: any
-  potatoDoc: any
-  oliveOilDoc: any
-  flourDoc: any
-  waterDoc: any
-  yeastDoc: any
-  beefDoc: any
-  parsleyDoc: any
-  pepperPasteDoc: any
-  garlicDoc: any
-  greenPepperDoc: any
-  sumacDoc: any
-  paprikaDoc: any
+  tomatoDoc: Ingredient
+  onionDoc: Ingredient
+  riceDoc: Ingredient
+  eggDoc: Ingredient
+  saltDoc: Ingredient
+  blackPepperDoc: Ingredient
+  lentilDoc: Ingredient
+  carrotDoc: Ingredient
+  potatoDoc: Ingredient
+  oliveOilDoc: Ingredient
+  flourDoc: Ingredient
+  waterDoc: Ingredient
+  yeastDoc: Ingredient
+  beefDoc: Ingredient
+  parsleyDoc: Ingredient
+  pepperPasteDoc: Ingredient
+  garlicDoc: Ingredient
+  greenPepperDoc: Ingredient
+  sumacDoc: Ingredient
+  paprikaDoc: Ingredient
   // Unit docs
-  gramUnitDoc: any
-  pieceUnitDoc: any
-  tablespoonUnitDoc: any
-  teaspoonUnitDoc: any
+  gramUnitDoc: IngredientUnit
+  pieceUnitDoc: IngredientUnit
+  tablespoonUnitDoc: IngredientUnit
+  teaspoonUnitDoc: IngredientUnit
   // Difficulty and cooking method docs
-  easyLevelDoc: any
-  mediumLevelDoc: any
-  hardLevelDoc: any
-  stovetopMethodDoc: any
-  ovenMethodDoc: any
-  steamMethodDoc: any
-  grillMethodDoc: any
-  pressureCookerMethodDoc: any
+  easyLevelDoc: DifficultyLevel
+  mediumLevelDoc: DifficultyLevel
+  hardLevelDoc: DifficultyLevel
+  stovetopMethodDoc: CookingMethod
+  ovenMethodDoc: CookingMethod
+  steamMethodDoc: CookingMethod
+  grillMethodDoc: CookingMethod
+  pressureCookerMethodDoc: CookingMethod
   // Nutrient docs
-  caloriesDoc: any
-  proteinDoc: any
-  carbohydratesDoc: any
-  fatDoc: any
-  fiberDoc: any
-  sugarDoc: any
-  sodiumDoc: any
-  cholesterolDoc: any
+  caloriesDoc: Nutrient
+  proteinDoc: Nutrient
+  carbohydratesDoc: Nutrient
+  fatDoc: Nutrient
+  fiberDoc: Nutrient
+  sugarDoc: Nutrient
+  sodiumDoc: Nutrient
+  cholesterolDoc: Nutrient
   // Diet type docs
-  veganDoc: any
-  vegetarianDoc: any
-  glutenFreeDoc: any
-  ketoDoc: any
-  lowCarbDoc: any
-  mediterraneanDoc: any
-  paleoDoc: any
+  veganDoc: DietType
+  vegetarianDoc: DietType
+  glutenFreeDoc: DietType
+  ketoDoc: DietType
+  lowCarbDoc: DietType
+  mediterraneanDoc: DietType
+  paleoDoc: DietType
   // Season docs
-  springDoc: any
-  summerDoc: any
-  autumnDoc: any
-  winterDoc: any
+  springDoc: Season
+  summerDoc: Season
+  autumnDoc: Season
+  winterDoc: Season
   // Region docs
-  marmaraDoc: any
-  egeDoc: any
-  icAnatoliaDoc: any
+  marmaraDoc: Region
+  egeDoc: Region
+  icAnatoliaDoc: Region
 }
 
 export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'recipes'> = ({
@@ -74,14 +85,14 @@ export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   tomatoDoc,
   oliveOilDoc,
   flourDoc,
-  waterDoc,
+  waterDoc: _waterDoc,
   yeastDoc,
   beefDoc,
   parsleyDoc,
   pepperPasteDoc,
   garlicDoc,
   greenPepperDoc,
-  sumacDoc,
+  sumacDoc: _sumacDoc,
   paprikaDoc,
   saltDoc,
   blackPepperDoc,

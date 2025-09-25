@@ -8,7 +8,7 @@ import PageClient from './page.client'
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatDateTime } from 'src/utilities/formatDateTime'
-import { ClockIcon, CookingPotIcon, HandPlatterIcon, TimerIcon } from 'lucide-react'
+import { ClockIcon, CookingPotIcon, HandPlatterIcon } from 'lucide-react'
 
 // Hook'tan gelen extended author tipi
 type PopulatedAuthor = {
