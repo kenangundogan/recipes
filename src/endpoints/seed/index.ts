@@ -99,6 +99,7 @@ import {
   cholesterol,
 } from './nutrients'
 import { vegan, vegetarian, glutenFree, keto, lowCarb, mediterranean, paleo } from './diet-types'
+import { soupRecipeCategory, doughRecipeCategory } from './recipe-categories'
 import { recipe1 } from './recipes-1'
 import { recipe2 } from './recipes-2'
 import { recipe3 } from './recipes-3'
@@ -124,6 +125,7 @@ const collections: CollectionSlug[] = [
   'nutrients',
   'dietTypes',
   'recipes',
+  'recipeCategories',
   'media',
   'pages',
   'posts',
@@ -2099,6 +2101,44 @@ export const seed = async ({
     collection: 'dietTypes',
     data: {
       relatedDietTypes: [glutenFreeDoc.id, lowCarbDoc.id],
+    },
+  })
+
+  payload.logger.info(`— Seeding recipe categories...`)
+
+  // Create recipe categories
+  const soupRecipeCategoryDoc = await payload.create({
+    collection: 'recipeCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: soupRecipeCategory({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  const doughRecipeCategoryDoc = await payload.create({
+    collection: 'recipeCategories',
+    depth: 0,
+    context: {
+      disableRevalidate: true,
+    },
+    data: doughRecipeCategory({ heroImage: image1Doc, author: demoAuthor }),
+  })
+
+  // update each recipe category with related categories
+  await payload.update({
+    id: soupRecipeCategoryDoc.id,
+    collection: 'recipeCategories',
+    data: {
+      relatedRecipeCategories: [doughRecipeCategoryDoc.id],
+    },
+  })
+
+  await payload.update({
+    id: doughRecipeCategoryDoc.id,
+    collection: 'recipeCategories',
+    data: {
+      relatedRecipeCategories: [soupRecipeCategoryDoc.id],
     },
   })
 

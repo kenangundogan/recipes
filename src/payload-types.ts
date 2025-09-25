@@ -74,6 +74,7 @@ export interface Config {
     users: User;
     genders: Gender;
     recipes: Recipe;
+    recipeCategories: RecipeCategory;
     continents: Continent;
     countries: Country;
     regions: Region;
@@ -106,6 +107,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     genders: GendersSelect<false> | GendersSelect<true>;
     recipes: RecipesSelect<false> | RecipesSelect<true>;
+    recipeCategories: RecipeCategoriesSelect<false> | RecipeCategoriesSelect<true>;
     continents: ContinentsSelect<false> | ContinentsSelect<true>;
     countries: CountriesSelect<false> | CountriesSelect<true>;
     regions: RegionsSelect<false> | RegionsSelect<true>;
@@ -1492,6 +1494,53 @@ export interface City {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipeCategories".
+ */
+export interface RecipeCategory {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedRecipeCategories?: (string | RecipeCategory)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "continents".
  */
 export interface Continent {
@@ -1801,6 +1850,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'recipes';
         value: string | Recipe;
+      } | null)
+    | ({
+        relationTo: 'recipeCategories';
+        value: string | RecipeCategory;
       } | null)
     | ({
         relationTo: 'continents';
@@ -2307,6 +2360,37 @@ export interface RecipesSelect<T extends boolean = true> {
   seasons?: T;
   dietTypes?: T;
   regions?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipeCategories_select".
+ */
+export interface RecipeCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedRecipeCategories?: T;
   meta?:
     | T
     | {
@@ -3183,6 +3267,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'recipes';
           value: string | Recipe;
+        } | null)
+      | ({
+          relationTo: 'recipeCategories';
+          value: string | RecipeCategory;
         } | null)
       | ({
           relationTo: 'continents';
