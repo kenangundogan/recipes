@@ -498,6 +498,19 @@ export const Recipes: CollectionConfig<'recipes'> = {
           name: 'name',
           type: 'text',
         },
+        {
+          name: 'firstName',
+          type: 'text',
+        },
+        {
+          name: 'lastName',
+          type: 'text',
+        },
+        {
+          name: 'profilePicture',
+          type: 'upload',
+          relationTo: 'media',
+        },
       ],
     },
     ...slugField(),

@@ -17,7 +17,7 @@ export const stovetopMethod: (
       'Geleneksel ocak üstü pişirme yöntemi. Tencere, tava gibi kaplarla düşük, orta veya yüksek ateşte pişirme.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -105,7 +105,7 @@ export const ovenMethod: (
       'Fırında kuru sıcaklıkla pişirme yöntemi. Ekmekler, börekler, et ve sebze yemekleri için ideal.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -192,7 +192,7 @@ export const steamMethod: (
     description: 'Su buharı ile sağlıklı pişirme yöntemi. Sebzelerin vitamin değerlerini korur.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -279,7 +279,7 @@ export const grillMethod: (
       'Doğrudan ateş veya ızgara üzerinde pişirme. Et, tavuk, balık ve sebzeler için idealdir.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -367,7 +367,7 @@ export const pressureCookerMethod: (
       'Yüksek basınçla hızlı pişirme yöntemi. Zamandan tasarruf sağlar ve et gibi sert gıdaları yumuşatır.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',

@@ -14,7 +14,7 @@ export const populateAuthors: CollectionAfterReadHook = async ({ doc, req, req: 
         const authorDoc = await payload.findByID({
           id: typeof author === 'object' ? author?.id : author,
           collection: 'users',
-          depth: 1,
+          depth: 2,
         })
 
         if (authorDoc) {
@@ -25,29 +25,12 @@ export const populateAuthors: CollectionAfterReadHook = async ({ doc, req, req: 
           const populatedAuthors = []
 
           for (const authorDoc of authorDocs) {
-            let profilePicture = null
-
-            // Eğer profilePicture ID olarak geliyorsa, ayrı bir query ile media objesini getir
-            if (authorDoc.profilePicture && typeof authorDoc.profilePicture === 'string') {
-              try {
-                profilePicture = await payload.findByID({
-                  id: authorDoc.profilePicture,
-                  collection: 'media',
-                  depth: 0,
-                })
-              } catch {
-                // hata durumunda null bırak
-              }
-            } else if (typeof authorDoc.profilePicture === 'object') {
-              profilePicture = authorDoc.profilePicture
-            }
-
             populatedAuthors.push({
               id: authorDoc.id,
               name: authorDoc.name,
               firstName: authorDoc.general?.firstName || '',
               lastName: authorDoc.general?.lastName || '',
-              profilePicture: profilePicture,
+              profilePicture: authorDoc.profilePicture,
             })
           }
 

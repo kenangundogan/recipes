@@ -17,7 +17,7 @@ export const calories: (args: NutrientArgs) => RequiredDataFromCollectionSlug<'n
     description: 'Enerji birimi. Vücudun günlük aktiviteleri için gerekli enerjiyi sağlar.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -104,7 +104,7 @@ export const protein: (args: NutrientArgs) => RequiredDataFromCollectionSlug<'nu
     description: 'Kas gelişimi ve onarımı için gerekli makro besin. Amino asitlerin kaynağıdır.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -192,7 +192,7 @@ export const carbohydrates: (args: NutrientArgs) => RequiredDataFromCollectionSl
       'Vücudun birincil enerji kaynağı. Beyin ve kas fonksiyonları için hayati önem taşır.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -280,7 +280,7 @@ export const fat: (args: NutrientArgs) => RequiredDataFromCollectionSlug<'nutrie
     description: 'Uzun süreli enerji depolama ve vitamin emilimi için gerekli makro besin.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -368,7 +368,7 @@ export const fiber: (args: NutrientArgs) => RequiredDataFromCollectionSlug<'nutr
       'Sindirim sistemi sağlığı için önemli. Tokluk hissi verir ve bağırsak sağlığını destekler.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -456,7 +456,7 @@ export const sugar: (args: NutrientArgs) => RequiredDataFromCollectionSlug<'nutr
     description: 'Hızlı enerji kaynağı. Aşırı tüketimi sağlık sorunlarına yol açabilir.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -544,7 +544,7 @@ export const sodium: (args: NutrientArgs) => RequiredDataFromCollectionSlug<'nut
       'Sıvı dengesi ve sinir iletimi için gerekli mineral. Aşırı tüketimi yüksek tansiyon riskini artırır.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -633,7 +633,7 @@ export const cholesterol: (args: NutrientArgs) => RequiredDataFromCollectionSlug
       'Hücre yapısı ve hormon üretimi için gerekli. Aşırı miktarda kalp sağlığına zararlıdır.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',

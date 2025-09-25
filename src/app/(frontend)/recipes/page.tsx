@@ -29,6 +29,9 @@ type RecipeWithPopulatedAuthors = Pick<
   populatedAuthors?: PopulatedAuthor[] | null
   createdAt?: string
   updatedAt?: string
+  servings?: number
+  prepTime?: number
+  cookTime?: number
 }
 
 export const dynamic = 'force-static'

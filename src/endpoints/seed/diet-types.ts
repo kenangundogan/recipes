@@ -17,7 +17,7 @@ export const vegan: (args: DietTypeArgs) => RequiredDataFromCollectionSlug<'diet
     description: 'Hiçbir hayvansal ürün içermeyen tamamen bitki bazlı beslenme tarzı.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -104,7 +104,7 @@ export const vegetarian: (args: DietTypeArgs) => RequiredDataFromCollectionSlug<
     description: 'Et ve balık tüketilmeyen, süt ürünleri ve yumurta içerebilen beslenme şekli.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -191,7 +191,7 @@ export const glutenFree: (args: DietTypeArgs) => RequiredDataFromCollectionSlug<
     description: 'Gluten içeren tahılların (buğday, arpa, çavdar) tüketilmediği beslenme şekli.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -278,7 +278,7 @@ export const keto: (args: DietTypeArgs) => RequiredDataFromCollectionSlug<'dietT
     description: 'Çok düşük karbonhidrat, yüksek yağ içeren metabolik beslenme yaklaşımı.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -365,7 +365,7 @@ export const lowCarb: (args: DietTypeArgs) => RequiredDataFromCollectionSlug<'di
     description: 'Karbonhidrat alımının sınırlandırıldığı, protein ve yağ ağırlıklı beslenme.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -453,7 +453,7 @@ export const mediterranean: (args: DietTypeArgs) => RequiredDataFromCollectionSl
       'Zeytinyağı, balık, sebze ve tam tahıl ağırlıklı geleneksel Akdeniz beslenme tarzı.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -541,7 +541,7 @@ export const paleo: (args: DietTypeArgs) => RequiredDataFromCollectionSlug<'diet
     description: 'İşlenmemiş, doğal gıdalarla paleolitik çağ beslenme tarzını taklit eden diyet.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',

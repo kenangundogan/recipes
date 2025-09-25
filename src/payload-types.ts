@@ -881,6 +881,9 @@ export interface Recipe {
     | {
         id?: string | null;
         name?: string | null;
+        firstName?: string | null;
+        lastName?: string | null;
+        profilePicture?: (string | null) | Media;
       }[]
     | null;
   slug?: string | null;
@@ -2374,6 +2377,9 @@ export interface RecipesSelect<T extends boolean = true> {
     | {
         id?: T;
         name?: T;
+        firstName?: T;
+        lastName?: T;
+        profilePicture?: T;
       };
   slug?: T;
   slugLock?: T;

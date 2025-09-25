@@ -16,7 +16,7 @@ export const easyLevel: (
     description: 'Başlangıç seviyesi. Basit malzemeler ve tekniklerle kısa sürede hazırlanabilir.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -103,7 +103,7 @@ export const mediumLevel: (
     description: 'Orta seviye. Biraz tecrübe gerektirir ve birkaç farklı teknik kullanılabilir.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -190,7 +190,7 @@ export const hardLevel: (
       'İleri seviye. Deneyimli aşçılar için. Karmaşık teknikler ve uzun hazırlık süresi gerektirir.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',

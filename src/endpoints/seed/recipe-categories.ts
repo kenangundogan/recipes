@@ -17,7 +17,7 @@ export const soupRecipeCategory: (
       'Çorbalar, Türk ve dünya mutfağında yemeğe başlangıç olarak sunulan, genellikle sıvı kıvamlı yemeklerdir. Sağlıklı, besleyici ve doyurucu özellikleriyle öne çıkar.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
@@ -105,7 +105,7 @@ export const doughRecipeCategory: (
       'Hamur tabanlı yemekler; pide, lahmacun, börek, pizza ve diğer fırın ürünlerini kapsayan geniş bir kategoridir.',
     heroImage: heroImage.id,
     authors: [author],
-    publishedAt: new Date(),
+    publishedAt: new Date().toISOString(),
     content: {
       root: {
         type: 'root',
