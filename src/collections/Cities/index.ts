@@ -38,7 +38,6 @@ export const Cities: CollectionConfig<'cities'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    countries: true,
     meta: {
       image: true,
       description: true,

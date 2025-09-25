@@ -38,7 +38,6 @@ export const DifficultyLevels: CollectionConfig<'difficultyLevels'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    difficultyLevels: true,
     meta: {
       image: true,
       description: true,

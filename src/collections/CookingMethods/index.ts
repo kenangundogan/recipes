@@ -38,7 +38,6 @@ export const CookingMethods: CollectionConfig<'cookingMethods'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    cookingMethods: true,
     meta: {
       image: true,
       description: true,
