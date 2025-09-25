@@ -13,6 +13,7 @@ import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Genders } from './collections/Genders'
 import { Recipes } from './collections/Recipes'
+import { RecipeCategories } from './collections/RecipeCategories'
 import { Continents } from './collections/Continents'
 import { Countries } from './collections/Countries'
 import { Regions } from './collections/Regions'
@@ -86,6 +87,7 @@ export default buildConfig({
     Users,
     Genders,
     Recipes,
+    RecipeCategories,
     Continents,
     Countries,
     Regions,
