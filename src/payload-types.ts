@@ -1612,6 +1612,10 @@ export interface Redirect {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'recipes';
+          value: string | Recipe;
         } | null);
     url?: string | null;
   };
@@ -1645,10 +1649,15 @@ export interface Search {
   id: string;
   title?: string | null;
   priority?: number | null;
-  doc: {
-    relationTo: 'posts';
-    value: string | Post;
-  };
+  doc:
+    | {
+        relationTo: 'posts';
+        value: string | Post;
+      }
+    | {
+        relationTo: 'recipes';
+        value: string | Recipe;
+      };
   slug?: string | null;
   meta?: {
     title?: string | null;
