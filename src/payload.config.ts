@@ -128,5 +128,18 @@ export default buildConfig({
       },
     },
     tasks: [],
+    autoRun: [
+      {
+        cron: '*/10 * * * * *', // every 10 seconds
+        limit: 100, // limit jobs to process each run
+        queue: 'default', // default queue kullan
+      },
+    ],
+    shouldAutoRun: async () => {
+      // Tell Payload if it should run jobs or not. This function is optional and will return true by default.
+      // This function will be invoked each time Payload goes to pick up and run jobs.
+      // If this function ever returns false, the cron schedule will be stopped.
+      return true
+    },
   },
 })
