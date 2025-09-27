@@ -107,6 +107,7 @@ import { imageRecipe1 } from './imageRecipe1'
 import { imageRecipe2 } from './imageRecipe2'
 import { imageRecipe3 } from './imageRecipe3'
 import { imageAuthor1 } from './imageAuthor1'
+import { genders as gendersData } from './genders'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -132,6 +133,7 @@ const collections: CollectionSlug[] = [
   'forms',
   'form-submissions',
   'search',
+  'genders',
 ]
 const globals: GlobalSlug[] = ['header', 'footer']
 
@@ -2346,6 +2348,17 @@ export const seed = async ({
     depth: 0,
     data: contactFormData,
   })
+
+  payload.logger.info(`— Seeding genders...`)
+
+  await Promise.all([
+    gendersData.map((gender) =>
+      payload.create({
+        collection: 'genders',
+        data: gender,
+      }),
+    ),
+  ])
 
   payload.logger.info(`— Seeding pages...`)
 

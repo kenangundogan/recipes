@@ -13,6 +13,7 @@ export const Genders: CollectionConfig = {
     update: authenticated,
   },
   admin: {
+    group: 'User Management',
     useAsTitle: 'title',
     defaultColumns: ['title', 'description'],
   },
