@@ -2363,14 +2363,29 @@ export const seed = async ({
   ])
 
   payload.logger.info(`— Seeding roles...`)
-  await Promise.all([
+  const createdRoles = await Promise.all(
     rolesData.map((role) =>
       payload.create({
         collection: 'roles',
         data: role,
       }),
     ),
-  ])
+  )
+
+  // Admin rolünü bul
+  const adminRole = createdRoles.find((role) => role.slug === 'admin')
+
+  // Demo kullanıcısına admin rolü ata
+  if (adminRole && demoAuthor) {
+    await payload.update({
+      collection: 'users',
+      id: demoAuthor.id,
+      data: {
+        roles: adminRole.id,
+      },
+    })
+    payload.logger.info(`— Demo user updated with admin role`)
+  }
 
   payload.logger.info(`— Seeding pages...`)
 

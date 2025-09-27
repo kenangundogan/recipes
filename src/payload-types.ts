@@ -430,6 +430,7 @@ export interface User {
     landline?: string | null;
     gsm?: string | null;
   };
+  roles?: (string | null) | Role;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -456,6 +457,20 @@ export interface Gender {
   id: string;
   title: string;
   description?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles".
+ */
+export interface Role {
+  id: string;
+  name: string;
+  description?: string | null;
+  permissions: ('create' | 'read' | 'update' | 'delete')[];
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1660,20 +1675,6 @@ export interface Country {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "roles".
- */
-export interface Role {
-  id: string;
-  name: string;
-  description?: string | null;
-  permissions: ('create' | 'read' | 'update' | 'delete')[];
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -2321,6 +2322,7 @@ export interface UsersSelect<T extends boolean = true> {
         landline?: T;
         gsm?: T;
       };
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
