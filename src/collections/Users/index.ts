@@ -1,13 +1,14 @@
 import type { CollectionConfig } from 'payload'
 
-import { authenticated, authenticatedField } from '../../access/authenticated'
+import { authenticatedField } from '../../access/authenticated'
 import { adminOnly, adminOnlyField } from '../../access/adminOnly'
 import { adminOrSelf } from '../../access/adminOrSelf'
+import { userAdminAccess } from '../../access/userSelfAccess'
 
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
-    admin: authenticated,
+    admin: userAdminAccess, // Admin/editor/author tüm kullanıcıları, diğerleri sadece kendilerini görebilir
     create: adminOnly,
     delete: adminOnly,
     read: adminOrSelf,
@@ -18,7 +19,15 @@ export const Users: CollectionConfig = {
     defaultColumns: ['name', 'email'],
     useAsTitle: 'name',
   },
-  auth: true,
+  auth: {
+    loginWithUsername: {
+      allowEmailLogin: true,
+      requireEmail: false,
+    },
+    verify: false,
+    maxLoginAttempts: 5,
+    lockTime: 600 * 1000, // 10 minutes
+  },
   timestamps: true,
   fields: [
     {
