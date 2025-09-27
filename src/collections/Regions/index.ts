@@ -128,17 +128,10 @@ export const Regions: CollectionConfig<'regions'> = {
               type: 'group',
               fields: [
                 {
-                  name: 'latitude',
-                  type: 'number',
+                  name: 'point',
+                  type: 'point',
                   admin: {
-                    placeholder: 'Örn. 37.774929',
-                  },
-                },
-                {
-                  name: 'longitude',
-                  type: 'number',
-                  admin: {
-                    placeholder: 'Örn. 29.032321',
+                    placeholder: 'Örn. 37.774929, 29.032321',
                   },
                 },
               ],

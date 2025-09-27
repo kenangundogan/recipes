@@ -143,8 +143,7 @@ export const istanbulCity: (args: CityArgs) => RequiredDataFromCollectionSlug<'c
     },
     heroImage: heroImage.id,
     code: 'IST',
-    latitude: 41.0082,
-    longitude: 28.9784,
+    point: [41.0082, 28.9784],
     meta: {
       description: "İstanbul, Türkiye'nin en büyük şehri, iki kıtayı birleştiren tarihi kent.",
       image: heroImage.id,
@@ -291,8 +290,7 @@ export const ankaraCity: (args: CityArgs) => RequiredDataFromCollectionSlug<'cit
     },
     heroImage: heroImage.id,
     code: 'ANK',
-    latitude: 39.9334,
-    longitude: 32.8597,
+    point: [39.9334, 32.8597],
     meta: {
       description: "Ankara, Türkiye'nin başkenti ve ikinci büyük şehri.",
       image: heroImage.id,
@@ -439,8 +437,7 @@ export const izmirCity: (args: CityArgs) => RequiredDataFromCollectionSlug<'citi
     },
     heroImage: heroImage.id,
     code: 'IZM',
-    latitude: 38.4192,
-    longitude: 27.1287,
+    point: [38.4192, 27.1287],
     meta: {
       description: "İzmir, Ege Bölgesi'nin incisi, Türkiye'nin üçüncü büyük şehri.",
       image: heroImage.id,

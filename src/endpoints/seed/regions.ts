@@ -143,8 +143,7 @@ export const marmaraRegion: (args: RegionArgs) => RequiredDataFromCollectionSlug
     },
     heroImage: heroImage.id,
     code: 'MAR',
-    latitude: 40.7589,
-    longitude: 28.9662,
+    point: [40.7589, 28.9662],
     meta: {
       description: "Türkiye'nin en gelişmiş ve en kalabalık bölgesi, ekonomik ve kültürel merkezi.",
       image: heroImage.id,
@@ -292,8 +291,7 @@ export const egeRegion: (args: RegionArgs) => RequiredDataFromCollectionSlug<'re
     },
     heroImage: heroImage.id,
     code: 'EGE',
-    latitude: 38.7312,
-    longitude: 27.2103,
+    point: [38.7312, 27.2103],
     meta: {
       description: 'Antik medeniyetlerin beşiği, turizm ve tarımın merkezi olan güzel bölge.',
       image: heroImage.id,
@@ -442,8 +440,7 @@ export const icAnatoliaRegion: (args: RegionArgs) => RequiredDataFromCollectionS
     },
     heroImage: heroImage.id,
     code: 'ICA',
-    latitude: 39.0626,
-    longitude: 35.1628,
+    point: [39.0626, 35.1628],
     meta: {
       description:
         "Türkiye'nin başkenti Ankara'nın bulunduğu, tarihî ve kültürel önemi yüksek bölge.",

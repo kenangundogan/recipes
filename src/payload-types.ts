@@ -1421,8 +1421,11 @@ export interface Region {
     [k: string]: unknown;
   };
   code?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
   relatedRegions?: (string | Region)[] | null;
   cities?: (string | City)[] | null;
   meta?: {
@@ -1472,8 +1475,11 @@ export interface City {
     [k: string]: unknown;
   };
   code?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
   relatedCities?: (string | City)[] | null;
   meta?: {
     title?: string | null;
@@ -1569,8 +1575,11 @@ export interface Continent {
     [k: string]: unknown;
   };
   code?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
   relatedContinents?: (string | Continent)[] | null;
   countries?: (string | Country)[] | null;
   meta?: {
@@ -1620,8 +1629,11 @@ export interface Country {
     [k: string]: unknown;
   };
   code?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
   relatedCountries?: (string | Country)[] | null;
   cities?: (string | City)[] | null;
   meta?: {
@@ -2448,8 +2460,7 @@ export interface ContinentsSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   code?: T;
-  latitude?: T;
-  longitude?: T;
+  point?: T;
   relatedContinents?: T;
   countries?: T;
   meta?:
@@ -2483,8 +2494,7 @@ export interface CountriesSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   code?: T;
-  latitude?: T;
-  longitude?: T;
+  point?: T;
   relatedCountries?: T;
   cities?: T;
   meta?:
@@ -2518,8 +2528,7 @@ export interface RegionsSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   code?: T;
-  latitude?: T;
-  longitude?: T;
+  point?: T;
   relatedRegions?: T;
   cities?: T;
   meta?:
@@ -2553,8 +2562,7 @@ export interface CitiesSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   code?: T;
-  latitude?: T;
-  longitude?: T;
+  point?: T;
   relatedCities?: T;
   meta?:
     | T

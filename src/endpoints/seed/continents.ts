@@ -143,8 +143,7 @@ export const europeContinent: (
     },
     heroImage: heroImage.id,
     code: 'EU',
-    latitude: 54.526,
-    longitude: 15.2551,
+    point: [54.526, 15.2551],
     meta: {
       description:
         'Batı uygarlığının beşiği, zengin tarihi ve kültürel çeşitliliği ile tanınan kıta.',
@@ -292,8 +291,7 @@ export const asiaContinent: (
     },
     heroImage: heroImage.id,
     code: 'AS',
-    latitude: 29.8405,
-    longitude: 89.2956,
+    point: [29.8405, 89.2956],
     meta: {
       description:
         'Dünyanın en büyük ve en kalabalık kıtası, çeşitli kültürler ve teknolojik gelişimin merkezi.',
@@ -441,8 +439,7 @@ export const africaContinent: (
     },
     heroImage: heroImage.id,
     code: 'AF',
-    latitude: -8.7832,
-    longitude: 34.5085,
+    point: [-8.7832, 34.5085],
     meta: {
       description:
         'İnsanlığın beşiği olarak bilinen, doğal zenginlikleri ve genç nüfusuyla öne çıkan kıta.',

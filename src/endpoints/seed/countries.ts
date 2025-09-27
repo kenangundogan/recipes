@@ -144,8 +144,7 @@ export const turkeyCountry: (args: CountryArgs) => RequiredDataFromCollectionSlu
     },
     heroImage: heroImage.id,
     code: 'TR',
-    latitude: 38.9637,
-    longitude: 35.2433,
+    point: [38.9637, 35.2433],
     meta: {
       description:
         'Avrupa ve Asya kıtalarında yer alan, köklü tarihi ve zengin kültürü ile tanınan cumhuriyet.',
@@ -256,8 +255,7 @@ export const germanyCountry: (args: CountryArgs) => RequiredDataFromCollectionSl
     },
     heroImage: heroImage.id,
     code: 'DE',
-    latitude: 51.1657,
-    longitude: 10.4515,
+    point: [51.1657, 10.4515],
     meta: {
       description:
         "Avrupa'nın kalbi olarak bilinen, güçlü ekonomisi ve teknolojik gelişimiyle öne çıkan ülke.",
@@ -368,8 +366,7 @@ export const franceCountry: (args: CountryArgs) => RequiredDataFromCollectionSlu
     },
     heroImage: heroImage.id,
     code: 'FR',
-    latitude: 46.2276,
-    longitude: 2.2137,
+    point: [46.2276, 2.2137],
     meta: {
       description:
         'Sanat, kültür ve gastronomi başkenti olarak bilinen, dünyanın en çok ziyaret edilen ülkesi.',
