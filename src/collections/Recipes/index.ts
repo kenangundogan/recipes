@@ -53,7 +53,7 @@ export const Recipes: CollectionConfig<'recipes'> = {
     },
   },
   admin: {
-    defaultColumns: ['title', 'difficulty', 'cookTime', 'servings', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'difficulty', 'cookTime', 'servings', 'updatedAt'],
     group: 'Recipe Management',
     livePreview: {
       url: ({ data, req }) => {
