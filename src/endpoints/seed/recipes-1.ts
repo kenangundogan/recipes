@@ -9,6 +9,9 @@ import type {
   DietType,
   Season,
   Region,
+  Country,
+  City,
+  Continent,
 } from '@/payload-types'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
@@ -62,6 +65,14 @@ export type RecipeArgs = {
   summerDoc: Season
   autumnDoc: Season
   winterDoc: Season
+  // Continent docs
+  europeDoc: Continent
+  // Country docs
+  turkeyDoc: Country
+  // City docs
+  istanbulDoc: City
+  ankaraDoc: City
+  izmirDoc: City
   // Region docs
   marmaraDoc: Region
   egeDoc: Region
@@ -95,13 +106,16 @@ export const recipe1: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   veganDoc,
   vegetarianDoc,
   glutenFreeDoc,
-  springDoc: _springDoc,
-  summerDoc: _summerDoc,
   autumnDoc,
   winterDoc,
   marmaraDoc,
   egeDoc,
   icAnatoliaDoc,
+  europeDoc,
+  turkeyDoc,
+  istanbulDoc,
+  ankaraDoc,
+  izmirDoc,
 }) => {
   return {
     slug: 'lentil-soup',
@@ -404,6 +418,9 @@ export const recipe1: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
     relatedRecipes: [], // Bu seed script tarafından doldurulacak
     categories: [], // Bu seed script tarafından doldurulacak
     seasons: [autumnDoc.id, winterDoc.id], // Sonbahar ve kış çorbası
+    continents: [europeDoc.id], // Türkiye'nin bulunduğu kıta
+    countries: [turkeyDoc.id], // Türkiye
+    cities: [istanbulDoc.id, ankaraDoc.id, izmirDoc.id], // Tüm Türkiye şehirlerinde sevilen
     regions: [marmaraDoc.id, egeDoc.id, icAnatoliaDoc.id], // Tüm Türkiye bölgelerinde sevilen
     dietTypes: [veganDoc.id, vegetarianDoc.id, glutenFreeDoc.id], // Vegan, vejetaryen, glutensiz
   }

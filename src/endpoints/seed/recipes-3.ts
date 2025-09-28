@@ -9,6 +9,9 @@ import type {
   DietType,
   Season,
   Region,
+  Continent,
+  Country,
+  City,
 } from '@/payload-types'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
@@ -76,6 +79,14 @@ export type RecipeArgs = {
   marmaraDoc: Region
   egeDoc: Region
   icAnatoliaDoc: Region
+  // Continent docs
+  europeDoc: Continent
+  // Country docs
+  turkeyDoc: Country
+  // City docs
+  istanbulDoc: City
+  ankaraDoc: City
+  izmirDoc: City
 }
 
 export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'recipes'> = ({
@@ -85,14 +96,12 @@ export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   tomatoDoc,
   oliveOilDoc,
   flourDoc,
-  waterDoc: _waterDoc,
   yeastDoc,
   beefDoc,
   parsleyDoc,
   pepperPasteDoc,
   garlicDoc,
   greenPepperDoc,
-  sumacDoc: _sumacDoc,
   paprikaDoc,
   saltDoc,
   blackPepperDoc,
@@ -115,6 +124,11 @@ export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   autumnDoc,
   winterDoc,
   marmaraDoc,
+  europeDoc,
+  turkeyDoc,
+  istanbulDoc,
+  ankaraDoc,
+  izmirDoc,
   egeDoc,
   icAnatoliaDoc,
 }) => {
@@ -382,6 +396,9 @@ export const recipe3: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
     relatedRecipes: [],
     categories: [],
     seasons: [springDoc.id, summerDoc.id, autumnDoc.id, winterDoc.id], // Her mevsim yapılabilir
+    continents: [europeDoc.id], // Avrupa
+    countries: [turkeyDoc.id], // Türkiye
+    cities: [istanbulDoc.id, ankaraDoc.id, izmirDoc.id], // Tüm Türkiye şehirlerinde sevilen
     regions: [marmaraDoc.id, egeDoc.id, icAnatoliaDoc.id], // Tüm Türkiye'de sevilen lezzet
     dietTypes: [], // Et ve gluten içerdiği için vegan/vejetaryen/glutensiz işaretlenmedi
   }

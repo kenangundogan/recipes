@@ -2199,6 +2199,11 @@ export const seed = async ({
       marmaraDoc: marmaraDoc,
       egeDoc: egeDoc,
       icAnatoliaDoc: icAnatoliaDoc,
+      europeDoc: europeDoc,
+      turkeyDoc: turkeyDoc,
+      istanbulDoc: istanbulDoc,
+      ankaraDoc: ankaraDoc,
+      izmirDoc: izmirDoc,
     }),
   })
 
@@ -2252,6 +2257,11 @@ export const seed = async ({
       marmaraDoc: marmaraDoc,
       egeDoc: egeDoc,
       icAnatoliaDoc: icAnatoliaDoc,
+      europeDoc: europeDoc,
+      turkeyDoc: turkeyDoc,
+      istanbulDoc: istanbulDoc,
+      ankaraDoc: ankaraDoc,
+      izmirDoc: izmirDoc,
     }),
   })
 
@@ -2315,6 +2325,11 @@ export const seed = async ({
       marmaraDoc: marmaraDoc,
       egeDoc: egeDoc,
       icAnatoliaDoc: icAnatoliaDoc,
+      europeDoc: europeDoc,
+      turkeyDoc: turkeyDoc,
+      istanbulDoc: istanbulDoc,
+      ankaraDoc: ankaraDoc,
+      izmirDoc: izmirDoc,
     }),
   })
 

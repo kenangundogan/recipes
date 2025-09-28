@@ -9,6 +9,9 @@ import type {
   DietType,
   Season,
   Region,
+  Continent,
+  Country,
+  City,
 } from '@/payload-types'
 import { RequiredDataFromCollectionSlug } from 'payload'
 
@@ -66,6 +69,14 @@ export type RecipeArgs = {
   marmaraDoc: Region
   egeDoc: Region
   icAnatoliaDoc: Region
+  // Continent docs
+  europeDoc: Continent
+  // Country docs
+  turkeyDoc: Country
+  // City docs
+  istanbulDoc: City
+  ankaraDoc: City
+  izmirDoc: City
 }
 export const recipe2: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'recipes'> = ({
   heroImage,
@@ -77,7 +88,6 @@ export const recipe2: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   blackPepperDoc,
   gramUnitDoc,
   pieceUnitDoc,
-  tablespoonUnitDoc: _tablespoonUnitDoc,
   teaspoonUnitDoc,
   mediumLevelDoc,
   stovetopMethodDoc,
@@ -90,13 +100,15 @@ export const recipe2: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
   sodiumDoc,
   cholesterolDoc,
   vegetarianDoc,
-  springDoc: _springDoc,
   summerDoc,
   autumnDoc,
-  winterDoc: _winterDoc,
   marmaraDoc,
   egeDoc,
-  icAnatoliaDoc: _icAnatoliaDoc,
+  europeDoc,
+  turkeyDoc,
+  istanbulDoc,
+  ankaraDoc,
+  izmirDoc,
 }) => {
   return {
     slug: 'domates-corbasi',
@@ -313,6 +325,9 @@ export const recipe2: (args: RecipeArgs) => RequiredDataFromCollectionSlug<'reci
     relatedRecipes: [], // Bu seed script tarafından doldurulacak
     categories: [], // Bu seed script tarafından doldurulacak
     seasons: [summerDoc.id, autumnDoc.id], // Domates mevsimi - yaz ve sonbahar
+    continents: [europeDoc.id], // Avrupa
+    countries: [turkeyDoc.id], // Türkiye
+    cities: [istanbulDoc.id, ankaraDoc.id, izmirDoc.id], // Tüm Türkiye şehirlerinde sevilen
     regions: [marmaraDoc.id, egeDoc.id], // Marmara ve Ege bölgesi domates çorbası
     dietTypes: [vegetarianDoc.id], // Vejetaryen
   }

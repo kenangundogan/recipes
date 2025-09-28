@@ -412,6 +412,24 @@ export const Recipes: CollectionConfig<'recipes'> = {
               relationTo: 'dietTypes',
             },
             {
+              name: 'continents',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'continents',
+            },
+            {
+              name: 'countries',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'countries',
+            },
+            {
               name: 'regions',
               type: 'relationship',
               admin: {
@@ -419,6 +437,15 @@ export const Recipes: CollectionConfig<'recipes'> = {
               },
               hasMany: true,
               relationTo: 'regions',
+            },
+            {
+              name: 'cities',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'cities',
             },
           ],
         },
