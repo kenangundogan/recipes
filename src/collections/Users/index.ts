@@ -1,18 +1,15 @@
 import type { CollectionConfig } from 'payload'
 
-import { authenticatedField } from '../../access/authenticated'
-import { adminOnly, adminOnlyField } from '../../access/adminOnly'
-import { adminOrSelf } from '../../access/adminOrSelf'
-import { userAdminAccess } from '../../access/userSelfAccess'
+import { authenticated } from '../../access/authenticated'
 
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
-    admin: userAdminAccess, // Admin/editor/author tüm kullanıcıları, diğerleri sadece kendilerini görebilir
-    create: adminOnly,
-    delete: adminOnly,
-    read: adminOrSelf,
-    update: adminOrSelf,
+    admin: authenticated,
+    create: authenticated,
+    delete: authenticated,
+    read: authenticated,
+    update: authenticated,
   },
   admin: {
     group: 'User Management',
@@ -164,11 +161,6 @@ export const Users: CollectionConfig = {
       name: 'roles',
       type: 'relationship',
       relationTo: 'roles',
-      access: {
-        create: adminOnlyField,
-        read: authenticatedField,
-        update: adminOnlyField,
-      },
       admin: {
         position: 'sidebar',
       },

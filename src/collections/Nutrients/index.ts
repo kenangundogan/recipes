@@ -9,7 +9,8 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { adminEditorAccess } from '../../access/adminRoleAccess'
+import { authenticated } from '../../access/authenticated'
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
@@ -29,11 +30,10 @@ import { slugField } from '@/fields/slug'
 export const Nutrients: CollectionConfig<'nutrients'> = {
   slug: 'nutrients',
   access: {
-    admin: adminEditorAccess,
-    create: adminEditorAccess,
-    delete: adminEditorAccess,
-    read: adminEditorAccess,
-    update: adminEditorAccess,
+    create: authenticated,
+    delete: authenticated,
+    read: authenticatedOrPublished,
+    update: authenticated,
   },
   defaultPopulate: {
     title: true,

@@ -1,16 +1,16 @@
 import type { CollectionConfig } from 'payload'
 
-import { adminEditorAccess } from '../../access/adminRoleAccess'
+import { authenticated } from '../../access/authenticated'
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { slugField } from '@/fields/slug'
 
 export const Genders: CollectionConfig = {
   slug: 'genders',
   access: {
-    admin: adminEditorAccess,
-    create: adminEditorAccess,
-    delete: adminEditorAccess,
-    read: adminEditorAccess,
-    update: adminEditorAccess,
+    create: authenticated,
+    delete: authenticated,
+    read: authenticatedOrPublished,
+    update: authenticated,
   },
   admin: {
     group: 'User Management',
