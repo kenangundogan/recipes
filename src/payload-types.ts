@@ -249,6 +249,8 @@ export interface Page {
     description?: string | null;
   };
   publishedAt?: string | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -296,6 +298,8 @@ export interface Post {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -324,6 +328,8 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -396,27 +402,6 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -443,6 +428,8 @@ export interface User {
     gsm?: string | null;
   };
   roles?: (string | null) | Role;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   updatedAt: string;
   createdAt: string;
   email?: string | null;
@@ -470,6 +457,8 @@ export interface Gender {
   id: string;
   title: string;
   description?: string | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -484,8 +473,33 @@ export interface Role {
   name: string;
   description?: string | null;
   permissions: ('create' | 'read' | 'update' | 'delete')[];
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  parent?: (string | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -916,6 +930,8 @@ export interface Recipe {
         profilePicture?: (string | null) | Media;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -963,6 +979,8 @@ export interface DifficultyLevel {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1010,6 +1028,8 @@ export interface CookingMethod {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1087,6 +1107,8 @@ export interface Ingredient {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1134,6 +1156,8 @@ export interface IngredientCategory {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1182,6 +1206,8 @@ export interface Season {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1229,6 +1255,8 @@ export interface Month {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1277,6 +1305,8 @@ export interface IngredientUnit {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1324,6 +1354,8 @@ export interface IngredientUnitCategory {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1371,6 +1403,8 @@ export interface Nutrient {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1418,6 +1452,8 @@ export interface DietType {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1472,6 +1508,8 @@ export interface Region {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1525,6 +1563,8 @@ export interface City {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1572,6 +1612,8 @@ export interface RecipeCategory {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1626,6 +1668,8 @@ export interface Continent {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1680,6 +1724,8 @@ export interface Country {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -2067,6 +2113,8 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2182,6 +2230,8 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2195,6 +2245,8 @@ export interface PostsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  createdBy?: T;
+  updatedBy?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -2287,6 +2339,8 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   parent?: T;
@@ -2336,6 +2390,8 @@ export interface UsersSelect<T extends boolean = true> {
         gsm?: T;
       };
   roles?: T;
+  createdBy?: T;
+  updatedBy?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -2361,6 +2417,8 @@ export interface UsersSelect<T extends boolean = true> {
 export interface GendersSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2429,6 +2487,8 @@ export interface RecipesSelect<T extends boolean = true> {
         lastName?: T;
         profilePicture?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2460,6 +2520,8 @@ export interface RecipeCategoriesSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2494,6 +2556,8 @@ export interface ContinentsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2528,6 +2592,8 @@ export interface CountriesSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2562,6 +2628,8 @@ export interface RegionsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2595,6 +2663,8 @@ export interface CitiesSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2627,6 +2697,8 @@ export interface SeasonsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2658,6 +2730,8 @@ export interface MonthsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2689,6 +2763,8 @@ export interface IngredientCategoriesSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2745,6 +2821,8 @@ export interface IngredientsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2776,6 +2854,8 @@ export interface IngredientUnitCategoriesSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2808,6 +2888,8 @@ export interface IngredientUnitsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2839,6 +2921,8 @@ export interface DifficultyLevelsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2870,6 +2954,8 @@ export interface CookingMethodsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2901,6 +2987,8 @@ export interface NutrientsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2932,6 +3020,8 @@ export interface DietTypesSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -2946,6 +3036,8 @@ export interface RolesSelect<T extends boolean = true> {
   name?: T;
   description?: T;
   permissions?: T;
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
