@@ -248,10 +248,10 @@ export const seed = async ({
       collection: 'users',
       data: {
         name: 'Demo Author',
+        username: 'demo-author',
         general: {
           firstName: 'Demo',
           lastName: 'Author',
-          username: 'demo-author',
           birthDate: '1990-01-01',
         },
         addresses: {
