@@ -11,6 +11,24 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
+import { Genders } from './collections/Genders'
+import { Recipes } from './collections/Recipes'
+import { RecipeCategories } from './collections/RecipeCategories'
+import { Continents } from './collections/Continents'
+import { Countries } from './collections/Countries'
+import { Regions } from './collections/Regions'
+import { Cities } from './collections/Cities'
+import { Seasons } from './collections/Seasons'
+import { IngredientCategories } from './collections/IngredientCategories'
+import { Ingredients } from './collections/Ingredients'
+import { IngredientUnits } from './collections/IngredientUnits'
+import { IngredientUnitCategories } from './collections/IngredientUnitCategories'
+import { DifficultyLevels } from './collections/DifficultyLevels'
+import { CookingMethods } from './collections/CookingMethods'
+import { Months } from './collections/Months'
+import { Nutrients } from './collections/Nutrients'
+import { DietTypes } from './collections/DietTypes'
+import { Roles } from './collections/Roles'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -62,7 +80,31 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [
+    Pages,
+    Posts,
+    Media,
+    Categories,
+    Users,
+    Genders,
+    Recipes,
+    RecipeCategories,
+    Continents,
+    Countries,
+    Regions,
+    Cities,
+    Seasons,
+    Months,
+    IngredientCategories,
+    Ingredients,
+    IngredientUnitCategories,
+    IngredientUnits,
+    DifficultyLevels,
+    CookingMethods,
+    Nutrients,
+    DietTypes,
+    Roles,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
@@ -88,5 +130,18 @@ export default buildConfig({
       },
     },
     tasks: [],
+    autoRun: [
+      {
+        cron: '*/10 * * * * *', // every 10 seconds
+        limit: 100, // limit jobs to process each run
+        queue: 'default', // default queue kullan
+      },
+    ],
+    shouldAutoRun: async () => {
+      // Tell Payload if it should run jobs or not. This function is optional and will return true by default.
+      // This function will be invoked each time Payload goes to pick up and run jobs.
+      // If this function ever returns false, the cron schedule will be stopped.
+      return true
+    },
   },
 })

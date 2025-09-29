@@ -47,6 +47,10 @@
     --success: 196 52% 74%;
     --warning: 34 89% 85%;
     --error: 10 100% 86%;
+
+    --header-height: 1px;
+    --footer-height: 1px;
+    --payload-admin-bar-height: 1px;
   }
 
   [data-theme='dark'] {

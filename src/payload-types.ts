@@ -72,6 +72,24 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    genders: Gender;
+    recipes: Recipe;
+    recipeCategories: RecipeCategory;
+    continents: Continent;
+    countries: Country;
+    regions: Region;
+    cities: City;
+    seasons: Season;
+    months: Month;
+    ingredientCategories: IngredientCategory;
+    ingredients: Ingredient;
+    ingredientUnitCategories: IngredientUnitCategory;
+    ingredientUnits: IngredientUnit;
+    difficultyLevels: DifficultyLevel;
+    cookingMethods: CookingMethod;
+    nutrients: Nutrient;
+    dietTypes: DietType;
+    roles: Role;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -88,6 +106,24 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    genders: GendersSelect<false> | GendersSelect<true>;
+    recipes: RecipesSelect<false> | RecipesSelect<true>;
+    recipeCategories: RecipeCategoriesSelect<false> | RecipeCategoriesSelect<true>;
+    continents: ContinentsSelect<false> | ContinentsSelect<true>;
+    countries: CountriesSelect<false> | CountriesSelect<true>;
+    regions: RegionsSelect<false> | RegionsSelect<true>;
+    cities: CitiesSelect<false> | CitiesSelect<true>;
+    seasons: SeasonsSelect<false> | SeasonsSelect<true>;
+    months: MonthsSelect<false> | MonthsSelect<true>;
+    ingredientCategories: IngredientCategoriesSelect<false> | IngredientCategoriesSelect<true>;
+    ingredients: IngredientsSelect<false> | IngredientsSelect<true>;
+    ingredientUnitCategories: IngredientUnitCategoriesSelect<false> | IngredientUnitCategoriesSelect<true>;
+    ingredientUnits: IngredientUnitsSelect<false> | IngredientUnitsSelect<true>;
+    difficultyLevels: DifficultyLevelsSelect<false> | DifficultyLevelsSelect<true>;
+    cookingMethods: CookingMethodsSelect<false> | CookingMethodsSelect<true>;
+    nutrients: NutrientsSelect<false> | NutrientsSelect<true>;
+    dietTypes: DietTypesSelect<false> | DietTypesSelect<true>;
+    roles: RolesSelect<false> | RolesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -124,22 +160,34 @@ export interface Config {
   };
 }
 export interface UserAuthOperations {
-  forgotPassword: {
-    email: string;
-    password: string;
-  };
-  login: {
-    email: string;
-    password: string;
-  };
+  forgotPassword:
+    | {
+        email: string;
+      }
+    | {
+        username: string;
+      };
+  login:
+    | {
+        email: string;
+        password: string;
+      }
+    | {
+        password: string;
+        username: string;
+      };
   registerFirstUser: {
-    email: string;
     password: string;
+    username: string;
+    email?: string;
   };
-  unlock: {
-    email: string;
-    password: string;
-  };
+  unlock:
+    | {
+        email: string;
+      }
+    | {
+        username: string;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -154,7 +202,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: any;
+          type: string;
           version: number;
           [k: string]: unknown;
         }[];
@@ -201,6 +249,8 @@ export interface Page {
     description?: string | null;
   };
   publishedAt?: string | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -219,7 +269,7 @@ export interface Post {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -248,6 +298,8 @@ export interface Post {
         name?: string | null;
       }[]
     | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -265,7 +317,7 @@ export interface Media {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -276,6 +328,8 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -348,35 +402,38 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  parent?: (string | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (string | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: string;
   name?: string | null;
+  profilePicture?: (string | null) | Media;
+  general?: {
+    firstName?: string | null;
+    lastName?: string | null;
+    username?: string | null;
+    birthDate?: string | null;
+  };
+  genders?: {
+    gender?: (string | null) | Gender;
+  };
+  addresses?: {
+    country?: string | null;
+    city?: string | null;
+    district?: string | null;
+    address?: string | null;
+  };
+  phones?: {
+    landline?: string | null;
+    gsm?: string | null;
+  };
+  roles?: (string | null) | Role;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
   updatedAt: string;
   createdAt: string;
-  email: string;
+  email?: string | null;
+  username: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
   salt?: string | null;
@@ -394,6 +451,60 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genders".
+ */
+export interface Gender {
+  id: string;
+  title: string;
+  description?: string | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles".
+ */
+export interface Role {
+  id: string;
+  name: string;
+  description?: string | null;
+  permissions: ('create' | 'read' | 'update' | 'delete')[];
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  title: string;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  parent?: (string | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
@@ -401,7 +512,7 @@ export interface CallToActionBlock {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -452,7 +563,7 @@ export interface ContentBlock {
           root: {
             type: string;
             children: {
-              type: any;
+              type: string;
               version: number;
               [k: string]: unknown;
             }[];
@@ -509,7 +620,7 @@ export interface ArchiveBlock {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -545,7 +656,7 @@ export interface FormBlock {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -602,7 +713,7 @@ export interface Form {
               root: {
                 type: string;
                 children: {
-                  type: any;
+                  type: string;
                   version: number;
                   [k: string]: unknown;
                 }[];
@@ -685,7 +796,7 @@ export interface Form {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -717,7 +828,7 @@ export interface Form {
           root: {
             type: string;
             children: {
-              type: any;
+              type: string;
               version: number;
               [k: string]: unknown;
             }[];
@@ -733,6 +844,896 @@ export interface Form {
     | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipes".
+ */
+export interface Recipe {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  servings: number;
+  prepTime: number;
+  cookTime: number;
+  difficulty: string | DifficultyLevel;
+  cookingMethod: (string | CookingMethod)[];
+  /**
+   * Tarif malzemelerini ekleyin
+   */
+  ingredients: {
+    ingredient: string | Ingredient;
+    amount: number;
+    unit: string | IngredientUnit;
+    notes?: string | null;
+    optional?: boolean | null;
+    id?: string | null;
+  }[];
+  /**
+   * Hazırlama adımlarını sıralayın
+   */
+  instructions: {
+    step: string;
+    tip?: string | null;
+    /**
+     * Adım görseli (opsiyonel)
+     */
+    image?: (string | null) | Media;
+    id?: string | null;
+  }[];
+  servingTips?: string | null;
+  /**
+   * Besin değerlerini ve miktarlarını belirtin
+   */
+  nutritionValues: {
+    nutrient: string | Nutrient;
+    amount: number;
+    unit: 'kcal' | 'g' | 'mg' | 'mcg';
+    id?: string | null;
+  }[];
+  relatedRecipes?: (string | Recipe)[] | null;
+  seasons?: (string | Season)[] | null;
+  dietTypes?: (string | DietType)[] | null;
+  continents?: (string | Continent)[] | null;
+  countries?: (string | Country)[] | null;
+  regions?: (string | Region)[] | null;
+  cities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+        firstName?: string | null;
+        lastName?: string | null;
+        profilePicture?: (string | null) | Media;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "difficultyLevels".
+ */
+export interface DifficultyLevel {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedDifficultyLevels?: (string | DifficultyLevel)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cookingMethods".
+ */
+export interface CookingMethod {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedCookingMethods?: (string | CookingMethod)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredients".
+ */
+export interface Ingredient {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  nutritionFacts?: {
+    /**
+     * Besin değerlerinin hesaplandığı porsiyon boyutu
+     */
+    servingSize?: string | null;
+    /**
+     * Porsiyon başına kalori miktarı
+     */
+    calories?: number | null;
+    protein?: number | null;
+    carbohydrates?: number | null;
+    fat?: number | null;
+    fiber?: number | null;
+    sugar?: number | null;
+    sodium?: number | null;
+  };
+  vitaminsAndMinerals?: {
+    /**
+     * Porsiyon başına Vitamin C miktarı
+     */
+    vitaminC?: number | null;
+    vitaminA?: number | null;
+    vitaminK?: number | null;
+    potassium?: number | null;
+    calcium?: number | null;
+    iron?: number | null;
+    magnesium?: number | null;
+  };
+  relatedIngredients?: (string | Ingredient)[] | null;
+  ingredientCategories?: (string | IngredientCategory)[] | null;
+  seasons?: (string | Season)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredientCategories".
+ */
+export interface IngredientCategory {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedIngredientCategories?: (string | IngredientCategory)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seasons".
+ */
+export interface Season {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedSeasons?: (string | Season)[] | null;
+  months?: (string | Month)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "months".
+ */
+export interface Month {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedMonths?: (string | Month)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredientUnits".
+ */
+export interface IngredientUnit {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedIngredientUnits?: (string | IngredientUnit)[] | null;
+  ingredientUnitCategories?: (string | IngredientUnitCategory)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredientUnitCategories".
+ */
+export interface IngredientUnitCategory {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedIngredientUnitCategories?: (string | IngredientUnitCategory)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nutrients".
+ */
+export interface Nutrient {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedNutrients?: (string | Nutrient)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dietTypes".
+ */
+export interface DietType {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedDietTypes?: (string | DietType)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "continents".
+ */
+export interface Continent {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
+  relatedContinents?: (string | Continent)[] | null;
+  countries?: (string | Country)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
+  relatedCountries?: (string | Country)[] | null;
+  cities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cities".
+ */
+export interface City {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
+  relatedCities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions".
+ */
+export interface Region {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
+  relatedRegions?: (string | Region)[] | null;
+  cities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipeCategories".
+ */
+export interface RecipeCategory {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedRecipeCategories?: (string | RecipeCategory)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -754,6 +1755,10 @@ export interface Redirect {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'recipes';
+          value: string | Recipe;
         } | null);
     url?: string | null;
   };
@@ -787,10 +1792,15 @@ export interface Search {
   id: string;
   title?: string | null;
   priority?: number | null;
-  doc: {
-    relationTo: 'posts';
-    value: string | Post;
-  };
+  doc:
+    | {
+        relationTo: 'posts';
+        value: string | Post;
+      }
+    | {
+        relationTo: 'recipes';
+        value: string | Recipe;
+      };
   slug?: string | null;
   meta?: {
     title?: string | null;
@@ -928,6 +1938,78 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
+        relationTo: 'genders';
+        value: string | Gender;
+      } | null)
+    | ({
+        relationTo: 'recipes';
+        value: string | Recipe;
+      } | null)
+    | ({
+        relationTo: 'recipeCategories';
+        value: string | RecipeCategory;
+      } | null)
+    | ({
+        relationTo: 'continents';
+        value: string | Continent;
+      } | null)
+    | ({
+        relationTo: 'countries';
+        value: string | Country;
+      } | null)
+    | ({
+        relationTo: 'regions';
+        value: string | Region;
+      } | null)
+    | ({
+        relationTo: 'cities';
+        value: string | City;
+      } | null)
+    | ({
+        relationTo: 'seasons';
+        value: string | Season;
+      } | null)
+    | ({
+        relationTo: 'months';
+        value: string | Month;
+      } | null)
+    | ({
+        relationTo: 'ingredientCategories';
+        value: string | IngredientCategory;
+      } | null)
+    | ({
+        relationTo: 'ingredients';
+        value: string | Ingredient;
+      } | null)
+    | ({
+        relationTo: 'ingredientUnitCategories';
+        value: string | IngredientUnitCategory;
+      } | null)
+    | ({
+        relationTo: 'ingredientUnits';
+        value: string | IngredientUnit;
+      } | null)
+    | ({
+        relationTo: 'difficultyLevels';
+        value: string | DifficultyLevel;
+      } | null)
+    | ({
+        relationTo: 'cookingMethods';
+        value: string | CookingMethod;
+      } | null)
+    | ({
+        relationTo: 'nutrients';
+        value: string | Nutrient;
+      } | null)
+    | ({
+        relationTo: 'dietTypes';
+        value: string | DietType;
+      } | null)
+    | ({
+        relationTo: 'roles';
+        value: string | Role;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: string | Redirect;
       } | null)
@@ -1034,6 +2116,8 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1149,6 +2233,8 @@ export interface PostsSelect<T extends boolean = true> {
         id?: T;
         name?: T;
       };
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
@@ -1162,6 +2248,8 @@ export interface PostsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  createdBy?: T;
+  updatedBy?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1254,6 +2342,8 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
+  createdBy?: T;
+  updatedBy?: T;
   slug?: T;
   slugLock?: T;
   parent?: T;
@@ -1274,9 +2364,41 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  profilePicture?: T;
+  general?:
+    | T
+    | {
+        firstName?: T;
+        lastName?: T;
+        username?: T;
+        birthDate?: T;
+      };
+  genders?:
+    | T
+    | {
+        gender?: T;
+      };
+  addresses?:
+    | T
+    | {
+        country?: T;
+        city?: T;
+        district?: T;
+        address?: T;
+      };
+  phones?:
+    | T
+    | {
+        landline?: T;
+        gsm?: T;
+      };
+  roles?: T;
+  createdBy?: T;
+  updatedBy?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
+  username?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
   salt?: T;
@@ -1290,6 +2412,642 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "genders_select".
+ */
+export interface GendersSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipes_select".
+ */
+export interface RecipesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  servings?: T;
+  prepTime?: T;
+  cookTime?: T;
+  difficulty?: T;
+  cookingMethod?: T;
+  ingredients?:
+    | T
+    | {
+        ingredient?: T;
+        amount?: T;
+        unit?: T;
+        notes?: T;
+        optional?: T;
+        id?: T;
+      };
+  instructions?:
+    | T
+    | {
+        step?: T;
+        tip?: T;
+        image?: T;
+        id?: T;
+      };
+  servingTips?: T;
+  nutritionValues?:
+    | T
+    | {
+        nutrient?: T;
+        amount?: T;
+        unit?: T;
+        id?: T;
+      };
+  relatedRecipes?: T;
+  seasons?: T;
+  dietTypes?: T;
+  continents?: T;
+  countries?: T;
+  regions?: T;
+  cities?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+        firstName?: T;
+        lastName?: T;
+        profilePicture?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipeCategories_select".
+ */
+export interface RecipeCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedRecipeCategories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "continents_select".
+ */
+export interface ContinentsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  code?: T;
+  point?: T;
+  relatedContinents?: T;
+  countries?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries_select".
+ */
+export interface CountriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  code?: T;
+  point?: T;
+  relatedCountries?: T;
+  cities?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions_select".
+ */
+export interface RegionsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  code?: T;
+  point?: T;
+  relatedRegions?: T;
+  cities?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cities_select".
+ */
+export interface CitiesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  code?: T;
+  point?: T;
+  relatedCities?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seasons_select".
+ */
+export interface SeasonsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedSeasons?: T;
+  months?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "months_select".
+ */
+export interface MonthsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedMonths?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredientCategories_select".
+ */
+export interface IngredientCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedIngredientCategories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredients_select".
+ */
+export interface IngredientsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  nutritionFacts?:
+    | T
+    | {
+        servingSize?: T;
+        calories?: T;
+        protein?: T;
+        carbohydrates?: T;
+        fat?: T;
+        fiber?: T;
+        sugar?: T;
+        sodium?: T;
+      };
+  vitaminsAndMinerals?:
+    | T
+    | {
+        vitaminC?: T;
+        vitaminA?: T;
+        vitaminK?: T;
+        potassium?: T;
+        calcium?: T;
+        iron?: T;
+        magnesium?: T;
+      };
+  relatedIngredients?: T;
+  ingredientCategories?: T;
+  seasons?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredientUnitCategories_select".
+ */
+export interface IngredientUnitCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedIngredientUnitCategories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ingredientUnits_select".
+ */
+export interface IngredientUnitsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedIngredientUnits?: T;
+  ingredientUnitCategories?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "difficultyLevels_select".
+ */
+export interface DifficultyLevelsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedDifficultyLevels?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cookingMethods_select".
+ */
+export interface CookingMethodsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedCookingMethods?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nutrients_select".
+ */
+export interface NutrientsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedNutrients?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "dietTypes_select".
+ */
+export interface DietTypesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
+  relatedDietTypes?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roles_select".
+ */
+export interface RolesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  permissions?: T;
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1666,6 +3424,70 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'recipes';
+          value: string | Recipe;
+        } | null)
+      | ({
+          relationTo: 'recipeCategories';
+          value: string | RecipeCategory;
+        } | null)
+      | ({
+          relationTo: 'continents';
+          value: string | Continent;
+        } | null)
+      | ({
+          relationTo: 'countries';
+          value: string | Country;
+        } | null)
+      | ({
+          relationTo: 'regions';
+          value: string | Region;
+        } | null)
+      | ({
+          relationTo: 'cities';
+          value: string | City;
+        } | null)
+      | ({
+          relationTo: 'seasons';
+          value: string | Season;
+        } | null)
+      | ({
+          relationTo: 'months';
+          value: string | Month;
+        } | null)
+      | ({
+          relationTo: 'ingredientCategories';
+          value: string | IngredientCategory;
+        } | null)
+      | ({
+          relationTo: 'ingredients';
+          value: string | Ingredient;
+        } | null)
+      | ({
+          relationTo: 'ingredientUnitCategories';
+          value: string | IngredientUnitCategory;
+        } | null)
+      | ({
+          relationTo: 'ingredientUnits';
+          value: string | IngredientUnit;
+        } | null)
+      | ({
+          relationTo: 'difficultyLevels';
+          value: string | DifficultyLevel;
+        } | null)
+      | ({
+          relationTo: 'cookingMethods';
+          value: string | CookingMethod;
+        } | null)
+      | ({
+          relationTo: 'nutrients';
+          value: string | Nutrient;
+        } | null)
+      | ({
+          relationTo: 'dietTypes';
+          value: string | DietType;
         } | null);
     global?: string | null;
     user?: (string | null) | User;
@@ -1682,7 +3504,7 @@ export interface BannerBlock {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
