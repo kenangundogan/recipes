@@ -110,7 +110,6 @@ export const Ingredients: CollectionConfig<'ingredients'> = {
                 },
               }),
               label: false,
-              required: true,
             },
           ],
           label: 'Content',

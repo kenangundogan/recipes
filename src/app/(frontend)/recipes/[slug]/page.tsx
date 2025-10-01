@@ -9,9 +9,11 @@ import type {
   DifficultyLevel,
   DietType,
   Season,
+  Continent,
+  Country,
+  City,
   Region,
   Month,
-  City,
 } from '@/payload-types'
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
@@ -47,7 +49,10 @@ type PopulatedRecipe = Omit<
   | 'difficulty'
   | 'dietTypes'
   | 'seasons'
+  | 'continents'
+  | 'countries'
   | 'regions'
+  | 'cities'
   | 'relatedRecipes'
 > & {
   populatedAuthors?: PopulatedAuthor[] | null
@@ -67,7 +72,10 @@ type PopulatedRecipe = Omit<
   difficulty: DifficultyLevel
   dietTypes: DietType[]
   seasons: (Omit<Season, 'months'> & { months: Month[] })[]
+  continents: Continent[]
+  countries: Country[]
   regions: (Omit<Region, 'cities'> & { cities: City[] })[]
+  cities: City[]
   relatedRecipes: (Recipe & { meta?: { image?: Media | null } })[]
 }
 
@@ -408,6 +416,93 @@ export default async function Recipe({ params: paramsPromise }: Args) {
         </div>
       )}
 
+      {/* Continents */}
+      {typedRecipe.continents && typedRecipe.continents.length > 0 && (
+        <div className="container mb-8 max-w-3xl">
+          <h2 className="text-2xl font-bold mb-4">Kıtalar</h2>
+          <table className="w-full">
+            <tbody>
+              {typedRecipe.continents.map((continent, index) => (
+                <tr
+                  key={continent?.id}
+                  className="*:py-4 *:border-b *:border-gray-200 *:last:border-b-0"
+                >
+                  <td>
+                    <div className="flex gap-4">
+                      <span className="text-gray-500 italic text-xs">{index + 1}.</span>
+                      <div className="flex flex-col leading-tight col-span-2">
+                        <span>{continent?.title}</span>
+                        <span className="text-gray-500 italic text-xs">
+                          {continent?.meta?.description}
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Countries */}
+      {typedRecipe.countries && typedRecipe.countries.length > 0 && (
+        <div className="container mb-8 max-w-3xl">
+          <h2 className="text-2xl font-bold mb-4">Ülkeler</h2>
+          <table className="w-full">
+            <tbody>
+              {typedRecipe.countries.map((country, index) => (
+                <tr
+                  key={country?.id}
+                  className="*:py-4 *:border-b *:border-gray-200 *:last:border-b-0"
+                >
+                  <td>
+                    <div className="flex gap-4">
+                      <span className="text-gray-500 italic text-xs">{index + 1}.</span>
+                      <div className="flex flex-col leading-tight col-span-2">
+                        <span>{country?.title}</span>
+                        <span className="text-gray-500 italic text-xs">
+                          {country?.meta?.description}
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Cities */}
+      {typedRecipe.cities && typedRecipe.cities.length > 0 && (
+        <div className="container mb-8 max-w-3xl">
+          <h2 className="text-2xl font-bold mb-4">Şehirler</h2>
+          <table className="w-full">
+            <tbody>
+              {typedRecipe.cities.map((city, index) => (
+                <tr
+                  key={city?.id}
+                  className="*:py-4 *:border-b *:border-gray-200 *:last:border-b-0"
+                >
+                  <td>
+                    <div className="flex gap-4">
+                      <span className="text-gray-500 italic text-xs">{index + 1}.</span>
+                      <div className="flex flex-col leading-tight col-span-2">
+                        <span>{city?.title}</span>
+                        <span className="text-gray-500 italic text-xs">
+                          {city?.meta?.description}
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
       {/* Regions */}
       {typedRecipe.regions && typedRecipe.regions.length > 0 && (
         <div className="container mb-8 max-w-3xl">
@@ -461,7 +556,7 @@ export default async function Recipe({ params: paramsPromise }: Args) {
                     height={500}
                     className="object-cover"
                   />
-                  <div className="flex flex-col">
+                  <div className="w-fullflex flex-col">
                     <span>{recipe?.title}</span>
                     <span className="text-gray-500 italic text-xs">
                       {recipe?.meta?.description}
