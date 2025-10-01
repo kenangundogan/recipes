@@ -232,6 +232,9 @@ export const seed = async ({
     fetchFileByURL(
       'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-author1.webp',
     ),
+    fetchFileByURL(
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-dummy.webp',
+    ),
   ])
 
   const [
@@ -2424,6 +2427,13 @@ export const seed = async ({
       slug: 'header',
       data: {
         navItems: [
+          {
+            link: {
+              type: 'custom',
+              label: 'Ingredients',
+              url: '/ingredients',
+            },
+          },
           {
             link: {
               type: 'custom',

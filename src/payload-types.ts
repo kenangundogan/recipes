@@ -1048,7 +1048,7 @@ export interface Ingredient {
   title: string;
   description: string;
   heroImage?: (string | null) | Media;
-  content: {
+  content?: {
     root: {
       type: string;
       children: {
@@ -1062,7 +1062,7 @@ export interface Ingredient {
       version: number;
     };
     [k: string]: unknown;
-  };
+  } | null;
   nutritionFacts?: {
     /**
      * Besin değerlerinin hesaplandığı porsiyon boyutu

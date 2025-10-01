@@ -115,8 +115,6 @@ export default async function Recipe({ params: paramsPromise }: Args) {
 
   const typedRecipe = recipe as PopulatedRecipe
 
-  console.log(typedRecipe)
-
   return (
     <article>
       <PageClient />
@@ -558,7 +556,7 @@ export default async function Recipe({ params: paramsPromise }: Args) {
                     height={500}
                     className="object-cover"
                   />
-                  <div className="flex flex-col">
+                  <div className="w-fullflex flex-col">
                     <span>{recipe?.title}</span>
                     <span className="text-gray-500 italic text-xs">
                       {recipe?.meta?.description}
