@@ -107,6 +107,7 @@ import { imageRecipe1 } from './imageRecipe1'
 import { imageRecipe2 } from './imageRecipe2'
 import { imageRecipe3 } from './imageRecipe3'
 import { imageAuthor1 } from './imageAuthor1'
+import { imageDummy } from './imageDummy'
 import { genders as gendersData } from './genders'
 import { roles as rolesData } from './roles'
 
@@ -207,6 +208,7 @@ export const seed = async ({
     imageRecipe2Buffer,
     imageRecipe3Buffer,
     imageAuthor1Buffer,
+    imageDummyBuffer,
   ] = await Promise.all([
     fetchFileByURL(
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
@@ -221,19 +223,19 @@ export const seed = async ({
       'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp',
     ),
     fetchFileByURL(
-      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-recipe1.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-recipe1.webp',
     ),
     fetchFileByURL(
-      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-recipe2.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-recipe2.webp',
     ),
     fetchFileByURL(
-      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-recipe3.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-recipe3.webp',
     ),
     fetchFileByURL(
-      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-author1.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-author1.webp',
     ),
     fetchFileByURL(
-      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/dev/src/endpoints/seed/image-dummy.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-dummy.webp',
     ),
   ])
 
@@ -246,6 +248,7 @@ export const seed = async ({
     imageRecipe1Doc,
     imageRecipe2Doc,
     imageRecipe3Doc,
+    imageAuthor1Doc,
   ] = await Promise.all([
     payload.create({
       collection: 'users',
@@ -310,6 +313,11 @@ export const seed = async ({
       collection: 'media',
       data: imageAuthor1,
       file: imageAuthor1Buffer,
+    }),
+    payload.create({
+      collection: 'media',
+      data: imageDummy,
+      file: imageDummyBuffer,
     }),
     payload.create({
       collection: 'categories',
@@ -2393,16 +2401,17 @@ export const seed = async ({
   // Admin rolünü bul
   const adminRole = createdRoles.find((role) => role.slug === 'admin')
 
-  // Demo kullanıcısına admin rolü ata
+  // Demo kullanıcısına admin rolü ve profil resmi ata
   if (adminRole && demoAuthor) {
     await payload.update({
       collection: 'users',
       id: demoAuthor.id,
       data: {
         roles: adminRole.id,
+        profilePicture: imageAuthor1Doc.id,
       },
     })
-    payload.logger.info(`— Demo user updated with admin role`)
+    payload.logger.info(`— Demo user updated with admin role and profile picture`)
   }
 
   payload.logger.info(`— Seeding pages...`)

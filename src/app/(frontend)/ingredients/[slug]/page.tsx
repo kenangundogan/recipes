@@ -182,13 +182,15 @@ export default async function Ingredient({ params: paramsPromise }: Args) {
       </div>
 
       {/* Content */}
-      <div className="container mb-8 max-w-3xl">
-        <RichText
-          className="max-w-[48rem] mx-auto"
-          data={typedIngredient.content}
-          enableGutter={false}
-        />
-      </div>
+      {typedIngredient.content && (
+        <div className="container mb-8 max-w-3xl">
+          <RichText
+            className="max-w-[48rem] mx-auto"
+            data={typedIngredient.content}
+            enableGutter={false}
+          />
+        </div>
+      )}
 
       {/* Nutrition Facts */}
       {typedIngredient.nutritionFacts && (
