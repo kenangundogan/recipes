@@ -211,16 +211,16 @@ export const seed = async ({
     imageDummyBuffer,
   ] = await Promise.all([
     fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post1.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-post1.webp',
     ),
     fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post2.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-post2.webp',
     ),
     fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-post3.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-post3.webp',
     ),
     fetchFileByURL(
-      'https://raw.githubusercontent.com/payloadcms/payload/refs/heads/main/templates/website/src/endpoints/seed/image-hero1.webp',
+      'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-hero1.webp',
     ),
     fetchFileByURL(
       'https://raw.githubusercontent.com/kenangundogan/recipes/refs/heads/main/src/endpoints/seed/image-recipe1.webp',
