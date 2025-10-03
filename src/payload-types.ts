@@ -1543,12 +1543,55 @@ export interface Country {
     };
     [k: string]: unknown;
   };
-  code?: string | null;
   /**
-   * @minItems 2
-   * @maxItems 2
+   * 2 harfli ISO ülke kodu
    */
-  point?: [number, number] | null;
+  iso2Code?: string | null;
+  /**
+   * 3 harfli ISO ülke kodu
+   */
+  iso3Code?: string | null;
+  /**
+   * Başkent şehri
+   */
+  capitalCity?: string | null;
+  coordinates?: {
+    /**
+     * Boylam
+     */
+    longitude?: string | null;
+    /**
+     * Enlem
+     */
+    latitude?: string | null;
+    /**
+     * Harita üzerinde konum
+     *
+     * @minItems 2
+     * @maxItems 2
+     */
+    point?: [number, number] | null;
+  };
+  region?: {
+    id?: string | null;
+    iso2code?: string | null;
+    value?: string | null;
+  };
+  adminregion?: {
+    id?: string | null;
+    iso2code?: string | null;
+    value?: string | null;
+  };
+  incomeLevel?: {
+    id?: string | null;
+    iso2code?: string | null;
+    value?: string | null;
+  };
+  lendingType?: {
+    id?: string | null;
+    iso2code?: string | null;
+    value?: string | null;
+  };
   relatedCountries?: (string | Country)[] | null;
   cities?: (string | City)[] | null;
   meta?: {
@@ -2579,8 +2622,44 @@ export interface CountriesSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
-  code?: T;
-  point?: T;
+  iso2Code?: T;
+  iso3Code?: T;
+  capitalCity?: T;
+  coordinates?:
+    | T
+    | {
+        longitude?: T;
+        latitude?: T;
+        point?: T;
+      };
+  region?:
+    | T
+    | {
+        id?: T;
+        iso2code?: T;
+        value?: T;
+      };
+  adminregion?:
+    | T
+    | {
+        id?: T;
+        iso2code?: T;
+        value?: T;
+      };
+  incomeLevel?:
+    | T
+    | {
+        id?: T;
+        iso2code?: T;
+        value?: T;
+      };
+  lendingType?:
+    | T
+    | {
+        id?: T;
+        iso2code?: T;
+        value?: T;
+      };
   relatedCountries?: T;
   cities?: T;
   meta?:
