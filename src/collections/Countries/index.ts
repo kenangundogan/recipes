@@ -184,7 +184,7 @@ export const Countries: CollectionConfig<'countries'> = {
               label: 'Region',
               fields: [
                 {
-                  name: 'id',
+                  name: 'code',
                   type: 'text',
                   admin: {
                     placeholder: 'Örn. ECS',
@@ -212,7 +212,7 @@ export const Countries: CollectionConfig<'countries'> = {
               label: 'Administrative Region',
               fields: [
                 {
-                  name: 'id',
+                  name: 'code',
                   type: 'text',
                   admin: {
                     placeholder: 'Örn. ECA',
@@ -240,7 +240,7 @@ export const Countries: CollectionConfig<'countries'> = {
               label: 'Income Level',
               fields: [
                 {
-                  name: 'id',
+                  name: 'code',
                   type: 'text',
                   admin: {
                     placeholder: 'Örn. UMC',
@@ -268,7 +268,7 @@ export const Countries: CollectionConfig<'countries'> = {
               label: 'Lending Type',
               fields: [
                 {
-                  name: 'id',
+                  name: 'code',
                   type: 'text',
                   admin: {
                     placeholder: 'Örn. IBD',
