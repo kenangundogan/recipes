@@ -11,7 +11,7 @@ export const searchFields: Field[] = [
   },
   {
     name: 'meta',
-    label: 'Meta',
+    label: 'Relations',
     type: 'group',
     index: true,
     admin: {

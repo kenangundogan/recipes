@@ -139,7 +139,7 @@ export const Regions: CollectionConfig<'regions'> = {
           ],
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedRegions',

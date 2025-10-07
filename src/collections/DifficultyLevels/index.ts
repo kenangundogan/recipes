@@ -114,7 +114,7 @@ export const DifficultyLevels: CollectionConfig<'difficultyLevels'> = {
           label: 'Content',
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedDifficultyLevels',

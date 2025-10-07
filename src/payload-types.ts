@@ -1191,8 +1191,23 @@ export interface Season {
     };
     [k: string]: unknown;
   };
+  hemisphere_north: {
+    /**
+     * Bu mevsimin Kuzey Yarım Küre'deki aylarını seçin
+     */
+    months: (string | Month)[];
+    start_date?: string | null;
+    end_date?: string | null;
+  };
+  hemisphere_south: {
+    /**
+     * Bu mevsimin Güney Yarım Küre'deki aylarını seçin
+     */
+    months: (string | Month)[];
+    start_date?: string | null;
+    end_date?: string | null;
+  };
   relatedSeasons?: (string | Season)[] | null;
-  months?: (string | Month)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1203,12 +1218,6 @@ export interface Season {
   };
   publishedAt?: string | null;
   authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
   createdBy?: (string | null) | User;
   updatedBy?: (string | null) | User;
   slug?: string | null;
@@ -1241,6 +1250,10 @@ export interface Month {
     };
     [k: string]: unknown;
   };
+  /**
+   * Ayın yıl içindeki sırası (1=Ocak, 2=Şubat, ..., 12=Aralık)
+   */
+  monthOrder: number;
   relatedMonths?: (string | Month)[] | null;
   meta?: {
     title?: string | null;
@@ -1252,12 +1265,6 @@ export interface Month {
   };
   publishedAt?: string | null;
   authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
   createdBy?: (string | null) | User;
   updatedBy?: (string | null) | User;
   slug?: string | null;
@@ -1573,22 +1580,22 @@ export interface Country {
     point?: [number, number] | null;
   };
   region?: {
-    id?: string | null;
+    code?: string | null;
     iso2code?: string | null;
     value?: string | null;
   };
   adminregion?: {
-    id?: string | null;
+    code?: string | null;
     iso2code?: string | null;
     value?: string | null;
   };
   incomeLevel?: {
-    id?: string | null;
+    code?: string | null;
     iso2code?: string | null;
     value?: string | null;
   };
   lendingType?: {
-    id?: string | null;
+    code?: string | null;
     iso2code?: string | null;
     value?: string | null;
   };
@@ -2635,28 +2642,28 @@ export interface CountriesSelect<T extends boolean = true> {
   region?:
     | T
     | {
-        id?: T;
+        code?: T;
         iso2code?: T;
         value?: T;
       };
   adminregion?:
     | T
     | {
-        id?: T;
+        code?: T;
         iso2code?: T;
         value?: T;
       };
   incomeLevel?:
     | T
     | {
-        id?: T;
+        code?: T;
         iso2code?: T;
         value?: T;
       };
   lendingType?:
     | T
     | {
-        id?: T;
+        code?: T;
         iso2code?: T;
         value?: T;
       };
@@ -2765,8 +2772,21 @@ export interface SeasonsSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
+  hemisphere_north?:
+    | T
+    | {
+        months?: T;
+        start_date?: T;
+        end_date?: T;
+      };
+  hemisphere_south?:
+    | T
+    | {
+        months?: T;
+        start_date?: T;
+        end_date?: T;
+      };
   relatedSeasons?: T;
-  months?: T;
   meta?:
     | T
     | {
@@ -2776,12 +2796,6 @@ export interface SeasonsSelect<T extends boolean = true> {
       };
   publishedAt?: T;
   authors?: T;
-  populatedAuthors?:
-    | T
-    | {
-        id?: T;
-        name?: T;
-      };
   createdBy?: T;
   updatedBy?: T;
   slug?: T;
@@ -2799,6 +2813,7 @@ export interface MonthsSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
+  monthOrder?: T;
   relatedMonths?: T;
   meta?:
     | T
@@ -2809,12 +2824,6 @@ export interface MonthsSelect<T extends boolean = true> {
       };
   publishedAt?: T;
   authors?: T;
-  populatedAuthors?:
-    | T
-    | {
-        id?: T;
-        name?: T;
-      };
   createdBy?: T;
   updatedBy?: T;
   slug?: T;
