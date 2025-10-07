@@ -126,7 +126,7 @@ export const Seasons: CollectionConfig<'seasons'> = {
                   relationTo: 'months',
                   label: 'Aylar',
                   hasMany: true,
-                  required: true,
+                  required: false,
                   admin: {
                     description: "Bu mevsimin Kuzey Yarım Küre'deki aylarını seçin",
                   },
@@ -160,7 +160,7 @@ export const Seasons: CollectionConfig<'seasons'> = {
                   relationTo: 'months',
                   label: 'Aylar',
                   hasMany: true,
-                  required: true,
+                  required: false,
                   admin: {
                     description: "Bu mevsimin Güney Yarım Küre'deki aylarını seçin",
                   },

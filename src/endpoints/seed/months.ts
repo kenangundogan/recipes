@@ -15,6 +15,7 @@ export const januaryMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<'
     _status: 'published',
     title: 'Ocak',
     description: 'Yılın ilk ayı, kış mevsiminin ortası ve yeni başlangıçların simgesi.',
+    monthOrder: 1,
     authors: [author],
     content: {
       root: {
@@ -160,6 +161,7 @@ export const februaryMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<
     _status: 'published',
     title: 'Şubat',
     description: 'Kış mevsiminin son ayı, sevgililer günü ve bahara geçiş dönemi.',
+    monthOrder: 2,
     authors: [author],
     content: {
       root: {
@@ -267,6 +269,7 @@ export const marchMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<'mo
     _status: 'published',
     title: 'Mart',
     description: 'Bahar mevsiminin başlangıcı, doğanın uyanışı ve yeniden doğum ayı.',
+    monthOrder: 3,
     authors: [author],
     content: {
       root: {
@@ -374,6 +377,7 @@ export const aprilMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<'mo
     _status: 'published',
     title: 'Nisan',
     description: 'Bahar mevsiminin tam ortası, çiçek açma zamanı ve yaşamın patlama ayı.',
+    monthOrder: 4,
     authors: [author],
     content: {
       root: {
@@ -481,6 +485,7 @@ export const mayMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<'mont
     _status: 'published',
     title: 'Mayıs',
     description: 'Bahar mevsiminin son ayı, işçi bayramı ve yazın müjdecisi.',
+    monthOrder: 5,
     authors: [author],
     content: {
       root: {
@@ -588,6 +593,7 @@ export const juneMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<'mon
     _status: 'published',
     title: 'Haziran',
     description: 'Yaz mevsiminin başlangıcı, en uzun gün ve tatil zamanının müjdecisi.',
+    monthOrder: 6,
     authors: [author],
     content: {
       root: {
@@ -695,6 +701,7 @@ export const julyMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<'mon
     _status: 'published',
     title: 'Temmuz',
     description: 'Yaz mevsiminin ortası, en sıcak günler ve tatil zamanının zirvesi.',
+    monthOrder: 7,
     authors: [author],
     content: {
       root: {
@@ -802,6 +809,7 @@ export const augustMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<'m
     _status: 'published',
     title: 'Ağustos',
     description: 'Yazın son ayı, hasat zamanı ve okula dönüş hazırlıkları.',
+    monthOrder: 8,
     authors: [author],
     content: {
       root: {
@@ -909,6 +917,7 @@ export const septemberMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug
     _status: 'published',
     title: 'Eylül',
     description: 'Sonbaharın başlangıcı, okul açılışları ve mevsim geçişi.',
+    monthOrder: 9,
     authors: [author],
     content: {
       root: {
@@ -1016,6 +1025,7 @@ export const octoberMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<'
     _status: 'published',
     title: 'Ekim',
     description: 'Sonbaharın tam ortası, renk değişimi ve Cumhuriyet Bayramı.',
+    monthOrder: 10,
     authors: [author],
     content: {
       root: {
@@ -1123,6 +1133,7 @@ export const novemberMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<
     _status: 'published',
     title: 'Kasım',
     description: "Sonbaharın son ayı, kışa geçiş ve Atatürk'ü Anma Günü.",
+    monthOrder: 11,
     authors: [author],
     content: {
       root: {
@@ -1230,6 +1241,7 @@ export const decemberMonth: (args: MonthArgs) => RequiredDataFromCollectionSlug<
     _status: 'published',
     title: 'Aralık',
     description: 'Yılın son ayı, kış gün dönümü ve yeni yıl hazırlıkları.',
+    monthOrder: 12,
     authors: [author],
     content: {
       root: {
