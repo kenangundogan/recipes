@@ -139,7 +139,7 @@ export const Continents: CollectionConfig<'continents'> = {
           ],
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedContinents',

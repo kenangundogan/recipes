@@ -15,9 +15,6 @@ import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidateSeason } from './hooks/revalidateSeason'
-
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -38,7 +35,8 @@ export const Seasons: CollectionConfig<'seasons'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    months: true,
+    hemisphere_north: true,
+    hemisphere_south: true,
     meta: {
       image: true,
       description: true,
@@ -46,7 +44,7 @@ export const Seasons: CollectionConfig<'seasons'> = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    group: 'Geography Management',
+    group: 'Time & Calendar',
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
@@ -72,7 +70,7 @@ export const Seasons: CollectionConfig<'seasons'> = {
       type: 'text',
       required: true,
       admin: {
-        placeholder: 'Örn. Yaz',
+        placeholder: 'Örn. İlkbahar',
       },
     },
     {
@@ -80,7 +78,7 @@ export const Seasons: CollectionConfig<'seasons'> = {
       type: 'textarea',
       required: true,
       admin: {
-        placeholder: 'Örn. Yaz',
+        placeholder: 'Örn. Doğanın uyanış mevsimi',
       },
     },
     {
@@ -115,11 +113,85 @@ export const Seasons: CollectionConfig<'seasons'> = {
           label: 'Content',
         },
         {
-          label: 'Meta',
+          label: 'Hemisphere Info',
+          fields: [
+            {
+              name: 'hemisphere_north',
+              type: 'group',
+              label: 'Kuzey Yarım Küre',
+              fields: [
+                {
+                  name: 'months',
+                  type: 'relationship',
+                  relationTo: 'months',
+                  label: 'Aylar',
+                  hasMany: true,
+                  required: true,
+                  admin: {
+                    description: "Bu mevsimin Kuzey Yarım Küre'deki aylarını seçin",
+                  },
+                },
+                {
+                  name: 'start_date',
+                  type: 'text',
+                  label: 'Başlangıç Tarihi',
+                  admin: {
+                    placeholder: 'Örn. 21 Mart',
+                  },
+                },
+                {
+                  name: 'end_date',
+                  type: 'text',
+                  label: 'Bitiş Tarihi',
+                  admin: {
+                    placeholder: 'Örn. 21 Haziran',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'hemisphere_south',
+              type: 'group',
+              label: 'Güney Yarım Küre',
+              fields: [
+                {
+                  name: 'months',
+                  type: 'relationship',
+                  relationTo: 'months',
+                  label: 'Aylar',
+                  hasMany: true,
+                  required: true,
+                  admin: {
+                    description: "Bu mevsimin Güney Yarım Küre'deki aylarını seçin",
+                  },
+                },
+                {
+                  name: 'start_date',
+                  type: 'text',
+                  label: 'Başlangıç Tarihi',
+                  admin: {
+                    placeholder: 'Örn. 23 Eylül',
+                  },
+                },
+                {
+                  name: 'end_date',
+                  type: 'text',
+                  label: 'Bitiş Tarihi',
+                  admin: {
+                    placeholder: 'Örn. 21 Aralık',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Relations',
           fields: [
             {
               name: 'relatedSeasons',
               type: 'relationship',
+              label: 'İlişkili Mevsimler',
               admin: {
                 position: 'sidebar',
               },
@@ -132,15 +204,6 @@ export const Seasons: CollectionConfig<'seasons'> = {
               },
               hasMany: true,
               relationTo: 'seasons',
-            },
-            {
-              name: 'months',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              hasMany: true,
-              relationTo: 'months',
             },
           ],
         },
@@ -162,10 +225,7 @@ export const Seasons: CollectionConfig<'seasons'> = {
 
             MetaDescriptionField({}),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -201,30 +261,6 @@ export const Seasons: CollectionConfig<'seasons'> = {
       },
       hasMany: true,
       relationTo: 'users',
-    },
-    // This field is only used to populate the user data via the `populateAuthors` hook
-    // This is because the `user` collection has access control locked to protect user privacy
-    // GraphQL will also not return mutated user data that differs from the underlying schema
-    {
-      name: 'populatedAuthors',
-      type: 'array',
-      access: {
-        update: () => false,
-      },
-      admin: {
-        disabled: true,
-        readOnly: true,
-      },
-      fields: [
-        {
-          name: 'id',
-          type: 'text',
-        },
-        {
-          name: 'name',
-          type: 'text',
-        },
-      ],
     },
     {
       name: 'createdBy',
@@ -265,15 +301,10 @@ export const Seasons: CollectionConfig<'seasons'> = {
     },
     ...slugField(),
   ],
-  hooks: {
-    afterChange: [revalidateSeason],
-    afterRead: [populateAuthors],
-    afterDelete: [revalidateDelete],
-  },
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 100,
       },
       schedulePublish: true,
     },

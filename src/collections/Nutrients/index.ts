@@ -115,7 +115,7 @@ export const Nutrients: CollectionConfig<'nutrients'> = {
           label: 'Content',
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedNutrients',

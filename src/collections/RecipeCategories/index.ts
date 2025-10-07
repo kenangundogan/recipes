@@ -115,7 +115,7 @@ export const RecipeCategories: CollectionConfig<'recipeCategories'> = {
           label: 'Content',
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedRecipeCategories',

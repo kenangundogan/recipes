@@ -138,7 +138,7 @@ export const Cities: CollectionConfig<'cities'> = {
           ],
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedCities',

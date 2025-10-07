@@ -115,7 +115,7 @@ export const DietTypes: CollectionConfig<'dietTypes'> = {
           label: 'Content',
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedDietTypes',

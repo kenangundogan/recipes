@@ -375,7 +375,7 @@ export const Recipes: CollectionConfig<'recipes'> = {
           ],
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedRecipes',

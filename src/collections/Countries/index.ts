@@ -293,7 +293,7 @@ export const Countries: CollectionConfig<'countries'> = {
           ],
         },
         {
-          label: 'Meta',
+          label: 'Relations',
           fields: [
             {
               name: 'relatedCountries',

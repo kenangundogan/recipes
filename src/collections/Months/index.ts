@@ -15,8 +15,6 @@ import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
-import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidateMonth } from './hooks/revalidateMonth'
 
 import {
   MetaDescriptionField,
@@ -38,7 +36,6 @@ export const Months: CollectionConfig<'months'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    relatedMonths: true,
     meta: {
       image: true,
       description: true,
@@ -46,7 +43,7 @@ export const Months: CollectionConfig<'months'> = {
   },
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    group: 'Geography Management',
+    group: 'Time & Calendar',
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
@@ -80,7 +77,7 @@ export const Months: CollectionConfig<'months'> = {
       type: 'textarea',
       required: true,
       admin: {
-        placeholder: 'Örn. Ocak',
+        placeholder: 'Örn. Yılın ilk ayı',
       },
     },
     {
@@ -115,11 +112,29 @@ export const Months: CollectionConfig<'months'> = {
           label: 'Content',
         },
         {
-          label: 'Meta',
+          label: 'Month Info',
+          fields: [
+            {
+              name: 'monthOrder',
+              type: 'number',
+              label: 'Ay Sırası',
+              required: true,
+              admin: {
+                description: 'Ayın yıl içindeki sırası (1=Ocak, 2=Şubat, ..., 12=Aralık)',
+                placeholder: 'Örn. 1',
+              },
+              min: 1,
+              max: 12,
+            },
+          ],
+        },
+        {
+          label: 'Relations',
           fields: [
             {
               name: 'relatedMonths',
               type: 'relationship',
+              label: 'İlişkili Aylar',
               admin: {
                 position: 'sidebar',
               },
@@ -153,10 +168,7 @@ export const Months: CollectionConfig<'months'> = {
 
             MetaDescriptionField({}),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -192,30 +204,6 @@ export const Months: CollectionConfig<'months'> = {
       },
       hasMany: true,
       relationTo: 'users',
-    },
-    // This field is only used to populate the user data via the `populateAuthors` hook
-    // This is because the `user` collection has access control locked to protect user privacy
-    // GraphQL will also not return mutated user data that differs from the underlying schema
-    {
-      name: 'populatedAuthors',
-      type: 'array',
-      access: {
-        update: () => false,
-      },
-      admin: {
-        disabled: true,
-        readOnly: true,
-      },
-      fields: [
-        {
-          name: 'id',
-          type: 'text',
-        },
-        {
-          name: 'name',
-          type: 'text',
-        },
-      ],
     },
     {
       name: 'createdBy',
@@ -256,15 +244,10 @@ export const Months: CollectionConfig<'months'> = {
     },
     ...slugField(),
   ],
-  hooks: {
-    afterChange: [revalidateMonth],
-    afterRead: [populateAuthors],
-    afterDelete: [revalidateDelete],
-  },
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 100,
       },
       schedulePublish: true,
     },
