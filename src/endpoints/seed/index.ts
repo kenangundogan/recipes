@@ -926,7 +926,12 @@ export const seed = async ({
     collection: 'seasons',
     data: {
       relatedSeasons: [summerDoc.id, autumnDoc.id, winterDoc.id],
-      months: [marchDoc.id, aprilDoc.id, mayDoc.id],
+      hemisphere_north: {
+        months: [marchDoc.id, aprilDoc.id, mayDoc.id],
+      },
+      hemisphere_south: {
+        months: [septemberDoc.id, octoberDoc.id, novemberDoc.id],
+      },
     },
   })
   await payload.update({
@@ -934,7 +939,12 @@ export const seed = async ({
     collection: 'seasons',
     data: {
       relatedSeasons: [springDoc.id, autumnDoc.id, winterDoc.id],
-      months: [juneDoc.id, julyDoc.id, augustDoc.id],
+      hemisphere_north: {
+        months: [juneDoc.id, julyDoc.id, augustDoc.id],
+      },
+      hemisphere_south: {
+        months: [decemberDoc.id, januaryDoc.id, februaryDoc.id],
+      },
     },
   })
   await payload.update({
@@ -942,7 +952,12 @@ export const seed = async ({
     collection: 'seasons',
     data: {
       relatedSeasons: [springDoc.id, summerDoc.id, winterDoc.id],
-      months: [septemberDoc.id, octoberDoc.id, novemberDoc.id],
+      hemisphere_north: {
+        months: [septemberDoc.id, octoberDoc.id, novemberDoc.id],
+      },
+      hemisphere_south: {
+        months: [marchDoc.id, aprilDoc.id, mayDoc.id],
+      },
     },
   })
   await payload.update({
@@ -950,7 +965,12 @@ export const seed = async ({
     collection: 'seasons',
     data: {
       relatedSeasons: [springDoc.id, summerDoc.id, autumnDoc.id],
-      months: [decemberDoc.id, januaryDoc.id, februaryDoc.id],
+      hemisphere_north: {
+        months: [decemberDoc.id, januaryDoc.id, februaryDoc.id],
+      },
+      hemisphere_south: {
+        months: [juneDoc.id, julyDoc.id, augustDoc.id],
+      },
     },
   })
 

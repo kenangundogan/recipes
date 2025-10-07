@@ -185,8 +185,17 @@ export const springSeason: (args: SeasonArgs) => RequiredDataFromCollectionSlug<
       image: heroImage.id,
       title: 'İlkbahar - Yenilenme ve Umudun Mevsimi',
     },
+    hemisphere_north: {
+      months: [], // Bu seed script tarafından doldurulacak
+      start_date: '21 Mart',
+      end_date: '21 Haziran',
+    },
+    hemisphere_south: {
+      months: [], // Bu seed script tarafından doldurulacak
+      start_date: '23 Eylül',
+      end_date: '21 Aralık',
+    },
     relatedSeasons: [], // Bu seed script tarafından doldurulacak
-    months: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -369,8 +378,17 @@ export const summerSeason: (args: SeasonArgs) => RequiredDataFromCollectionSlug<
       image: heroImage.id,
       title: 'Yaz - Güneş ve Enerjinin Mevsimi',
     },
+    hemisphere_north: {
+      months: [], // Bu seed script tarafından doldurulacak
+      start_date: '21 Haziran',
+      end_date: '23 Eylül',
+    },
+    hemisphere_south: {
+      months: [], // Bu seed script tarafından doldurulacak
+      start_date: '21 Aralık',
+      end_date: '21 Mart',
+    },
     relatedSeasons: [], // Bu seed script tarafından doldurulacak
-    months: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -553,8 +571,17 @@ export const autumnSeason: (args: SeasonArgs) => RequiredDataFromCollectionSlug<
       image: heroImage.id,
       title: 'Sonbahar - Hasat ve Değişimin Mevsimi',
     },
+    hemisphere_north: {
+      months: [], // Bu seed script tarafından doldurulacak
+      start_date: '23 Eylül',
+      end_date: '21 Aralık',
+    },
+    hemisphere_south: {
+      months: [], // Bu seed script tarafından doldurulacak
+      start_date: '21 Mart',
+      end_date: '21 Haziran',
+    },
     relatedSeasons: [], // Bu seed script tarafından doldurulacak
-    months: [], // Bu seed script tarafından doldurulacak
   }
 }
 
@@ -737,7 +764,16 @@ export const winterSeason: (args: SeasonArgs) => RequiredDataFromCollectionSlug<
       image: heroImage.id,
       title: 'Kış - Sessizlik ve Dinginliğin Mevsimi',
     },
+    hemisphere_north: {
+      months: [], // Bu seed script tarafından doldurulacak
+      start_date: '21 Aralık',
+      end_date: '21 Mart',
+    },
+    hemisphere_south: {
+      months: [], // Bu seed script tarafından doldurulacak
+      start_date: '21 Haziran',
+      end_date: '23 Eylül',
+    },
     relatedSeasons: [], // Bu seed script tarafından doldurulacak
-    months: [], // Bu seed script tarafından doldurulacak
   }
 }
