@@ -13,8 +13,8 @@ export const Users: CollectionConfig = {
   },
   admin: {
     group: 'User Management',
-    defaultColumns: ['name', 'email'],
-    useAsTitle: 'name',
+    defaultColumns: ['email', 'general.firstName', 'general.lastName'],
+    useAsTitle: 'email',
   },
   auth: {
     loginWithUsername: {
@@ -27,10 +27,6 @@ export const Users: CollectionConfig = {
   },
   timestamps: true,
   fields: [
-    {
-      name: 'name',
-      type: 'text',
-    },
     {
       name: 'profilePicture',
       type: 'upload',

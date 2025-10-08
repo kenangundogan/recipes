@@ -31,7 +31,7 @@ export const populateAuthors: CollectionAfterReadHook = async ({
           for (const authorDoc of authorDocs) {
             populatedAuthors.push({
               id: authorDoc.id,
-              name: authorDoc.name,
+              name: authorDoc.username,
               firstName: authorDoc.general?.firstName || '',
               lastName: authorDoc.general?.lastName || '',
               profilePicture: authorDoc.profilePicture,

@@ -406,7 +406,6 @@ export interface Media {
  */
 export interface User {
   id: string;
-  name?: string | null;
   profilePicture?: (string | null) | Media;
   general?: {
     firstName?: string | null;
@@ -2412,7 +2411,6 @@ export interface CategoriesSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T;
   profilePicture?: T;
   general?:
     | T
