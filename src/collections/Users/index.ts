@@ -63,14 +63,6 @@ export const Users: CollectionConfig = {
               },
             },
             {
-              name: 'username',
-              type: 'text',
-              label: 'Username',
-              admin: {
-                placeholder: 'Örn. kenangundogan',
-              },
-            },
-            {
               name: 'birthDate',
               type: 'date',
               label: 'Birth Date',
