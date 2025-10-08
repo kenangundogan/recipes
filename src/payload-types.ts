@@ -411,7 +411,6 @@ export interface User {
   general?: {
     firstName?: string | null;
     lastName?: string | null;
-    username?: string | null;
     birthDate?: string | null;
   };
   genders?: {
@@ -2420,7 +2419,6 @@ export interface UsersSelect<T extends boolean = true> {
     | {
         firstName?: T;
         lastName?: T;
-        username?: T;
         birthDate?: T;
       };
   genders?:
