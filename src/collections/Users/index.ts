@@ -101,19 +101,15 @@ export const Users: CollectionConfig = {
           fields: [
             {
               name: 'country',
-              type: 'text',
+              type: 'relationship',
               label: 'Country',
-              admin: {
-                placeholder: 'Örn. Türkiye',
-              },
+              relationTo: 'countries',
             },
             {
               name: 'city',
-              type: 'text',
+              type: 'relationship',
               label: 'City',
-              admin: {
-                placeholder: 'Örn. İstanbul',
-              },
+              relationTo: 'cities',
             },
             {
               name: 'district',

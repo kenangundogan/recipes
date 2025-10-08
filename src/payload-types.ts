@@ -418,8 +418,8 @@ export interface User {
     gender?: (string | null) | Gender;
   };
   addresses?: {
-    country?: string | null;
-    city?: string | null;
+    country?: (string | null) | Country;
+    city?: (string | null) | City;
     district?: string | null;
     address?: string | null;
   };
@@ -463,6 +463,160 @@ export interface Gender {
   slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "countries".
+ */
+export interface Country {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * 2 harfli ISO ülke kodu
+   */
+  iso2Code?: string | null;
+  /**
+   * 3 harfli ISO ülke kodu
+   */
+  iso3Code?: string | null;
+  /**
+   * Başkent şehri
+   */
+  capitalCity?: string | null;
+  coordinates?: {
+    /**
+     * Boylam
+     */
+    longitude?: string | null;
+    /**
+     * Enlem
+     */
+    latitude?: string | null;
+    /**
+     * Harita üzerinde konum
+     *
+     * @minItems 2
+     * @maxItems 2
+     */
+    point?: [number, number] | null;
+  };
+  region?: {
+    code?: string | null;
+    iso2code?: string | null;
+    value?: string | null;
+  };
+  adminregion?: {
+    code?: string | null;
+    iso2code?: string | null;
+    value?: string | null;
+  };
+  incomeLevel?: {
+    code?: string | null;
+    iso2code?: string | null;
+    value?: string | null;
+  };
+  lendingType?: {
+    code?: string | null;
+    iso2code?: string | null;
+    value?: string | null;
+  };
+  relatedCountries?: (string | Country)[] | null;
+  cities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cities".
+ */
+export interface City {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  code?: string | null;
+  /**
+   * @minItems 2
+   * @maxItems 2
+   */
+  point?: [number, number] | null;
+  relatedCities?: (string | City)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1191,19 +1345,19 @@ export interface Season {
     };
     [k: string]: unknown;
   };
-  hemisphere_north: {
+  hemisphere_north?: {
     /**
      * Bu mevsimin Kuzey Yarım Küre'deki aylarını seçin
      */
-    months: (string | Month)[];
+    months?: (string | Month)[] | null;
     start_date?: string | null;
     end_date?: string | null;
   };
-  hemisphere_south: {
+  hemisphere_south?: {
     /**
      * Bu mevsimin Güney Yarım Küre'deki aylarını seçin
      */
-    months: (string | Month)[];
+    months?: (string | Month)[] | null;
     start_date?: string | null;
     end_date?: string | null;
   };
@@ -1502,160 +1656,6 @@ export interface Continent {
   point?: [number, number] | null;
   relatedContinents?: (string | Continent)[] | null;
   countries?: (string | Country)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  createdBy?: (string | null) | User;
-  updatedBy?: (string | null) | User;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "countries".
- */
-export interface Country {
-  id: string;
-  title: string;
-  description: string;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  /**
-   * 2 harfli ISO ülke kodu
-   */
-  iso2Code?: string | null;
-  /**
-   * 3 harfli ISO ülke kodu
-   */
-  iso3Code?: string | null;
-  /**
-   * Başkent şehri
-   */
-  capitalCity?: string | null;
-  coordinates?: {
-    /**
-     * Boylam
-     */
-    longitude?: string | null;
-    /**
-     * Enlem
-     */
-    latitude?: string | null;
-    /**
-     * Harita üzerinde konum
-     *
-     * @minItems 2
-     * @maxItems 2
-     */
-    point?: [number, number] | null;
-  };
-  region?: {
-    code?: string | null;
-    iso2code?: string | null;
-    value?: string | null;
-  };
-  adminregion?: {
-    code?: string | null;
-    iso2code?: string | null;
-    value?: string | null;
-  };
-  incomeLevel?: {
-    code?: string | null;
-    iso2code?: string | null;
-    value?: string | null;
-  };
-  lendingType?: {
-    code?: string | null;
-    iso2code?: string | null;
-    value?: string | null;
-  };
-  relatedCountries?: (string | Country)[] | null;
-  cities?: (string | City)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  createdBy?: (string | null) | User;
-  updatedBy?: (string | null) | User;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cities".
- */
-export interface City {
-  id: string;
-  title: string;
-  description: string;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  code?: string | null;
-  /**
-   * @minItems 2
-   * @maxItems 2
-   */
-  point?: [number, number] | null;
-  relatedCities?: (string | City)[] | null;
   meta?: {
     title?: string | null;
     /**
