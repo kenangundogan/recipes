@@ -17,6 +17,7 @@ import { RecipeCategories } from './collections/RecipeCategories'
 import { Continents } from './collections/Continents'
 import { Countries } from './collections/Countries'
 import { Regions } from './collections/Regions'
+import { RegionTypes } from './collections/RegionTypes'
 import { Cities } from './collections/Cities'
 import { Seasons } from './collections/Seasons'
 import { IngredientCategories } from './collections/IngredientCategories'
@@ -92,6 +93,7 @@ export default buildConfig({
     Continents,
     Countries,
     Regions,
+    RegionTypes,
     Cities,
     Seasons,
     Months,

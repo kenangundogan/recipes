@@ -38,7 +38,7 @@ export const Countries: CollectionConfig<'countries'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    cities: true,
+    regions: true,
     meta: {
       image: true,
       description: true,
@@ -115,177 +115,16 @@ export const Countries: CollectionConfig<'countries'> = {
           label: 'Content',
         },
         {
-          label: 'Other',
+          label: 'Coordinates',
           fields: [
             {
-              name: 'iso2Code',
-              label: 'ISO 2 Code',
-              type: 'text',
-              required: false,
-              admin: {
-                placeholder: 'Örn. TR',
-                description: '2 harfli ISO ülke kodu',
-              },
-            },
-            {
-              name: 'iso3Code',
-              label: 'ISO 3 Code',
-              type: 'text',
-              required: false,
-              admin: {
-                placeholder: 'Örn. TUR',
-                description: '3 harfli ISO ülke kodu',
-              },
-            },
-            {
-              name: 'capitalCity',
-              label: 'Capital City',
-              type: 'text',
-              required: false,
-              admin: {
-                placeholder: 'Örn. Ankara',
-                description: 'Başkent şehri',
-              },
-            },
-            {
-              name: 'coordinates',
               type: 'group',
-              label: 'Coordinates',
               fields: [
-                {
-                  name: 'longitude',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. 32.3606',
-                    description: 'Boylam',
-                  },
-                },
-                {
-                  name: 'latitude',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. 39.7153',
-                    description: 'Enlem',
-                  },
-                },
                 {
                   name: 'point',
                   type: 'point',
                   admin: {
-                    placeholder: 'Örn. 37.774929, 29.032321',
-                    description: 'Harita üzerinde konum',
-                  },
-                },
-              ],
-            },
-            {
-              name: 'region',
-              type: 'group',
-              label: 'Region',
-              fields: [
-                {
-                  name: 'code',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. ECS',
-                  },
-                },
-                {
-                  name: 'iso2code',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. Z7',
-                  },
-                },
-                {
-                  name: 'value',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. Europe & Central Asia',
-                  },
-                },
-              ],
-            },
-            {
-              name: 'adminregion',
-              type: 'group',
-              label: 'Administrative Region',
-              fields: [
-                {
-                  name: 'code',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. ECA',
-                  },
-                },
-                {
-                  name: 'iso2code',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. 7E',
-                  },
-                },
-                {
-                  name: 'value',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. Europe & Central Asia (excluding high income)',
-                  },
-                },
-              ],
-            },
-            {
-              name: 'incomeLevel',
-              type: 'group',
-              label: 'Income Level',
-              fields: [
-                {
-                  name: 'code',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. UMC',
-                  },
-                },
-                {
-                  name: 'iso2code',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. XT',
-                  },
-                },
-                {
-                  name: 'value',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. Upper middle income',
-                  },
-                },
-              ],
-            },
-            {
-              name: 'lendingType',
-              type: 'group',
-              label: 'Lending Type',
-              fields: [
-                {
-                  name: 'code',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. IBD',
-                  },
-                },
-                {
-                  name: 'iso2code',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. XF',
-                  },
-                },
-                {
-                  name: 'value',
-                  type: 'text',
-                  admin: {
-                    placeholder: 'Örn. IBRD',
+                    placeholder: 'Örn. 37.774929',
                   },
                 },
               ],
@@ -296,29 +135,13 @@ export const Countries: CollectionConfig<'countries'> = {
           label: 'Relations',
           fields: [
             {
-              name: 'relatedCountries',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: 'countries',
-            },
-            {
-              name: 'cities',
+              name: 'regions',
               type: 'relationship',
               admin: {
                 position: 'sidebar',
               },
               hasMany: true,
-              relationTo: 'cities',
+              relationTo: 'regions',
             },
           ],
         },

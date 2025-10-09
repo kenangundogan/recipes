@@ -16,7 +16,7 @@ import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidateContinent } from './hooks/revalidateContinent'
+import { revalidateDelete, revalidateRegionType } from './hooks/revalidateRegionType'
 
 import {
   MetaDescriptionField,
@@ -27,8 +27,8 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
 
-export const Continents: CollectionConfig<'continents'> = {
-  slug: 'continents',
+export const RegionTypes: CollectionConfig<'regionTypes'> = {
+  slug: 'regionTypes',
   access: {
     create: authenticated,
     delete: authenticated,
@@ -38,20 +38,19 @@ export const Continents: CollectionConfig<'continents'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    countries: true,
     meta: {
       image: true,
       description: true,
     },
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'regionType', 'slug', 'updatedAt'],
     group: 'Geography Management',
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
-          collection: 'continents',
+          collection: 'regionTypes',
           req,
         })
 
@@ -61,7 +60,7 @@ export const Continents: CollectionConfig<'continents'> = {
     preview: (data, { req }) =>
       generatePreviewPath({
         slug: typeof data?.slug === 'string' ? data.slug : '',
-        collection: 'continents',
+        collection: 'regionTypes',
         req,
       }),
     useAsTitle: 'title',
@@ -72,7 +71,7 @@ export const Continents: CollectionConfig<'continents'> = {
       type: 'text',
       required: true,
       admin: {
-        placeholder: 'Örn. Avrupa',
+        placeholder: 'Örn. Coğrafi Bölge, İdari Bölge, Federal Eyalet, Ekonomik Bölge',
       },
     },
     {
@@ -80,7 +79,7 @@ export const Continents: CollectionConfig<'continents'> = {
       type: 'textarea',
       required: true,
       admin: {
-        placeholder: 'Örn. Avrupa kıtası',
+        placeholder: 'Bölge tipi hakkında kısa açıklama...',
       },
     },
     {
@@ -113,37 +112,6 @@ export const Continents: CollectionConfig<'continents'> = {
             },
           ],
           label: 'Content',
-        },
-        {
-          label: 'Coordinates',
-          fields: [
-            {
-              type: 'group',
-              fields: [
-                {
-                  name: 'point',
-                  type: 'point',
-                  admin: {
-                    placeholder: 'Örn. 37.774929',
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: 'Relations',
-          fields: [
-            {
-              name: 'countries',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              hasMany: true,
-              relationTo: 'countries',
-            },
-          ],
         },
         {
           name: 'meta',
@@ -267,7 +235,7 @@ export const Continents: CollectionConfig<'continents'> = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidateContinent],
+    afterChange: [revalidateRegionType],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
   },

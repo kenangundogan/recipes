@@ -78,6 +78,7 @@ export interface Config {
     continents: Continent;
     countries: Country;
     regions: Region;
+    regionTypes: RegionType;
     cities: City;
     seasons: Season;
     months: Month;
@@ -112,6 +113,7 @@ export interface Config {
     continents: ContinentsSelect<false> | ContinentsSelect<true>;
     countries: CountriesSelect<false> | CountriesSelect<true>;
     regions: RegionsSelect<false> | RegionsSelect<true>;
+    regionTypes: RegionTypesSelect<false> | RegionTypesSelect<true>;
     cities: CitiesSelect<false> | CitiesSelect<true>;
     seasons: SeasonsSelect<false> | SeasonsSelect<true>;
     months: MonthsSelect<false> | MonthsSelect<true>;
@@ -487,56 +489,120 @@ export interface Country {
     [k: string]: unknown;
   };
   /**
-   * 2 harfli ISO ülke kodu
+   * @minItems 2
+   * @maxItems 2
    */
-  iso2Code?: string | null;
+  point?: [number, number] | null;
+  regions?: (string | Region)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regions".
+ */
+export interface Region {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   /**
-   * 3 harfli ISO ülke kodu
+   * @minItems 2
+   * @maxItems 2
    */
-  iso3Code?: string | null;
+  point?: [number, number] | null;
   /**
-   * Başkent şehri
+   * Bu bölgenin tipi
    */
-  capitalCity?: string | null;
-  coordinates?: {
+  regionType: string | RegionType;
+  /**
+   * Bu bölgenin ait olduğu şehirler
+   */
+  cities?: (string | null) | City;
+  meta?: {
+    title?: string | null;
     /**
-     * Boylam
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
-    longitude?: string | null;
-    /**
-     * Enlem
-     */
-    latitude?: string | null;
-    /**
-     * Harita üzerinde konum
-     *
-     * @minItems 2
-     * @maxItems 2
-     */
-    point?: [number, number] | null;
+    image?: (string | null) | Media;
+    description?: string | null;
   };
-  region?: {
-    code?: string | null;
-    iso2code?: string | null;
-    value?: string | null;
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regionTypes".
+ */
+export interface RegionType {
+  id: string;
+  title: string;
+  description: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
   };
-  adminregion?: {
-    code?: string | null;
-    iso2code?: string | null;
-    value?: string | null;
-  };
-  incomeLevel?: {
-    code?: string | null;
-    iso2code?: string | null;
-    value?: string | null;
-  };
-  lendingType?: {
-    code?: string | null;
-    iso2code?: string | null;
-    value?: string | null;
-  };
-  relatedCountries?: (string | Country)[] | null;
-  cities?: (string | City)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -585,13 +651,11 @@ export interface City {
     };
     [k: string]: unknown;
   };
-  code?: string | null;
   /**
    * @minItems 2
    * @maxItems 2
    */
   point?: [number, number] | null;
-  relatedCities?: (string | City)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1646,70 +1710,12 @@ export interface Continent {
     };
     [k: string]: unknown;
   };
-  code?: string | null;
   /**
    * @minItems 2
    * @maxItems 2
    */
   point?: [number, number] | null;
-  relatedContinents?: (string | Continent)[] | null;
   countries?: (string | Country)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  createdBy?: (string | null) | User;
-  updatedBy?: (string | null) | User;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "regions".
- */
-export interface Region {
-  id: string;
-  title: string;
-  description: string;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  code?: string | null;
-  /**
-   * @minItems 2
-   * @maxItems 2
-   */
-  point?: [number, number] | null;
-  relatedRegions?: (string | Region)[] | null;
-  cities?: (string | City)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -2008,6 +2014,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'regions';
         value: string | Region;
+      } | null)
+    | ({
+        relationTo: 'regionTypes';
+        value: string | RegionType;
       } | null)
     | ({
         relationTo: 'cities';
@@ -2589,9 +2599,7 @@ export interface ContinentsSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
-  code?: T;
   point?: T;
-  relatedContinents?: T;
   countries?: T;
   meta?:
     | T
@@ -2625,46 +2633,8 @@ export interface CountriesSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
-  iso2Code?: T;
-  iso3Code?: T;
-  capitalCity?: T;
-  coordinates?:
-    | T
-    | {
-        longitude?: T;
-        latitude?: T;
-        point?: T;
-      };
-  region?:
-    | T
-    | {
-        code?: T;
-        iso2code?: T;
-        value?: T;
-      };
-  adminregion?:
-    | T
-    | {
-        code?: T;
-        iso2code?: T;
-        value?: T;
-      };
-  incomeLevel?:
-    | T
-    | {
-        code?: T;
-        iso2code?: T;
-        value?: T;
-      };
-  lendingType?:
-    | T
-    | {
-        code?: T;
-        iso2code?: T;
-        value?: T;
-      };
-  relatedCountries?: T;
-  cities?: T;
+  point?: T;
+  regions?: T;
   meta?:
     | T
     | {
@@ -2697,10 +2667,41 @@ export interface RegionsSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
-  code?: T;
   point?: T;
-  relatedRegions?: T;
+  regionType?: T;
   cities?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "regionTypes_select".
+ */
+export interface RegionTypesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  heroImage?: T;
+  content?: T;
   meta?:
     | T
     | {
@@ -2733,9 +2734,7 @@ export interface CitiesSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
-  code?: T;
   point?: T;
-  relatedCities?: T;
   meta?:
     | T
     | {
@@ -3528,6 +3527,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'regions';
           value: string | Region;
+        } | null)
+      | ({
+          relationTo: 'regionTypes';
+          value: string | RegionType;
         } | null)
       | ({
           relationTo: 'cities';

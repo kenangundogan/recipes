@@ -39,13 +39,14 @@ export const Regions: CollectionConfig<'regions'> = {
     title: true,
     slug: true,
     cities: true,
+    regionType: true,
     meta: {
       image: true,
       description: true,
     },
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'regionType', 'slug', 'updatedAt'],
     group: 'Geography Management',
     livePreview: {
       url: ({ data, req }) => {
@@ -72,7 +73,7 @@ export const Regions: CollectionConfig<'regions'> = {
       type: 'text',
       required: true,
       admin: {
-        placeholder: 'Örn. İstanbul',
+        placeholder: 'Örn. Marmara Bölgesi, Lombardia, Bavaria',
       },
     },
     {
@@ -80,7 +81,7 @@ export const Regions: CollectionConfig<'regions'> = {
       type: 'textarea',
       required: true,
       admin: {
-        placeholder: 'Örn. İstanbul',
+        placeholder: 'Bölge hakkında kısa açıklama...',
       },
     },
     {
@@ -115,15 +116,8 @@ export const Regions: CollectionConfig<'regions'> = {
           label: 'Content',
         },
         {
-          label: 'Other',
+          label: 'Coordinates',
           fields: [
-            {
-              name: 'code',
-              type: 'text',
-              admin: {
-                placeholder: 'Örn. TR',
-              },
-            },
             {
               type: 'group',
               fields: [
@@ -131,7 +125,7 @@ export const Regions: CollectionConfig<'regions'> = {
                   name: 'point',
                   type: 'point',
                   admin: {
-                    placeholder: 'Örn. 37.774929, 29.032321',
+                    placeholder: 'Örn. 37.774929',
                   },
                 },
               ],
@@ -142,29 +136,22 @@ export const Regions: CollectionConfig<'regions'> = {
           label: 'Relations',
           fields: [
             {
-              name: 'relatedRegions',
+              name: 'regionType',
               type: 'relationship',
+              relationTo: 'regionTypes',
+              required: true,
               admin: {
-                position: 'sidebar',
+                description: 'Bu bölgenin tipi',
               },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: 'regions',
             },
             {
               name: 'cities',
               type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              hasMany: true,
               relationTo: 'cities',
+              required: false,
+              admin: {
+                description: 'Bu bölgenin ait olduğu şehirler',
+              },
             },
           ],
         },
