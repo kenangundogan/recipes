@@ -72,16 +72,16 @@ type PopulatedRecipe = Omit<
   cookingMethod: CookingMethod[]
   difficulty: DifficultyLevel
   dietTypes: DietType[]
-  seasons: (Omit<Season, 'hemisphere_north' | 'hemisphere_south'> & {
-    hemisphere_north: {
+  seasons: (Omit<Season, 'hemisphereNorth' | 'hemisphereSouth'> & {
+    hemisphereNorth: {
       months: Month[]
-      start_date?: string
-      end_date?: string
+      startDate?: string
+      endDate?: string
     }
-    hemisphere_south: {
+    hemisphereSouth: {
       months: Month[]
-      start_date?: string
-      end_date?: string
+      startDate?: string
+      endDate?: string
     }
   })[]
   continents: Continent[]
@@ -415,13 +415,13 @@ export default async function Recipe({ params: paramsPromise }: Args) {
                           {season?.meta?.description}
                         </span>
                         <span className="text-gray-500 italic text-xs">
-                          {season?.hemisphere_north?.months
+                          {season?.hemisphereNorth?.months
                             ?.map((month) => month?.title)
                             .filter(Boolean)
                             .join(', ')}
                         </span>
                         <span className="text-gray-500 italic text-xs">
-                          {season?.hemisphere_south?.months
+                          {season?.hemisphereSouth?.months
                             ?.map((month) => month?.title)
                             .filter(Boolean)
                             .join(', ')}

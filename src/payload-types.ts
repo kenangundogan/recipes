@@ -1407,23 +1407,16 @@ export interface Season {
     };
     [k: string]: unknown;
   };
-  hemisphere_north?: {
-    /**
-     * Bu mevsimin Kuzey Yarım Küre'deki aylarını seçin
-     */
+  hemisphereNorth?: {
     months?: (string | Month)[] | null;
-    start_date?: string | null;
-    end_date?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
   };
-  hemisphere_south?: {
-    /**
-     * Bu mevsimin Güney Yarım Küre'deki aylarını seçin
-     */
+  hemisphereSouth?: {
     months?: (string | Month)[] | null;
-    start_date?: string | null;
-    end_date?: string | null;
+    startDate?: string | null;
+    endDate?: string | null;
   };
-  relatedSeasons?: (string | Season)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -1470,7 +1463,6 @@ export interface Month {
    * Ayın yıl içindeki sırası (1=Ocak, 2=Şubat, ..., 12=Aralık)
    */
   monthOrder: number;
-  relatedMonths?: (string | Month)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -2767,21 +2759,20 @@ export interface SeasonsSelect<T extends boolean = true> {
   description?: T;
   heroImage?: T;
   content?: T;
-  hemisphere_north?:
+  hemisphereNorth?:
     | T
     | {
         months?: T;
-        start_date?: T;
-        end_date?: T;
+        startDate?: T;
+        endDate?: T;
       };
-  hemisphere_south?:
+  hemisphereSouth?:
     | T
     | {
         months?: T;
-        start_date?: T;
-        end_date?: T;
+        startDate?: T;
+        endDate?: T;
       };
-  relatedSeasons?: T;
   meta?:
     | T
     | {
@@ -2809,7 +2800,6 @@ export interface MonthsSelect<T extends boolean = true> {
   heroImage?: T;
   content?: T;
   monthOrder?: T;
-  relatedMonths?: T;
   meta?:
     | T
     | {
