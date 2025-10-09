@@ -112,12 +112,11 @@ export const Months: CollectionConfig<'months'> = {
           label: 'Content',
         },
         {
-          label: 'Month Info',
+          label: 'Month Order',
           fields: [
             {
               name: 'monthOrder',
               type: 'number',
-              label: 'Ay Sırası',
               required: true,
               admin: {
                 description: 'Ayın yıl içindeki sırası (1=Ocak, 2=Şubat, ..., 12=Aralık)',
@@ -125,28 +124,6 @@ export const Months: CollectionConfig<'months'> = {
               },
               min: 1,
               max: 12,
-            },
-          ],
-        },
-        {
-          label: 'Relations',
-          fields: [
-            {
-              name: 'relatedMonths',
-              type: 'relationship',
-              label: 'İlişkili Aylar',
-              admin: {
-                position: 'sidebar',
-              },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: 'months',
             },
           ],
         },

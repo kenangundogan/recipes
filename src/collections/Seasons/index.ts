@@ -35,8 +35,8 @@ export const Seasons: CollectionConfig<'seasons'> = {
   defaultPopulate: {
     title: true,
     slug: true,
-    hemisphere_north: true,
-    hemisphere_south: true,
+    hemisphereNorth: true,
+    hemisphereSouth: true,
     meta: {
       image: true,
       description: true,
@@ -116,33 +116,26 @@ export const Seasons: CollectionConfig<'seasons'> = {
           label: 'Hemisphere Info',
           fields: [
             {
-              name: 'hemisphere_north',
+              name: 'hemisphereNorth',
               type: 'group',
-              label: 'Kuzey Yarım Küre',
               fields: [
                 {
                   name: 'months',
                   type: 'relationship',
                   relationTo: 'months',
-                  label: 'Aylar',
                   hasMany: true,
                   required: false,
-                  admin: {
-                    description: "Bu mevsimin Kuzey Yarım Küre'deki aylarını seçin",
-                  },
                 },
                 {
-                  name: 'start_date',
+                  name: 'startDate',
                   type: 'text',
-                  label: 'Başlangıç Tarihi',
                   admin: {
                     placeholder: 'Örn. 21 Mart',
                   },
                 },
                 {
-                  name: 'end_date',
+                  name: 'endDate',
                   type: 'text',
-                  label: 'Bitiş Tarihi',
                   admin: {
                     placeholder: 'Örn. 21 Haziran',
                   },
@@ -150,60 +143,31 @@ export const Seasons: CollectionConfig<'seasons'> = {
               ],
             },
             {
-              name: 'hemisphere_south',
+              name: 'hemisphereSouth',
               type: 'group',
-              label: 'Güney Yarım Küre',
               fields: [
                 {
                   name: 'months',
                   type: 'relationship',
                   relationTo: 'months',
-                  label: 'Aylar',
                   hasMany: true,
                   required: false,
-                  admin: {
-                    description: "Bu mevsimin Güney Yarım Küre'deki aylarını seçin",
-                  },
                 },
                 {
-                  name: 'start_date',
+                  name: 'startDate',
                   type: 'text',
-                  label: 'Başlangıç Tarihi',
                   admin: {
                     placeholder: 'Örn. 23 Eylül',
                   },
                 },
                 {
-                  name: 'end_date',
+                  name: 'endDate',
                   type: 'text',
-                  label: 'Bitiş Tarihi',
                   admin: {
                     placeholder: 'Örn. 21 Aralık',
                   },
                 },
               ],
-            },
-          ],
-        },
-        {
-          label: 'Relations',
-          fields: [
-            {
-              name: 'relatedSeasons',
-              type: 'relationship',
-              label: 'İlişkili Mevsimler',
-              admin: {
-                position: 'sidebar',
-              },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: 'seasons',
             },
           ],
         },
