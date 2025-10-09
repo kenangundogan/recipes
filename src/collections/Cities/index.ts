@@ -114,15 +114,8 @@ export const Cities: CollectionConfig<'cities'> = {
           label: 'Content',
         },
         {
-          label: 'Other',
+          label: 'Coordinates',
           fields: [
-            {
-              name: 'code',
-              type: 'text',
-              admin: {
-                placeholder: 'Örn. TR',
-              },
-            },
             {
               type: 'group',
               fields: [
@@ -130,31 +123,10 @@ export const Cities: CollectionConfig<'cities'> = {
                   name: 'point',
                   type: 'point',
                   admin: {
-                    placeholder: 'Örn. 37.774929, 29.032321',
+                    placeholder: 'Örn. 37.774929',
                   },
                 },
               ],
-            },
-          ],
-        },
-        {
-          label: 'Relations',
-          fields: [
-            {
-              name: 'relatedCities',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: 'cities',
             },
           ],
         },

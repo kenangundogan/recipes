@@ -54,6 +54,7 @@ type PopulatedRecipe = Omit<
   | 'regions'
   | 'cities'
   | 'relatedRecipes'
+  | 'heroImage'
 > & {
   populatedAuthors?: PopulatedAuthor[] | null
   ingredients: (Omit<Recipe['ingredients'][0], 'ingredient' | 'unit'> & {
@@ -71,10 +72,23 @@ type PopulatedRecipe = Omit<
   cookingMethod: CookingMethod[]
   difficulty: DifficultyLevel
   dietTypes: DietType[]
-  seasons: (Omit<Season, 'months'> & { months: Month[] })[]
+  seasons: (Omit<Season, 'hemisphere_north' | 'hemisphere_south'> & {
+    hemisphere_north: {
+      months: Month[]
+      start_date?: string
+      end_date?: string
+    }
+    hemisphere_south: {
+      months: Month[]
+      start_date?: string
+      end_date?: string
+    }
+  })[]
   continents: Continent[]
   countries: Country[]
-  regions: (Omit<Region, 'cities'> & { cities: City[] })[]
+  regions: (Omit<Region, 'cities'> & {
+    cities?: City | null
+  })[]
   cities: City[]
   relatedRecipes: (Recipe & { meta?: { image?: Media | null } })[]
 }
@@ -401,7 +415,13 @@ export default async function Recipe({ params: paramsPromise }: Args) {
                           {season?.meta?.description}
                         </span>
                         <span className="text-gray-500 italic text-xs">
-                          {season?.months
+                          {season?.hemisphere_north?.months
+                            ?.map((month) => month?.title)
+                            .filter(Boolean)
+                            .join(', ')}
+                        </span>
+                        <span className="text-gray-500 italic text-xs">
+                          {season?.hemisphere_south?.months
                             ?.map((month) => month?.title)
                             .filter(Boolean)
                             .join(', ')}
@@ -474,35 +494,6 @@ export default async function Recipe({ params: paramsPromise }: Args) {
         </div>
       )}
 
-      {/* Cities */}
-      {typedRecipe.cities && typedRecipe.cities.length > 0 && (
-        <div className="container mb-8 max-w-3xl">
-          <h2 className="text-2xl font-bold mb-4">Şehirler</h2>
-          <table className="w-full">
-            <tbody>
-              {typedRecipe.cities.map((city, index) => (
-                <tr
-                  key={city?.id}
-                  className="*:py-4 *:border-b *:border-gray-200 *:last:border-b-0"
-                >
-                  <td>
-                    <div className="flex gap-4">
-                      <span className="text-gray-500 italic text-xs">{index + 1}.</span>
-                      <div className="flex flex-col leading-tight col-span-2">
-                        <span>{city?.title}</span>
-                        <span className="text-gray-500 italic text-xs">
-                          {city?.meta?.description}
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
       {/* Regions */}
       {typedRecipe.regions && typedRecipe.regions.length > 0 && (
         <div className="container mb-8 max-w-3xl">
@@ -522,12 +513,11 @@ export default async function Recipe({ params: paramsPromise }: Args) {
                         <span className="text-gray-500 italic text-xs">
                           {region?.meta?.description}
                         </span>
-                        <span className="text-gray-500 italic text-xs">
-                          {region?.cities
-                            ?.map((city) => city?.title)
-                            .filter(Boolean)
-                            .join(', ')}
-                        </span>
+                        {region?.cities && (
+                          <span className="text-gray-500 italic text-xs">
+                            {region.cities?.title}
+                          </span>
+                        )}
                       </div>
                     </div>
                   </td>
