@@ -260,8 +260,6 @@ export const seed = async ({
           birthDate: '1990-01-01',
         },
         addresses: {
-          country: 'TR',
-          city: 'İstanbul',
           district: 'Beşiktaş',
           address: 'Beşiktaş Mahallesi, 123. Sokak, No: 1',
         },
