@@ -11,6 +11,8 @@ import { post2 } from './post-2'
 import { post3 } from './post-3'
 import { imageAuthor1 } from './imageAuthor1'
 import { imageDummy } from './imageDummy'
+import { monthsSeed } from './months'
+import { seasonsSeed } from './seasons'
 
 const collections: CollectionSlug[] = [
   'categories',
@@ -257,6 +259,37 @@ export const seed = async ({
       },
     }),
   ])
+
+  payload.logger.info(`— Seeding months...`)
+
+  const monthDocs = await Promise.all(
+    monthsSeed({ author: demoAuthor, heroImage: imageHomeDoc }).map((month) =>
+      payload.create({
+        collection: 'months',
+        data: month,
+      }),
+    ),
+  )
+
+  // Create a mapping of month slugs to IDs for seasons
+  const monthSlugToId: { [key: string]: string } = {}
+  monthDocs.forEach((month) => {
+    if (month.slug) {
+      monthSlugToId[month.slug] = month.id
+    }
+  })
+
+  payload.logger.info(`— Seeding seasons...`)
+
+  await Promise.all(
+    seasonsSeed({ author: demoAuthor, heroImage: imageHomeDoc, months: monthSlugToId }).map(
+      (season) =>
+        payload.create({
+          collection: 'seasons',
+          data: season,
+        }),
+    ),
+  )
 
   payload.logger.info(`— Seeding posts...`)
 
