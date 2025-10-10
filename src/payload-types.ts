@@ -554,7 +554,7 @@ export interface Region {
   /**
    * Bu bölgenin ait olduğu şehirler
    */
-  cities?: (string | null) | City;
+  cities?: (string | City)[] | null;
   meta?: {
     title?: string | null;
     /**

@@ -148,7 +148,7 @@ export const Regions: CollectionConfig<'regions'> = {
               name: 'cities',
               type: 'relationship',
               relationTo: 'cities',
-              required: false,
+              hasMany: true,
               admin: {
                 description: 'Bu bölgenin ait olduğu şehirler',
               },
