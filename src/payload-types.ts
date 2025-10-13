@@ -88,6 +88,7 @@ export interface Config {
     ingredientUnits: IngredientUnit;
     difficultyLevels: DifficultyLevel;
     cookingMethods: CookingMethod;
+    nutrientUnits: NutrientUnit;
     nutrients: Nutrient;
     dietTypes: DietType;
     roles: Role;
@@ -123,6 +124,7 @@ export interface Config {
     ingredientUnits: IngredientUnitsSelect<false> | IngredientUnitsSelect<true>;
     difficultyLevels: DifficultyLevelsSelect<false> | DifficultyLevelsSelect<true>;
     cookingMethods: CookingMethodsSelect<false> | CookingMethodsSelect<true>;
+    nutrientUnits: NutrientUnitsSelect<false> | NutrientUnitsSelect<true>;
     nutrients: NutrientsSelect<false> | NutrientsSelect<true>;
     dietTypes: DietTypesSelect<false> | DietTypesSelect<true>;
     roles: RolesSelect<false> | RolesSelect<true>;
@@ -1783,6 +1785,59 @@ export interface RecipeCategory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nutrientUnits".
+ */
+export interface NutrientUnit {
+  id: string;
+  title: string;
+  description: string;
+  /**
+   * Örn. kcal, g, mg, µg, iu, etc.
+   */
+  symbol: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedNutrientUnits?: (string | NutrientUnit)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  createdBy?: (string | null) | User;
+  updatedBy?: (string | null) | User;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -2046,6 +2101,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'cookingMethods';
         value: string | CookingMethod;
+      } | null)
+    | ({
+        relationTo: 'nutrientUnits';
+        value: string | NutrientUnit;
       } | null)
     | ({
         relationTo: 'nutrients';
@@ -3043,6 +3102,40 @@ export interface CookingMethodsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "nutrientUnits_select".
+ */
+export interface NutrientUnitsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  symbol?: T;
+  heroImage?: T;
+  content?: T;
+  relatedNutrientUnits?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  createdBy?: T;
+  updatedBy?: T;
+  slug?: T;
+  slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "nutrients_select".
  */
 export interface NutrientsSelect<T extends boolean = true> {
@@ -3557,6 +3650,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'cookingMethods';
           value: string | CookingMethod;
+        } | null)
+      | ({
+          relationTo: 'nutrientUnits';
+          value: string | NutrientUnit;
         } | null)
       | ({
           relationTo: 'nutrients';
