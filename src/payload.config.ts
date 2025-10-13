@@ -27,6 +27,7 @@ import { IngredientUnitCategories } from './collections/IngredientUnitCategories
 import { DifficultyLevels } from './collections/DifficultyLevels'
 import { CookingMethods } from './collections/CookingMethods'
 import { Months } from './collections/Months'
+import { NutrientUnits } from './collections/NutrientUnits'
 import { Nutrients } from './collections/Nutrients'
 import { DietTypes } from './collections/DietTypes'
 import { Roles } from './collections/Roles'
@@ -103,6 +104,7 @@ export default buildConfig({
     IngredientUnits,
     DifficultyLevels,
     CookingMethods,
+    NutrientUnits,
     Nutrients,
     DietTypes,
     Roles,
